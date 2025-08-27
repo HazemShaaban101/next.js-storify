@@ -8,6 +8,7 @@ export default function Home() {
 		<>
 			<h1 className="text-green-400">Home</h1>
 			<Button
+				className="bg-white text-black dark:bg-gray-900 dark:text-white"
 				variant={"default"}
 				onClick={() => {
 					theme == "light" ? setTheme("dark") : setTheme("light");

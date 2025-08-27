@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./_Components/ThemeProvider/ThemeProvider";
+import { ThemeProvider } from "next-themes";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import NavSideBar from "./_Components/NavSideBar/NavSideBar";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -32,7 +34,16 @@ export default function RootLayout({
 					defaultTheme="system"
 					enableSystem
 					disableTransitionOnChange>
-					{children}
+					<SidebarProvider>
+						<NavSideBar />
+						<main>
+							<div className="p-2 m-2 rounded-sm bg-gray-100 dark:bg-slate-900">
+								<SidebarTrigger />
+
+								{children}
+							</div>
+						</main>
+					</SidebarProvider>
 				</ThemeProvider>
 			</body>
 		</html>
