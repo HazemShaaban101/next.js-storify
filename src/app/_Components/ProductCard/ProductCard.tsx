@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { ShoppingCart, Star, User } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export function ProductCard({ product }: { product: productType }) {
@@ -21,19 +22,27 @@ export function ProductCard({ product }: { product: productType }) {
 			<Link href={`/products/${product.id}`}>
 				<CardHeader className="">
 					<CardTitle className="overflow-hidden">
-						<img
+						<Image
 							src={
 								product.brand?.image ? product.brand.image : ""
 							}
 							alt={product.brand?.slug ? product.brand.slug : ""}
 							width={36}
+							height={24}
+							objectFit="cover"
 						/>
 						<p className="truncate text-md">{product?.title}</p>
 					</CardTitle>
 					<CardDescription>{product.category?.name}</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<img src={product?.imageCover} alt={product?.description} />
+					<Image
+						src={product?.imageCover}
+						alt={product?.description}
+						width={200}
+						height={350}
+						objectFit="cover"
+					/>
 
 					<div className="flex justify-between">
 						<p>{product?.price} EGP</p>
