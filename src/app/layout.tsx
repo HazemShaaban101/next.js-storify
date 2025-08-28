@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import NavSideBar from "./_Components/NavSideBar/NavSideBar";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -37,10 +38,14 @@ export default function RootLayout({
 					disableTransitionOnChange>
 					<SidebarProvider>
 						<NavSideBar />
-						<main className="w-full">
+						<main className="w-full relative">
 							<div className="w-full flex hello">
 								<div className="w-full p-2 m-2 rounded-sm bg-gray-100 dark:bg-slate-900">
-									<SidebarTrigger />
+									<SidebarTrigger className="absolute top-10 left-10" />
+									<Toaster
+										closeButton
+										position="top-center"
+									/>
 									{children}
 								</div>
 							</div>
