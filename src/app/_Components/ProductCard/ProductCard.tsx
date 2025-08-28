@@ -18,24 +18,36 @@ import Link from "next/link";
 export function ProductCard({ product }: { product: productType }) {
 	// console.log(product);
 	return (
-		<Card className="w-full max-w-sm col-span-1">
+		<Card className="w-full max-w-sm col-span-1 content-center justify-center">
 			<Link href={`/products/${product.id}`}>
 				<CardHeader className="">
 					<CardTitle className="overflow-hidden">
-						<Image
-							src={
-								product.brand?.image ? product.brand.image : ""
-							}
-							alt={product.brand?.slug ? product.brand.slug : ""}
-							width={36}
-							height={24}
-							objectFit="cover"
-						/>
-						<p className="truncate text-md">{product?.title}</p>
+						<div className="flex items-center justify-between">
+							<Image
+								src={
+									product.brand?.image
+										? product.brand.image
+										: ""
+								}
+								alt={
+									product.brand?.slug
+										? product.brand.slug
+										: ""
+								}
+								width={36}
+								height={24}
+								objectFit="cover"
+							/>
+							<p className="text-gray-400 text-sm font-sans font-light">
+								{product.category?.name}
+							</p>
+						</div>
+						<p className="truncate text-md mt-2 p-0">
+							{product?.title}
+						</p>
 					</CardTitle>
-					<CardDescription>{product.category?.name}</CardDescription>
 				</CardHeader>
-				<CardContent>
+				<CardContent className="flex justify-center flex-wrap mt-2">
 					<Image
 						src={product?.imageCover}
 						alt={product?.description}
@@ -44,7 +56,7 @@ export function ProductCard({ product }: { product: productType }) {
 						objectFit="cover"
 					/>
 
-					<div className="flex justify-between">
+					<div className="w-full flex justify-between mt-2">
 						<p>{product?.price} EGP</p>
 						<div className="flex gap-2 items-center">
 							<span className="flex gap-1 items-center">
@@ -63,8 +75,8 @@ export function ProductCard({ product }: { product: productType }) {
 					</div>
 				</CardContent>
 			</Link>
-			<CardFooter className="flex-col gap-2">
-				<Button type="button" className="w-full">
+			<CardFooter className="">
+				<Button type="button" className="w-full mt-0">
 					<ShoppingCart />
 					Add to cart
 				</Button>

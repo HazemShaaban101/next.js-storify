@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import MainHomeSlider from "./_Components/MainHomeSlider/MainHomeSlider";
 import CategorySlider from "./_Components/CategorySlider/CategorySlider";
 import { productType } from "./_interfaces/product.interface";
-import AllProducts from "./apis/AllProducts.api";
+import AllProducts from "../apis/AllProducts.api";
 import { ProductCard } from "./_Components/ProductCard/ProductCard";
 
 export default async function Home() {

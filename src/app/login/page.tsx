@@ -1,5 +1,5 @@
 import { GalleryVerticalEnd } from "lucide-react";
-import registerimage from "../../../public/Sign up.gif";
+import loginimage from "../../../public/login.gif";
 import Image from "next/image";
 import LoginForm from "../_Components/LoginForm/LoginForm";
 
@@ -15,7 +15,7 @@ export default function Login() {
 			</div>
 			<div className="bg-muted relative hidden lg:block rounded-r-2xl shadow">
 				<Image
-					src={registerimage}
+					src={loginimage}
 					alt="Image"
 					className="absolute inset-0 h-full w-full object-contain dark:brightness-[0.6]"
 				/>
