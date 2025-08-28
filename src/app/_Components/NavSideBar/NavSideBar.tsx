@@ -1,3 +1,4 @@
+"use client";
 import {
 	Calendar,
 	Home,
@@ -9,6 +10,8 @@ import {
 	ShoppingCart,
 	Apple,
 	Store,
+	Sun,
+	Moon,
 } from "lucide-react";
 
 import {
@@ -22,6 +25,8 @@ import {
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 
 // Menu items.
 const items = [
@@ -58,18 +63,38 @@ const items = [
 ];
 
 export default function NavSideBar() {
+	const { setTheme, theme } = useTheme();
+
 	return (
 		<Sidebar>
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel className="my-3">
-						<p className="flex items-center gap-2">
-							<Store
-								color={"oklch(52% 0.105 223.128)"}
-								size={20}
-							/>
-							<span className="text-lg">Storify</span>
-						</p>
+						<div className="flex justify-between items-center w-full">
+							<p className="flex items-center gap-2">
+								<Store
+									color={"oklch(52% 0.105 223.128)"}
+									size={20}
+								/>
+								<span className="text-lg">Storify</span>
+							</p>
+							<Button
+								className="bg-white text-dark shadow-lg hover:bg-cyan-100 focus:bg-cyan-100 dark:bg-slate-800 dark:text-white dark:hover:bg-cyan-950 dark:focus:bg-cyan-950"
+								variant={"default"}
+								onClick={(e) => {
+									theme == "light"
+										? (() => {
+												setTheme("dark");
+												e.currentTarget.blur();
+										  })()
+										: (() => {
+												setTheme("light");
+												e.currentTarget.blur();
+										  })();
+								}}>
+								{theme == "light" ? <Sun /> : <Moon />}
+							</Button>
+						</div>
 					</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
