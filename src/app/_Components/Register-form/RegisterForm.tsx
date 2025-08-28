@@ -118,7 +118,6 @@ export default function RegisterForm({
 								<FormControl>
 									<Input {...field} />
 								</FormControl>
-								<FormDescription />
 								<FormMessage />
 							</FormItem>
 						)}
@@ -132,7 +131,6 @@ export default function RegisterForm({
 								<FormControl>
 									<Input {...field} type="password" />
 								</FormControl>
-								<FormDescription />
 								<FormMessage />
 							</FormItem>
 						)}
@@ -146,7 +144,6 @@ export default function RegisterForm({
 								<FormControl>
 									<Input {...field} type="password" />
 								</FormControl>
-								<FormDescription />
 								<FormMessage />
 							</FormItem>
 						)}
@@ -160,7 +157,6 @@ export default function RegisterForm({
 								<FormControl>
 									<Input {...field} />
 								</FormControl>
-								<FormDescription />
 								<FormMessage />
 							</FormItem>
 						)}
