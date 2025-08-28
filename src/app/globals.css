@@ -186,7 +186,7 @@ html {
 
 /* very important for swiper width not causing horizontal scroll */
 .swiper-slide {
-	width: 100% !important;
+	width: 12.5% !important;
 	box-sizing: border-box;
 	display: flex;
 	justify-content: center;
@@ -194,6 +194,18 @@ html {
 }
 
 .swiper-slide img {
+	max-width: 100%;
+	display: block;
+}
+.mainHomeSlider .swiper-slide {
+	width: 100% !important;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.mainHomeSlider .swiper-slide img {
 	max-width: 100%;
 	display: block;
 }

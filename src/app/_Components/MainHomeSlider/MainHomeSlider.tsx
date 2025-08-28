@@ -13,7 +13,7 @@ import { Autoplay, Virtual } from "swiper/modules";
 export default function MainHomeSlider() {
 	return (
 		<>
-			<div className="flex w-[80%] mx-auto">
+			<div className="mainHomeSlider flex justify-center mx-auto">
 				<div className="flex w-3/4">
 					<Swiper
 						spaceBetween={0}
