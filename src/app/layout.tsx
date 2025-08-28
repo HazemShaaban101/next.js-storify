@@ -28,7 +28,8 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				suppressHydrationWarning>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"
@@ -36,11 +37,12 @@ export default function RootLayout({
 					disableTransitionOnChange>
 					<SidebarProvider>
 						<NavSideBar />
-						<main>
-							<div className="p-2 m-2 rounded-sm bg-gray-100 dark:bg-slate-900">
-								<SidebarTrigger />
-
-								{children}
+						<main className="w-full">
+							<div className="w-full flex hello">
+								<div className="w-full p-2 m-2 rounded-sm bg-gray-100 dark:bg-slate-900">
+									<SidebarTrigger />
+									{children}
+								</div>
 							</div>
 						</main>
 					</SidebarProvider>
