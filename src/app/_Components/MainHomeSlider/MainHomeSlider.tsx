@@ -11,9 +11,6 @@ import "swiper/css";
 import { Autoplay, Virtual } from "swiper/modules";
 
 export default function MainHomeSlider() {
-	useEffect(() => {
-		console.log("hello there");
-	});
 	return (
 		<>
 			<div className="flex w-[80%] mx-auto">
@@ -29,21 +26,21 @@ export default function MainHomeSlider() {
 							<Image
 								src={image1}
 								alt="greens"
-								className=" h-[400px] object-cover object-center"
+								className="w-full h-[300px] object-cover object-center"
 							/>
 						</SwiperSlide>
 						<SwiperSlide className=" box-border">
 							<Image
 								src={image4}
 								alt="greens"
-								className=" h-[400px] object-cover object-center"
+								className="w-full h-[300px] object-cover object-center"
 							/>
 						</SwiperSlide>
 						<SwiperSlide className=" box-border">
 							<Image
-								src={image5}
+								src={image3}
 								alt="greens"
-								className=" h-[400px] object-cover object-center"
+								className="w-full h-[300px] object-cover object-center"
 							/>
 						</SwiperSlide>
 					</Swiper>
@@ -52,12 +49,12 @@ export default function MainHomeSlider() {
 					<Image
 						src={image2}
 						alt="choco"
-						className="w-full h-[200px]"
+						className="w-full h-[150px]"
 					/>
 					<Image
 						src={image3}
 						alt="food"
-						className="w-full h-[200px]"
+						className="w-full h-[150px]"
 					/>
 				</div>
 			</div>
