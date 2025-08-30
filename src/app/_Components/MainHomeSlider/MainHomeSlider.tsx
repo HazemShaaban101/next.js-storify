@@ -27,6 +27,7 @@ export default function MainHomeSlider() {
 								src={image1}
 								alt="greens"
 								className="w-full h-[300px] object-cover object-center"
+								priority
 							/>
 						</SwiperSlide>
 						<SwiperSlide className=" box-border">

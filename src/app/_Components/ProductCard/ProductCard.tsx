@@ -36,7 +36,7 @@ export function ProductCard({ product }: { product: productType }) {
 								}
 								width={36}
 								height={24}
-								objectFit="cover"
+								className="w-auto h-auto"
 							/>
 							<p className="text-gray-400 text-sm font-sans font-light">
 								{product.category?.name}
@@ -53,7 +53,6 @@ export function ProductCard({ product }: { product: productType }) {
 						alt={product?.description}
 						width={200}
 						height={350}
-						objectFit="cover"
 					/>
 
 					<div className="w-full flex justify-between mt-2">
