@@ -21,6 +21,8 @@ import {
 } from "@/app/_interfaces/register.interface";
 import { useRouter } from "next/navigation";
 
+import { signIn } from "next-auth/react";
+
 export default function LoginForm({
 	className,
 	...props
@@ -41,18 +43,17 @@ export default function LoginForm({
 	async function handleLogin(userData: object) {
 		console.log(userData);
 
-		axios
-			.post(
-				"https://ecommerce.routemisr.com/api/v1/auth/signin",
-				userData
-			)
-			.then(() => {
-				toast.success("Login successful!");
-				router.push("/login");
-			})
-			.catch((err: RegisterErrorType) => {
-				toast.error(err.response.data.message);
-			});
+		const loginData = await signIn("credentials", {
+			...userData,
+			redirect: false,
+		});
+
+		if (loginData?.ok) {
+			toast.success("User logged in successfully!");
+			window.location.href = "/";
+		} else {
+			toast.error(loginData?.error || "Login fail...");
+		}
 	}
 
 	const router = useRouter();
@@ -65,10 +66,10 @@ export default function LoginForm({
 				onSubmit={form.handleSubmit(handleLogin)}>
 				<div className=" items-center gap-2 text-center">
 					<h1 className="text-2xl font-bold">
-						Register a new account
+						Alreaady have an account?
 					</h1>
 					<p className="text-muted-foreground text-sm text-balance">
-						Enter your info below to create your new account
+						Enter your info below to log into your account
 					</p>
 				</div>
 				<div className="grid gap-3">
