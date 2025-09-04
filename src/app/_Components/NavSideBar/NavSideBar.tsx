@@ -171,6 +171,29 @@ export default function NavSideBar() {
 					<div className="flex">
 						<SidebarMenuButton asChild>
 							<Link
+								href={"https://github.com"}
+								className="justify-center">
+								<div className="icon text-center box-border py-5">
+									<svg
+										role="img"
+										viewBox="0 0 24 24" // Simple Icons are typically 24x24
+										xmlns="http://www.w3.org/2000/svg"
+										width={24}
+										height={24}
+										style={
+											theme == "light"
+												? { fill: "#000000" }
+												: { fill: "#ffffff" }
+										} // Use the icon's hex color
+									>
+										<title>{siGithub.title}</title>
+										<path d={siGithub.path} />
+									</svg>
+								</div>
+							</Link>
+						</SidebarMenuButton>
+						<SidebarMenuButton asChild>
+							<Link
 								href={"https://facebook.com"}
 								className="justify-center">
 								<div className="icon text-center">
