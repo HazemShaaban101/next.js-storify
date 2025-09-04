@@ -8,10 +8,9 @@ export default async function CategorySlider() {
 	);
 	const { data }: { data: CategoryType[] } = await response.json();
 
-	console.log(data);
 	return (
 		<>
-			<div className="flex justify-center">
+			<div className="flex justify-center w-[90%]">
 				<CategorySwiper data={data} />
 			</div>
 		</>

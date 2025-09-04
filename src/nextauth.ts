@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
 				password: { type: "password", placeholder: "H@zemsh2011" },
 			},
 			async authorize(credentials, req) {
-				console.log(req);
+				// console.log("user credentials:", credentials);
 				const response = await fetch(
 					`${process.env.APIBASE}/auth/signin`,
 					{
@@ -33,6 +33,7 @@ export const authOptions: NextAuthOptions = {
 
 				console.log(payload);
 				if (payload.message === "success") {
+					// console.log("payload at nextAuth:", payload);
 					return {
 						user: payload.user,
 						token: payload.token,
@@ -47,14 +48,20 @@ export const authOptions: NextAuthOptions = {
 
 	callbacks: {
 		async jwt({ token, user }) {
-			token.user = user?.user;
-			token.token = user?.token;
+			if (user) {
+				console.log("------user insdie token:", user);
+				// First run: user just signed in
+				token.user = user.user;
+				token.token = user.token;
+			}
+			// console.log("------token:", token);
 			// token is the encrypted object on the server. this cannot be accessed by the client
 			return token;
 		},
 
 		async session({ session, token }) {
 			session.user = token.user;
+			// console.log("session:", session);
 			return session;
 		},
 	},

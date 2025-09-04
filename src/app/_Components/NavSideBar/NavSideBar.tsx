@@ -17,6 +17,7 @@ import {
 import {
 	Sidebar,
 	SidebarContent,
+	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupContent,
 	SidebarGroupLabel,
@@ -28,8 +29,20 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 
+import {
+	siFacebook,
+	siGithub,
+	siInstagram,
+	siTiktok,
+	siWhatsapp,
+} from "simple-icons";
+import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
+import { authOptions } from "@/nextauth";
+import { Skeleton } from "@/components/ui/skeleton";
+
 // Menu items.
-const items = [
+const menuItems = [
 	{
 		title: "Home",
 		url: "/",
@@ -40,11 +53,8 @@ const items = [
 		url: "/products",
 		icon: Apple,
 	},
-	{
-		title: "Cart",
-		url: "/cart",
-		icon: ShoppingCart,
-	},
+];
+const footerItems = [
 	{
 		title: "Login",
 		url: "/login",
@@ -55,15 +65,13 @@ const items = [
 		url: "/register",
 		icon: UserPlus,
 	},
-	{
-		title: "not found",
-		url: "/sdasdasdasd",
-		icon: Settings,
-	},
 ];
 
 export default function NavSideBar() {
 	const { setTheme, theme } = useTheme();
+	const session = useSession();
+
+	console.log(session);
 
 	return (
 		<Sidebar>
@@ -98,7 +106,7 @@ export default function NavSideBar() {
 					</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
-							{items.map((item) => (
+							{menuItems.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton asChild>
 										<Link href={item.url}>
@@ -108,10 +116,142 @@ export default function NavSideBar() {
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							))}
+							{session.status == "authenticated" && (
+								<SidebarMenuItem key={"cart"}>
+									<SidebarMenuButton asChild>
+										<Link href={"/cart"}>
+											<ShoppingCart />
+											<span>{"Cart"}</span>
+										</Link>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							)}
 						</SidebarMenu>
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
+			<SidebarFooter>
+				<SidebarMenu>
+					{session.status == "authenticated" ? (
+						<>
+							<p className="font-mono font-bold text-center">
+								Hello {session.data.user.name}!
+							</p>
+							<SidebarMenuItem key={"logOut"}>
+								<SidebarMenuButton asChild>
+									<Button
+										onClick={() => {
+											signOut();
+										}}>
+										Log out
+									</Button>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+						</>
+					) : session.status == "loading" ? (
+						<>
+							<Skeleton className="h-[30px] w-full rounded-full" />
+							<Skeleton className="h-[30px] w-full rounded-full" />
+						</>
+					) : (
+						footerItems.map((item) => (
+							<SidebarMenuItem key={item.title}>
+								<SidebarMenuButton asChild>
+									<Link href={item.url}>
+										<item.icon />
+										<span>{item.title}</span>
+									</Link>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+						))
+					)}
+
+					<hr className="my-2" />
+
+					<div className="flex">
+						<SidebarMenuButton asChild>
+							<Link
+								href={"https://facebook.com"}
+								className="justify-center">
+								<div className="icon text-center">
+									<svg
+										role="img"
+										viewBox="0 0 24 24" // Simple Icons are typically 24x24
+										xmlns="http://www.w3.org/2000/svg"
+										width={24}
+										height={24}
+										style={{ fill: "#0866FF" }} // Use the icon's hex color
+									>
+										<title>{siFacebook.title}</title>
+										<path d={siFacebook.path} />
+									</svg>
+								</div>
+							</Link>
+						</SidebarMenuButton>
+						<SidebarMenuButton asChild>
+							<Link
+								href={"https://instagram.com"}
+								className="justify-center">
+								<div className="icon text-center">
+									<svg
+										role="img"
+										viewBox="0 0 24 24" // Simple Icons are typically 24x24
+										xmlns="http://www.w3.org/2000/svg"
+										width={24}
+										height={24}
+										style={{ fill: "#FF0069" }} // Use the icon's hex color
+									>
+										<title>{siInstagram.title}</title>
+										<path d={siInstagram.path} />
+									</svg>
+								</div>
+							</Link>
+						</SidebarMenuButton>
+						<SidebarMenuButton asChild>
+							<Link
+								href={"https://whatsapp.com"}
+								className="justify-center">
+								<div className="icon text-center">
+									<svg
+										role="img"
+										viewBox="0 0 24 24" // Simple Icons are typically 24x24
+										xmlns="http://www.w3.org/2000/svg"
+										width={24}
+										height={24}
+										style={{ fill: "#25D366" }} // Use the icon's hex color
+									>
+										<title>{siWhatsapp.title}</title>
+										<path d={siWhatsapp.path} />
+									</svg>
+								</div>
+							</Link>
+						</SidebarMenuButton>
+						<SidebarMenuButton asChild>
+							<Link
+								href={"https://tiktok.com"}
+								className="justify-center">
+								<div className="icon text-center box-border py-5">
+									<svg
+										role="img"
+										viewBox="0 0 24 24" // Simple Icons are typically 24x24
+										xmlns="http://www.w3.org/2000/svg"
+										width={24}
+										height={24}
+										style={
+											theme == "light"
+												? { fill: "#000000" }
+												: { fill: "#ffffff" }
+										} // Use the icon's hex color
+									>
+										<title>{siTiktok.title}</title>
+										<path d={siTiktok.path} />
+									</svg>
+								</div>
+							</Link>
+						</SidebarMenuButton>
+					</div>
+				</SidebarMenu>
+			</SidebarFooter>
 		</Sidebar>
 	);
 }

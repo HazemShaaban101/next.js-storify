@@ -50,6 +50,7 @@ export default function LoginForm({
 
 		if (loginData?.ok) {
 			toast.success("User logged in successfully!");
+			console.log("userData: ", loginData);
 			window.location.href = "/";
 		} else {
 			toast.error(loginData?.error || "Login fail...");
