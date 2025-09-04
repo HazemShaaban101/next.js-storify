@@ -1,3 +1,4 @@
+"use client";
 import { productType } from "@/app/_interfaces/product.interface";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,10 +11,12 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import addToCart from "@/utilities/addToCart";
 
 import { ShoppingCart, Star, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export function ProductCard({ product }: { product: productType }) {
 	// console.log(product);
@@ -75,7 +78,17 @@ export function ProductCard({ product }: { product: productType }) {
 				</CardContent>
 			</Link>
 			<CardFooter className="">
-				<Button type="button" className="w-full mt-0">
+				<Button
+					type="button"
+					className="w-full mt-0"
+					onClick={async () => {
+						try {
+							const payload = await addToCart(product._id);
+							toast.success(payload.message);
+						} catch (err) {
+							toast.success("Cannot add product to cart");
+						}
+					}}>
 					<ShoppingCart />
 					Add to cart
 				</Button>
