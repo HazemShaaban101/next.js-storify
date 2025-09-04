@@ -18,7 +18,7 @@ import Link from "next/link";
 export function ProductCard({ product }: { product: productType }) {
 	// console.log(product);
 	return (
-		<Card className="w-full max-w-sm col-span-1 content-center justify-center">
+		<Card className="w-full max-w-sm mx-auto col-span-1 content-center justify-center">
 			<Link href={`/products/${product.id}`}>
 				<CardHeader className="">
 					<CardTitle className="overflow-hidden">

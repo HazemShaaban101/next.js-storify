@@ -9,11 +9,13 @@ export default async function Home() {
 	const data: productType[] = await AllProducts();
 	return (
 		<>
-			<div className="flex flex-col w-[80%] mx-auto gap-5 mb-10">
+			<div className="flex flex-col w-[80%] mx-auto gap-5 mb-10 overflow-hidden">
 				<MainHomeSlider />
+			</div>
+			<div className="flex justify-center mx-auto gap-5 mb-10 overflow-hidden">
 				<CategorySlider />
 			</div>
-			<div className="products grid grid-cols-5 gap-3">
+			<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
 				{data.map((product: productType) => (
 					<ProductCard product={product} key={product._id} />
 				))}

@@ -11,7 +11,7 @@ export default async function CategorySlider() {
 	console.log(data);
 	return (
 		<>
-			<div className="flex mx-auto">
+			<div className="flex justify-center">
 				<CategorySwiper data={data} />
 			</div>
 		</>
