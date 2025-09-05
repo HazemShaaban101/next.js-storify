@@ -1,3 +1,4 @@
+"use client";
 import {
 	Table,
 	TableBody,
@@ -9,53 +10,32 @@ import {
 import getUserCart from "@/utilities/getUserCart";
 import getUserToken from "@/utilities/getUserToken";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CartProduct } from "../_interfaces/cartProduct.interface";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import removeProductFromCart from "@/utilities/removeFromCart";
 
-export default async function Cart() {
-	const cartItems = await getUserCart();
+export default function Cart() {
+	const [cartItems, setCartItems] = useState<{
+		data: { products: CartProduct[] };
+	}>();
 
-	console.log("----------cart items", cartItems);
+	useEffect(() => {
+		HandleGetCartItems();
+	}, []);
 
-	const products = [
-		{
-			id: 101,
-			name: "Wireless Headphones",
-			category: "Electronics",
-			price: 59.99,
-			rating: 4.5,
-		},
-		{
-			id: 102,
-			name: "Yoga Mat",
-			category: "Sports & Fitness",
-			price: 25.0,
-			rating: 4.8,
-		},
-		{
-			id: 103,
-			name: "Coffee Maker",
-			category: "Home Appliances",
-			price: 80.0,
-			rating: 4.2,
-		},
-		{
-			id: 104,
-			name: "Running Shoes",
-			category: "Sportswear",
-			price: 70.0,
-			rating: 4.6,
-		},
-		{
-			id: 105,
-			name: "Smartwatch",
-			category: "Electronics",
-			price: 120.0,
-			rating: 4.7,
-		},
-	];
+	// get user cart items
+	async function HandleGetCartItems() {
+		const cartData = await getUserCart();
+		setCartItems(cartData);
+	}
+
+	// remove cart item
+	async function handleRemoveFromCart(id: string) {
+		const removeProduct = await removeProductFromCart(id);
+		HandleGetCartItems();
+	}
 
 	return (
 		<div className="w-full border rounded-md overflow-hidden">
@@ -74,7 +54,7 @@ export default async function Cart() {
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{cartItems.data?.products?.map((product: CartProduct) => (
+					{cartItems?.data?.products?.map((product: CartProduct) => (
 						<TableRow
 							key={product?._id}
 							className="odd:bg-muted/50">
@@ -96,7 +76,14 @@ export default async function Cart() {
 								{product?.price * product?.count}
 							</TableCell>
 							<TableCell className="text-center">
-								<Button>Remove</Button>
+								<Button
+									onClick={() => {
+										handleRemoveFromCart(
+											product.product._id
+										);
+									}}>
+									Remove
+								</Button>
 							</TableCell>
 						</TableRow>
 					))}

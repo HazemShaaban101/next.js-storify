@@ -17,6 +17,5 @@ export default async function getUserCart() {
 		})
 	).json();
 
-	console.log(cartItems);
 	return cartItems;
 }
