@@ -84,7 +84,9 @@ export default function NavSideBar() {
 									color={"oklch(52% 0.105 223.128)"}
 									size={20}
 								/>
-								<span className="text-lg">Storify</span>
+								<span className="text-lg font-mono font-extrabold">
+									Storify
+								</span>
 							</p>
 							<Button
 								className="bg-white text-dark shadow-lg hover:bg-cyan-100 focus:bg-cyan-100 dark:bg-slate-800 dark:text-white dark:hover:bg-cyan-950 dark:focus:bg-cyan-950"
@@ -104,6 +106,7 @@ export default function NavSideBar() {
 							</Button>
 						</div>
 					</SidebarGroupLabel>
+					<hr className="my-1 border-2 rounded-full" />
 					<SidebarGroupContent>
 						<SidebarMenu>
 							{menuItems.map((item) => (
@@ -166,8 +169,9 @@ export default function NavSideBar() {
 						))
 					)}
 
-					<hr className="my-2" />
+					<hr className="my-2 border-2 rounded-full" />
 
+					{/* social media links */}
 					<div className="flex">
 						<SidebarMenuButton asChild>
 							<Link
