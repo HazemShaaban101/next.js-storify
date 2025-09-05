@@ -15,11 +15,15 @@ import { CartProduct } from "../_interfaces/cartProduct.interface";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import removeProductFromCart from "@/utilities/removeFromCart";
+import CartCounter from "../_Components/CartCounter/CartCounter";
 
 export default function Cart() {
 	const [cartItems, setCartItems] = useState<{
 		data: { products: CartProduct[] };
 	}>();
+
+	const [updateLoading, setUpdataLoading] = useState<boolean>(false);
+	const [removing, setRemoving] = useState<boolean>(false);
 
 	useEffect(() => {
 		HandleGetCartItems();
@@ -33,8 +37,10 @@ export default function Cart() {
 
 	// remove cart item
 	async function handleRemoveFromCart(id: string) {
+		setRemoving(true);
 		const removeProduct = await removeProductFromCart(id);
-		HandleGetCartItems();
+		await HandleGetCartItems();
+		setRemoving(false);
 	}
 
 	return (
@@ -70,13 +76,21 @@ export default function Cart() {
 								{product?.product.title}
 							</TableCell>
 							<TableCell className="text-center">
-								{product?.count}
+								<CartCounter
+									id={product.product._id}
+									count={product?.count}
+									removing={removing}
+									setUpdateLoading={setUpdataLoading}
+									updateLoading={updateLoading}
+									setCartItems={setCartItems}
+								/>
 							</TableCell>
 							<TableCell className="text-center">
 								{product?.price * product?.count}
 							</TableCell>
 							<TableCell className="text-center">
 								<Button
+									disabled={updateLoading || removing}
 									onClick={() => {
 										handleRemoveFromCart(
 											product.product._id
