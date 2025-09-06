@@ -1,3 +1,4 @@
+"use server";
 import { toast } from "sonner";
 import getUserToken from "./getUserToken";
 

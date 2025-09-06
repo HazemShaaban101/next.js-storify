@@ -1,3 +1,4 @@
+"use server";
 import getUserToken from "./getUserToken";
 
 export default async function updateProductCartCount(

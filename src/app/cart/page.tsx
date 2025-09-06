@@ -20,7 +20,8 @@ import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { CartItemType } from "../_interfaces/cartItems.interface";
 import Link from "next/link";
 import { CartCountBadge } from "../_Components/CartCountContext/CartCountContext";
-import { removeItemBadge } from "@/utilities/cartBadge.Actions";
+import { clearCartBadge, removeItemBadge } from "@/utilities/cartBadge.Actions";
+import ClearCart from "@/utilities/ClearCart";
 
 export default function Cart() {
 	const [cartItems, setCartItems] = useState<CartItemType>();
@@ -28,6 +29,7 @@ export default function Cart() {
 	const [updateLoading, setUpdataLoading] = useState<boolean>(false);
 	const [removing, setRemoving] = useState<boolean>(false);
 	const [initialLoading, setInitialLoading] = useState<boolean>(true);
+	const [clearingCart, setClearingCart] = useState<boolean>(false);
 
 	const { cartCountState, setCartCountState } = useContext(CartCountBadge);
 
@@ -54,6 +56,18 @@ export default function Cart() {
 		removeItemBadge(itemCount, cartCountState, setCartCountState);
 	}
 
+	// remove cart item
+	async function handleClearCart() {
+		setClearingCart(true);
+		setRemoving(true);
+		await ClearCart();
+		await HandleGetCartItems();
+		setRemoving(false);
+		setClearingCart(false);
+
+		clearCartBadge(setCartCountState);
+	}
+
 	return (
 		<>
 			{initialLoading ? (
@@ -62,6 +76,29 @@ export default function Cart() {
 				</div>
 			) : cartItems?.numOfCartItems! > 0 ? (
 				<div className="min-h-[calc(100vh-2rem-60px)]">
+					<div className="flex justify-end gap-3 mb-3">
+						<Button
+							variant={"destructive"}
+							className="hover:bg-red-700 dark:hover:bg-[#863842]"
+							disabled={clearingCart}
+							onClick={() => {
+								handleClearCart();
+							}}>
+							{clearingCart ? (
+								<Spinner
+									className="text-cyan-800"
+									variant="ellipsis"
+								/>
+							) : (
+								"Clear Cart"
+							)}
+						</Button>
+						<Button
+							className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800 "
+							disabled={clearingCart}>
+							Check Out
+						</Button>
+					</div>
 					<div className="w-full border rounded-md overflow-hidden">
 						<Table>
 							<TableHeader>
