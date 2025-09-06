@@ -1,3 +1,4 @@
+"use client";
 import { productType } from "@/app/_interfaces/product.interface";
 import { Button } from "@/components/ui/button";
 import addToCart from "@/utilities/addToCart";

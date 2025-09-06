@@ -64,7 +64,7 @@ export default async function GetSingleProduct({
 								/>
 							</span>
 						</div>
-						<AddToCartButton productID={data._id} />
+						<AddToCartButton productID={data?.id} />
 					</div>
 				</div>
 			</div>
