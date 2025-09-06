@@ -12,7 +12,7 @@ export default function AddToCartButton({ productID }: { productID: string }) {
 	return (
 		<Button
 			type="button"
-			className="w-full mt-0"
+			className="w-full mt-0 cursor-pointer"
 			onClick={async () => {
 				try {
 					const payload = await addToCart(productID);

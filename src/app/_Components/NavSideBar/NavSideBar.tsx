@@ -95,7 +95,7 @@ export default function NavSideBar() {
 								</span>
 							</p>
 							<Button
-								className="py-4 bg-white text-dark shadow-lg hover:bg-cyan-100 focus:bg-cyan-100 dark:bg-slate-800 dark:text-white dark:hover:bg-cyan-950 dark:focus:bg-cyan-950"
+								className="py-4 bg-white text-dark shadow-lg hover:bg-cyan-100 focus:bg-cyan-100 dark:bg-slate-800 dark:text-white dark:hover:bg-cyan-950 dark:focus:bg-cyan-950 cursor-pointer"
 								variant={"default"}
 								onClick={(e) => {
 									theme == "light"
@@ -154,7 +154,7 @@ export default function NavSideBar() {
 							<SidebarMenuItem key={"logOut"}>
 								<SidebarMenuButton asChild>
 									<Button
-										className=" hover:bg-red-700 dark:hover:bg-red-800 hover:text-white transition-all duration-300 font-mono font-bold text-sm/relaxed"
+										className=" hover:bg-red-700 dark:hover:bg-red-800 hover:text-white transition-all duration-300 font-mono font-bold text-sm/relaxed cursor-pointer"
 										onClick={() => {
 											signOut();
 										}}>

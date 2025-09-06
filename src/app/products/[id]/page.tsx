@@ -1,3 +1,4 @@
+import AddToCartButton from "@/app/_Components/AddToCartButton/AddToCartButton";
 import { productType } from "@/app/_interfaces/product.interface";
 import { Button } from "@/components/ui/button";
 import { log } from "console";
@@ -63,10 +64,7 @@ export default async function GetSingleProduct({
 								/>
 							</span>
 						</div>
-						<Button type="button" className="w-full">
-							<ShoppingCart />
-							Add to cart
-						</Button>
+						<AddToCartButton productID={data._id} />
 					</div>
 				</div>
 			</div>

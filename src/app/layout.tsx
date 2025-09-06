@@ -45,7 +45,7 @@ export default function RootLayout({
 								<main className="w-full relative">
 									<div className="w-full flex">
 										<div className="w-full p-2 m-2 rounded-sm bg-gray-100 dark:bg-slate-900">
-											<SidebarTrigger className=" p-5 mb-5 bg-white hover:bg-cyan-100 shadow dark:bg-slate-800 dark:hover:bg-cyan-950" />
+											<SidebarTrigger className=" p-5 mb-5 bg-white hover:bg-cyan-100 shadow dark:bg-slate-800 dark:hover:bg-cyan-950 cursor-pointer" />
 											<Toaster
 												closeButton
 												position="top-center"

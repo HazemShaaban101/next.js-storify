@@ -55,7 +55,7 @@ export default function CartCounter({
 		<>
 			<div className="flex justify-center items-center gap-3">
 				<Button
-					className="p-0 rounded-full w-7 h-7"
+					className="p-0 rounded-full w-7 h-7 cursor-pointer"
 					disabled={disabled || removing}
 					onClick={() => {
 						handleUpdateCartCount(count - 1, "-");
@@ -74,7 +74,7 @@ export default function CartCounter({
 					)}
 				</p>
 				<Button
-					className="p-0 rounded-full w-7 h-7"
+					className="p-0 rounded-full w-7 h-7 cursor-pointer"
 					disabled={disabled || removing}
 					onClick={() => {
 						handleUpdateCartCount(count + 1, "+");

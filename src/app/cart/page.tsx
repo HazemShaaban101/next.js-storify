@@ -79,7 +79,7 @@ export default function Cart() {
 					<div className="flex justify-end gap-3 mb-3">
 						<Button
 							variant={"destructive"}
-							className="hover:bg-red-700 dark:hover:bg-[#863842]"
+							className="hover:bg-red-700 dark:hover:bg-[#863842] cursor-pointer"
 							disabled={clearingCart}
 							onClick={() => {
 								handleClearCart();
@@ -94,7 +94,7 @@ export default function Cart() {
 							)}
 						</Button>
 						<Button
-							className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800 "
+							className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800 cursor-pointer"
 							disabled={clearingCart}>
 							Check Out
 						</Button>
@@ -158,7 +158,7 @@ export default function Cart() {
 											</TableCell>
 											<TableCell className="text-center">
 												<Button
-													className="w-20"
+													className="w-20 cursor-pointer"
 													disabled={
 														updateLoading ||
 														removing
@@ -191,7 +191,7 @@ export default function Cart() {
 				<div className="flex justify-center items-center w-full text-cyan-700 font-mono font-bold text-4xl flex-wrap gap-10 h-[calc(100vh-60px-2rem)] content-center">
 					<p className="w-full text-center">No items in your cart!</p>
 					<Link href="/">
-						<Button className="text-lg font-mono px-20 py-6">
+						<Button className="text-lg font-mono px-20 py-6 cursor-pointer">
 							HomePage
 						</Button>
 					</Link>
