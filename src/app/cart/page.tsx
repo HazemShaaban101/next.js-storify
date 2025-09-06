@@ -16,22 +16,28 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import removeProductFromCart from "@/utilities/removeFromCart";
 import CartCounter from "../_Components/CartCounter/CartCounter";
+import { Spinner } from "@/components/ui/shadcn-io/spinner";
+import { CartItemType } from "../_interfaces/cartItems.interface";
+import Link from "next/link";
 
 export default function Cart() {
-	const [cartItems, setCartItems] = useState<{
-		data: { products: CartProduct[] };
-	}>();
+	const [cartItems, setCartItems] = useState<CartItemType>();
 
 	const [updateLoading, setUpdataLoading] = useState<boolean>(false);
 	const [removing, setRemoving] = useState<boolean>(false);
+	const [initialLoading, setInitialLoading] = useState<boolean>(true);
 
 	useEffect(() => {
-		HandleGetCartItems();
+		const dummyFunction = async () => HandleGetCartItems();
+		dummyFunction().then(() => {
+			setInitialLoading(false);
+		});
 	}, []);
 
 	// get user cart items
 	async function HandleGetCartItems() {
-		const cartData = await getUserCart();
+		const cartData: CartItemType = await getUserCart();
+		console.log("this is initial data", cartData);
 		setCartItems(cartData);
 	}
 
@@ -44,65 +50,110 @@ export default function Cart() {
 	}
 
 	return (
-		<div className="w-full border rounded-md overflow-hidden">
-			<Table>
-				<TableHeader>
-					<TableRow>
-						<TableHead className="text-center">Image</TableHead>
-						<TableHead className="text-center">
-							Product Name
-						</TableHead>
-						<TableHead className="text-center">Quantity</TableHead>
-						<TableHead className="text-center">
-							Price (EGP)
-						</TableHead>
-						<TableHead className="text-center"></TableHead>
-					</TableRow>
-				</TableHeader>
-				<TableBody>
-					{cartItems?.data?.products?.map((product: CartProduct) => (
-						<TableRow
-							key={product?._id}
-							className="odd:bg-muted/50">
-							<TableCell className="font-medium flex justify-center">
-								<Image
-									src={product.product.imageCover}
-									alt={product.product.title}
-									width={"50"}
-									height={"50"}
-								/>
-							</TableCell>
-							<TableCell className="font-medium text-center">
-								{product?.product.title}
-							</TableCell>
-							<TableCell className="text-center">
-								<CartCounter
-									id={product.product._id}
-									count={product?.count}
-									removing={removing}
-									setUpdateLoading={setUpdataLoading}
-									updateLoading={updateLoading}
-									setCartItems={setCartItems}
-								/>
-							</TableCell>
-							<TableCell className="text-center">
-								{product?.price * product?.count}
-							</TableCell>
-							<TableCell className="text-center">
-								<Button
-									disabled={updateLoading || removing}
-									onClick={() => {
-										handleRemoveFromCart(
-											product.product._id
-										);
-									}}>
-									Remove
-								</Button>
-							</TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		</div>
+		<>
+			{initialLoading ? (
+				<div className="min-h-[calc(100vh-2rem-60px)] justify-center items-center flex">
+					<span className="loader"></span>
+				</div>
+			) : cartItems?.numOfCartItems! > 0 ? (
+				<div className="min-h-[calc(100vh-2rem-60px)]">
+					<div className="w-full border rounded-md overflow-hidden">
+						<Table>
+							<TableHeader>
+								<TableRow>
+									<TableHead className="text-center">
+										Image
+									</TableHead>
+									<TableHead className="text-center">
+										Product Name
+									</TableHead>
+									<TableHead className="text-center">
+										Quantity
+									</TableHead>
+									<TableHead className="text-center">
+										Price (EGP)
+									</TableHead>
+									<TableHead className="text-center"></TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{cartItems?.data?.products?.map(
+									(product: CartProduct) => (
+										<TableRow
+											key={product?._id}
+											className="odd:bg-muted/50">
+											<TableCell className="font-medium flex justify-center">
+												<Image
+													src={
+														product.product
+															.imageCover
+													}
+													alt={product.product.title}
+													width={"50"}
+													height={"50"}
+												/>
+											</TableCell>
+											<TableCell className="font-medium text-center">
+												{product?.product.title}
+											</TableCell>
+											<TableCell className="text-center">
+												<CartCounter
+													id={product.product._id}
+													count={product?.count}
+													removing={removing}
+													setUpdateLoading={
+														setUpdataLoading
+													}
+													updateLoading={
+														updateLoading
+													}
+													setCartItems={setCartItems}
+												/>
+											</TableCell>
+											<TableCell className="text-center">
+												{product?.price *
+													product?.count}
+											</TableCell>
+											<TableCell className="text-center">
+												<Button
+													className="w-20"
+													disabled={
+														updateLoading ||
+														removing
+													}
+													onClick={() => {
+														handleRemoveFromCart(
+															product.product._id
+														);
+													}}>
+													{updateLoading ||
+													removing ? (
+														<Spinner
+															className="text-cyan-800"
+															variant="ellipsis"
+														/>
+													) : (
+														"Remove"
+													)}
+												</Button>
+											</TableCell>
+										</TableRow>
+									)
+								)}
+							</TableBody>
+						</Table>
+					</div>
+				</div>
+			) : (
+				<div className="flex justify-center items-center w-full text-cyan-700 font-mono font-bold text-4xl flex-wrap gap-10 h-[calc(100vh-60px-2rem)] content-center">
+					<p className="w-full text-center">No items in your cart!</p>
+					<Link href="/">
+						<Button className="text-lg font-mono px-20 py-6">
+							HomePage
+						</Button>
+					</Link>
+				</div>
+			)}
+		</>
 	);
 }

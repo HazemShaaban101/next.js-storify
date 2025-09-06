@@ -1,6 +1,7 @@
 "use client";
 import { CartProduct } from "@/app/_interfaces/cartProduct.interface";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import updateProductCartCount from "@/utilities/updateProductCartCount";
 import { Plus, Minus } from "lucide-react";
 import { TelemetryPlugin } from "next/dist/build/webpack/plugins/telemetry-plugin/telemetry-plugin";
@@ -54,7 +55,17 @@ export default function CartCounter({
 					}}>
 					<Minus />
 				</Button>
-				<p>{count}</p>
+				<p className="w-[20px]">
+					{disabled ? (
+						<Spinner
+							className="text-cyan-800 "
+							size={18}
+							variant="circle"
+						/>
+					) : (
+						count
+					)}
+				</p>
 				<Button
 					className="p-0 rounded-full w-7 h-7"
 					disabled={disabled || removing}
