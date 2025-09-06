@@ -40,6 +40,9 @@ import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 import { authOptions } from "@/nextauth";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
+import { useContext } from "react";
+import { CartCountBadge } from "../CartCountContext/CartCountContext";
 
 // Menu items.
 const menuItems = [
@@ -70,6 +73,9 @@ const footerItems = [
 export default function NavSideBar() {
 	const { setTheme, theme } = useTheme();
 	const session = useSession();
+
+	const cartCount: { cartCountState: number; setCartCountState: Function } =
+		useContext(CartCountBadge);
 
 	console.log(session);
 
@@ -122,9 +128,14 @@ export default function NavSideBar() {
 							{session.status == "authenticated" && (
 								<SidebarMenuItem key={"cart"}>
 									<SidebarMenuButton asChild>
-										<Link href={"/cart"}>
+										<Link href={"/cart"} className="">
 											<ShoppingCart />
 											<span>{"Cart"}</span>
+											<Badge
+												variant="default"
+												className="ml-auto">
+												{cartCount?.cartCountState!}
+											</Badge>
 										</Link>
 									</SidebarMenuButton>
 								</SidebarMenuItem>

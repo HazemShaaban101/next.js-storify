@@ -17,6 +17,7 @@ import { ShoppingCart, Star, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
+import AddToCartButton from "../AddToCartButton/AddToCartButton";
 
 export function ProductCard({ product }: { product: productType }) {
 	// console.log(product);
@@ -78,20 +79,7 @@ export function ProductCard({ product }: { product: productType }) {
 				</CardContent>
 			</Link>
 			<CardFooter className="">
-				<Button
-					type="button"
-					className="w-full mt-0"
-					onClick={async () => {
-						try {
-							const payload = await addToCart(product._id);
-							toast.success(payload.message);
-						} catch (err) {
-							toast.success("Cannot add product to cart");
-						}
-					}}>
-					<ShoppingCart />
-					Add to cart
-				</Button>
+				<AddToCartButton productID={product._id} />
 			</CardFooter>
 		</Card>
 	);

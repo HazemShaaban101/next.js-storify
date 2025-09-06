@@ -6,6 +6,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import NavSideBar from "./_Components/NavSideBar/NavSideBar";
 import MySessionProvider from "./_Components/MySessionProvider/MySessionProvider";
 import { Toaster } from "@/components/ui/sonner";
+import CartCountContext from "./_Components/CartCountContext/CartCountContext";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -37,23 +38,25 @@ export default function RootLayout({
 					defaultTheme="system"
 					enableSystem
 					disableTransitionOnChange>
-					<SidebarProvider>
-						<MySessionProvider>
-							<NavSideBar />
-							<main className="w-full relative">
-								<div className="w-full flex">
-									<div className="w-full p-2 m-2 rounded-sm bg-gray-100 dark:bg-slate-900">
-										<SidebarTrigger className=" p-5 mb-5 bg-white hover:bg-cyan-100 shadow dark:bg-slate-800 dark:hover:bg-cyan-950" />
-										<Toaster
-											closeButton
-											position="top-center"
-										/>
-										{children}
+					<CartCountContext>
+						<SidebarProvider>
+							<MySessionProvider>
+								<NavSideBar />
+								<main className="w-full relative">
+									<div className="w-full flex">
+										<div className="w-full p-2 m-2 rounded-sm bg-gray-100 dark:bg-slate-900">
+											<SidebarTrigger className=" p-5 mb-5 bg-white hover:bg-cyan-100 shadow dark:bg-slate-800 dark:hover:bg-cyan-950" />
+											<Toaster
+												closeButton
+												position="top-center"
+											/>
+											{children}
+										</div>
 									</div>
-								</div>
-							</main>
-						</MySessionProvider>
-					</SidebarProvider>
+								</main>
+							</MySessionProvider>
+						</SidebarProvider>
+					</CartCountContext>
 				</ThemeProvider>
 			</body>
 		</html>

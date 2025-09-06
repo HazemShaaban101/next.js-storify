@@ -10,7 +10,7 @@ import {
 import getUserCart from "@/utilities/getUserCart";
 import getUserToken from "@/utilities/getUserToken";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartProduct } from "../_interfaces/cartProduct.interface";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,8 @@ import CartCounter from "../_Components/CartCounter/CartCounter";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { CartItemType } from "../_interfaces/cartItems.interface";
 import Link from "next/link";
+import { CartCountBadge } from "../_Components/CartCountContext/CartCountContext";
+import { removeItemBadge } from "@/utilities/cartBadge.Actions";
 
 export default function Cart() {
 	const [cartItems, setCartItems] = useState<CartItemType>();
@@ -26,6 +28,8 @@ export default function Cart() {
 	const [updateLoading, setUpdataLoading] = useState<boolean>(false);
 	const [removing, setRemoving] = useState<boolean>(false);
 	const [initialLoading, setInitialLoading] = useState<boolean>(true);
+
+	const { cartCountState, setCartCountState } = useContext(CartCountBadge);
 
 	useEffect(() => {
 		const dummyFunction = async () => HandleGetCartItems();
@@ -37,16 +41,17 @@ export default function Cart() {
 	// get user cart items
 	async function HandleGetCartItems() {
 		const cartData: CartItemType = await getUserCart();
-		console.log("this is initial data", cartData);
+		// console.log("this is initial data", cartData);
 		setCartItems(cartData);
 	}
 
 	// remove cart item
-	async function handleRemoveFromCart(id: string) {
+	async function handleRemoveFromCart(id: string, itemCount: number) {
 		setRemoving(true);
 		const removeProduct = await removeProductFromCart(id);
 		await HandleGetCartItems();
 		setRemoving(false);
+		removeItemBadge(itemCount, cartCountState, setCartCountState);
 	}
 
 	return (
@@ -123,7 +128,8 @@ export default function Cart() {
 													}
 													onClick={() => {
 														handleRemoveFromCart(
-															product.product._id
+															product.product._id,
+															product.count
 														);
 													}}>
 													{updateLoading ||
