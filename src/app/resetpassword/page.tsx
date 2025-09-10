@@ -130,6 +130,32 @@ export default function ResetPassword() {
 			throw new Error("...Internal route error...");
 		}
 	}
+	async function handleVerifyCode(formData: unknown) {
+		try {
+			const response = await fetch(
+				`http://localhost:3000/api/verifycode`,
+				{
+					method: "POST",
+					body: JSON.stringify(formData),
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			if (response.ok) {
+				const payload = await response.json();
+				console.log(payload);
+				setStep(2);
+			} else if (response.status === 400) {
+				toast.error("Wrong code. check your email for correct code", {
+					className: "text-center flex flex-col",
+				});
+			}
+		} catch (error) {
+			setIsLoading(false);
+			throw new Error("...Internal route error...");
+		}
+	}
 
 	const { handleSubmit, control, reset } = form;
 
@@ -137,6 +163,10 @@ export default function ResetPassword() {
 		if (step === 0) {
 			setIsLoading(true);
 			await handleResetPassword(formData);
+			setIsLoading(false);
+		} else if (step === 1) {
+			setIsLoading(true);
+			await handleVerifyCode(formData);
 			setIsLoading(false);
 		} else {
 			console.log(formData);

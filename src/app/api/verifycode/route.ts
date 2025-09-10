@@ -14,10 +14,10 @@ export async function POST(request: NextRequest) {
 		} = await request.json();
 
 		const response = await fetch(
-			`https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords`,
+			`https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode`,
 			{
 				method: "POST",
-				body: JSON.stringify({ email: requestBody.email }),
+				body: JSON.stringify({ resetCode: requestBody.resetCode }),
 				headers: {
 					"Content-Type": "application/json",
 				},
