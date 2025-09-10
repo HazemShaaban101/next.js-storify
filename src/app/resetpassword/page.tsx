@@ -102,16 +102,42 @@ export default function ResetPassword() {
 		reValidateMode: "onSubmit",
 	});
 
+	async function handleResetPassword(formData: unknown) {
+		try {
+			const response = await fetch(
+				`http://localhost:3000/api/forgotpassword`,
+				{
+					method: "POST",
+					body: JSON.stringify(formData),
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			if (response.ok) {
+				const payload = await response.json();
+				toast.success(payload.message);
+				console.log(payload);
+				setStep(1);
+			} else if (response.status === 404) {
+				toast.error(
+					"Email not found. make sure you entered the correct email.",
+					{ className: "text-center flex flex-col" }
+				);
+			}
+		} catch (error) {
+			setIsLoading(false);
+			throw new Error("...Internal route error...");
+		}
+	}
+
 	const { handleSubmit, control, reset } = form;
 
 	const onSubmit = async (formData: unknown) => {
-		if (step < totalSteps - 1) {
+		if (step === 0) {
 			setIsLoading(true);
-			setTimeout(() => {
-				setIsLoading(false);
-				setStep(step + 1);
-				console.log(formData);
-			}, 5000);
+			await handleResetPassword(formData);
+			setIsLoading(false);
 		} else {
 			console.log(formData);
 			setStep(0);
