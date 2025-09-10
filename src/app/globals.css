@@ -198,3 +198,10 @@ html {
 	max-width: 100%;
 	display: block;
 }
+
+/* style for password reset OTP */
+div[data-input-otp-container] {
+	justify-content: center;
+	margin-right: auto;
+	margin-left: auto;
+}

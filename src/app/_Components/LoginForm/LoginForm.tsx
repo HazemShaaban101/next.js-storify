@@ -22,6 +22,7 @@ import {
 import { useRouter } from "next/navigation";
 
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function LoginForm({
 	className,
@@ -60,54 +61,68 @@ export default function LoginForm({
 	const router = useRouter();
 
 	return (
-		<FormProvider {...form}>
-			<form
-				className={cn("flex flex-col gap-6", className)}
-				{...props}
-				onSubmit={form.handleSubmit(handleLogin)}>
-				<div className=" items-center gap-2 text-center">
-					<h1 className="text-2xl font-bold">
-						Alreaady have an account?
-					</h1>
-					<p className="text-muted-foreground text-sm text-balance">
-						Enter your info below to log into your account
-					</p>
-				</div>
-				<div className="grid gap-3">
-					<FormField
-						control={form.control}
-						name="email"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Enter your email</FormLabel>
-								<FormControl>
-									<Input {...field} />
-								</FormControl>
-								<FormDescription />
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="password"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Enter your password</FormLabel>
-								<FormControl>
-									<Input {...field} type="password" />
-								</FormControl>
-								<FormDescription />
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+		<>
+			<FormProvider {...form}>
+				<form
+					className={cn("flex flex-col gap-6", className)}
+					{...props}
+					onSubmit={form.handleSubmit(handleLogin)}>
+					<div className=" items-center gap-2 text-center">
+						<h1 className="text-2xl font-bold">
+							Alreaady have an account?
+						</h1>
+						<p className="text-muted-foreground text-sm text-balance">
+							Enter your info below to log into your account
+						</p>
+					</div>
+					<div className="grid">
+						<FormField
+							control={form.control}
+							name="email"
+							render={({ field }) => (
+								<FormItem className="mb-3">
+									<FormLabel>Enter your email</FormLabel>
+									<FormControl>
+										<Input {...field} />
+									</FormControl>
+									<FormDescription />
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="password"
+							render={({ field }) => (
+								<FormItem className="">
+									<FormLabel>Enter your password</FormLabel>
+									<FormControl>
+										<Input {...field} type="password" />
+									</FormControl>
+									<FormDescription />
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 
-					<Button type="submit" className="w-full cursor-pointer">
-						Login
-					</Button>
-				</div>
-			</form>
-		</FormProvider>
+						<p className="my-0 py-0 text-sm/[14px] mb-5">
+							Forgot your password? try{" "}
+							<Link href={"/resetpassword"}>
+								<Button
+									variant={"link"}
+									type="button"
+									className="p-0 cursor-pointer h-fit">
+									Resetting your password
+								</Button>
+							</Link>
+						</p>
+
+						<Button type="submit" className="w-full cursor-pointer">
+							Login
+						</Button>
+					</div>
+				</form>
+			</FormProvider>
+		</>
 	);
 }
