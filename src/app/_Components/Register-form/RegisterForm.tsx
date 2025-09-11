@@ -20,11 +20,15 @@ import {
 	registerType,
 } from "@/app/_interfaces/register.interface";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Spinner } from "@/components/ui/shadcn-io/spinner";
 
 export default function RegisterForm({
 	className,
 	...props
 }: React.ComponentProps<"form">) {
+	const [loading, setLoading] = useState(false);
+
 	const formSchema = z
 		.object({
 			name: z
@@ -63,7 +67,7 @@ export default function RegisterForm({
 	});
 
 	async function handleRegister(userData: object) {
-		console.log(userData);
+		setLoading(true);
 
 		axios
 			.post(
@@ -76,6 +80,7 @@ export default function RegisterForm({
 			})
 			.catch((err: RegisterErrorType) => {
 				toast.error(err.response.data.message);
+				setLoading(false);
 			});
 	}
 
@@ -103,7 +108,11 @@ export default function RegisterForm({
 							<FormItem>
 								<FormLabel>Enter your name</FormLabel>
 								<FormControl>
-									<Input {...field} />
+									<Input
+										{...field}
+										disabled={loading}
+										placeholder="John Doe"
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -116,7 +125,11 @@ export default function RegisterForm({
 							<FormItem>
 								<FormLabel>Enter your email</FormLabel>
 								<FormControl>
-									<Input {...field} />
+									<Input
+										{...field}
+										disabled={loading}
+										placeholder="email@provider.com"
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -129,7 +142,12 @@ export default function RegisterForm({
 							<FormItem>
 								<FormLabel>Enter your password</FormLabel>
 								<FormControl>
-									<Input {...field} type="password" />
+									<Input
+										{...field}
+										type="password"
+										disabled={loading}
+										placeholder="••••••••"
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -142,7 +160,12 @@ export default function RegisterForm({
 							<FormItem>
 								<FormLabel>Repeat your password</FormLabel>
 								<FormControl>
-									<Input {...field} type="password" />
+									<Input
+										{...field}
+										type="password"
+										disabled={loading}
+										placeholder="••••••••"
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -155,14 +178,21 @@ export default function RegisterForm({
 							<FormItem>
 								<FormLabel>Enter your phone number</FormLabel>
 								<FormControl>
-									<Input {...field} />
+									<Input
+										{...field}
+										disabled={loading}
+										placeholder="+201023456789"
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
-					<Button type="submit" className="w-full cursor-pointer">
-						Register
+					<Button
+						type="submit"
+						className="w-full cursor-pointer"
+						disabled={loading}>
+						{loading ? <Spinner /> : "Register"}
 					</Button>
 				</div>
 			</form>

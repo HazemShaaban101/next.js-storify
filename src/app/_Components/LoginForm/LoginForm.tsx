@@ -23,11 +23,16 @@ import { useRouter } from "next/navigation";
 
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useState } from "react";
+import { truncate } from "fs";
+import { Spinner } from "@/components/ui/shadcn-io/spinner";
 
 export default function LoginForm({
 	className,
 	...props
 }: React.ComponentProps<"form">) {
+	const [loading, setLoading] = useState(false);
+
 	const formSchema = z.object({
 		email: z.email("Enter a valid email."),
 		password: z.string(),
@@ -42,8 +47,7 @@ export default function LoginForm({
 	});
 
 	async function handleLogin(userData: object) {
-		console.log(userData);
-
+		setLoading(true);
 		const loginData = await signIn("credentials", {
 			...userData,
 			redirect: false,
@@ -54,6 +58,7 @@ export default function LoginForm({
 			console.log("userData: ", loginData);
 			window.location.href = "/";
 		} else {
+			setLoading(false);
 			toast.error(loginData?.error || "Login fail...");
 		}
 	}
@@ -83,7 +88,11 @@ export default function LoginForm({
 								<FormItem className="mb-3">
 									<FormLabel>Enter your email</FormLabel>
 									<FormControl>
-										<Input {...field} />
+										<Input
+											{...field}
+											disabled={loading}
+											placeholder="email@provider.com"
+										/>
 									</FormControl>
 									<FormDescription />
 									<FormMessage />
@@ -97,7 +106,12 @@ export default function LoginForm({
 								<FormItem className="">
 									<FormLabel>Enter your password</FormLabel>
 									<FormControl>
-										<Input {...field} type="password" />
+										<Input
+											{...field}
+											type="password"
+											disabled={loading}
+											placeholder="••••••••"
+										/>
 									</FormControl>
 									<FormDescription />
 									<FormMessage />
@@ -105,11 +119,12 @@ export default function LoginForm({
 							)}
 						/>
 
-						<p className="my-0 py-0 text-sm/[14px] mb-5">
+						<p className="mt-2 py-0 text-sm/[14px] mb-5 text-center lg:text-left">
 							Forgot your password? try{" "}
 							<Link href={"/resetpassword"}>
 								<Button
 									variant={"link"}
+									disabled={loading}
 									type="button"
 									className="p-0 cursor-pointer h-fit">
 									Resetting your password
@@ -117,8 +132,11 @@ export default function LoginForm({
 							</Link>
 						</p>
 
-						<Button type="submit" className="w-full cursor-pointer">
-							Login
+						<Button
+							type="submit"
+							className="w-full cursor-pointer"
+							disabled={loading}>
+							{loading ? <Spinner /> : "Login"}
 						</Button>
 					</div>
 				</form>

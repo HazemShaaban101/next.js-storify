@@ -269,8 +269,8 @@ export default function ResetPassword() {
 													<FormControl>
 														<Input
 															{...field}
-															placeholder=""
-															autoComplete="off"
+															placeholder="email@provider.com"
+															autoComplete="email"
 															disabled={isLoading}
 														/>
 													</FormControl>
@@ -393,7 +393,8 @@ export default function ResetPassword() {
 														<Input
 															disabled={isLoading}
 															{...field}
-															placeholder=""
+															type="password"
+															placeholder="••••••••"
 															autoComplete="off"
 														/>
 													</FormControl>
@@ -417,7 +418,8 @@ export default function ResetPassword() {
 														<Input
 															disabled={isLoading}
 															{...field}
-															placeholder=""
+															type="password"
+															placeholder="••••••••"
 															autoComplete="off"
 														/>
 													</FormControl>
