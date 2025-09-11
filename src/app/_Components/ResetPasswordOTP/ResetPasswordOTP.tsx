@@ -12,6 +12,7 @@ export default function ResetPasswordOTP(props: {
 		| {
 				newPassword: string;
 				rePassword: string;
+				email: string;
 		  }
 		| {
 				email: string;

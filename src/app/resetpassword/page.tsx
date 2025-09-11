@@ -34,10 +34,14 @@ import ResetPasswordOTP from "../_Components/ResetPasswordOTP/ResetPasswordOTP";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
+import { redirect, useRouter } from "next/navigation";
+import { resolve } from "path";
+import Router from "next/router";
 export default function ResetPassword() {
 	const [step, setStep] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
 	const totalSteps = 3;
+	const router = useRouter();
 
 	const schemaArray = [
 		z.object({
@@ -50,6 +54,7 @@ export default function ResetPassword() {
 		}),
 		z
 			.object({
+				email: z.string(),
 				newPassword: z
 					.string()
 					.regex(
@@ -117,7 +122,6 @@ export default function ResetPassword() {
 			if (response.ok) {
 				const payload = await response.json();
 				toast.success(payload.message);
-				console.log(payload);
 				setStep(1);
 			} else if (response.status === 404) {
 				toast.error(
@@ -144,7 +148,6 @@ export default function ResetPassword() {
 			);
 			if (response.ok) {
 				const payload = await response.json();
-				console.log(payload);
 				setStep(2);
 			} else if (response.status === 400) {
 				toast.error("Wrong code. check your email for correct code", {
@@ -157,9 +160,39 @@ export default function ResetPassword() {
 		}
 	}
 
+	async function handleSetNewPassword(formData: unknown) {
+		try {
+			const response = await fetch(
+				`http://localhost:3000/api/resetpassword`,
+				{
+					method: "PUT",
+					body: JSON.stringify(formData),
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			if (response.ok) {
+				const payload = await response.json();
+				console.log(payload);
+				toast.success("Password successfully reset.");
+				router.push("/login");
+			} else {
+				toast.error("Failed to change password.", {
+					className: "text-center flex flex-col",
+				});
+			}
+		} catch (error) {
+			setIsLoading(false);
+			throw new Error("...Internal route error...");
+		}
+	}
+
 	const { handleSubmit, control, reset } = form;
 
 	const onSubmit = async (formData: unknown) => {
+		console.log(`step ${step + 1}`, formData);
 		if (step === 0) {
 			setIsLoading(true);
 			await handleResetPassword(formData);
@@ -168,12 +201,10 @@ export default function ResetPassword() {
 			setIsLoading(true);
 			await handleVerifyCode(formData);
 			setIsLoading(false);
-		} else {
-			console.log(formData);
-			setStep(0);
-			reset();
-
-			toast.success("Form successfully submitted");
+		} else if (step === 2) {
+			setIsLoading(true);
+			await handleSetNewPassword(formData);
+			setIsLoading(false);
 		}
 	};
 

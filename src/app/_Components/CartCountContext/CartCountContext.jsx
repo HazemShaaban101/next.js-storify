@@ -10,9 +10,8 @@ export default function CartCountContext({ children }) {
 	useEffect(() => {
 		const cartItems = getUserCart();
 		cartItems.then((value) => {
-			console.log("cartContext-------------------------", value);
 			let sum = 0;
-			value?.data.products.forEach((product) => {
+			value?.data?.products?.forEach((product) => {
 				sum += product.count;
 			});
 			setCartCountState(sum);
