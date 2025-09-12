@@ -2,15 +2,6 @@
 import React, { useEffect, useState } from "react";
 import AllBrands from "@/apis/AllBrands.api";
 import { brandMetadataType, brandType } from "../_interfaces/brand.interface";
-import {
-	Pagination,
-	PaginationContent,
-	PaginationEllipsis,
-	PaginationItem,
-	PaginationLink,
-	PaginationNext,
-	PaginationPrevious,
-} from "@/components/ui/pagination";
 import { useSearchParams } from "next/navigation";
 import Paginator from "../_Components/Paginator/Paginator";
 import Link from "next/link";
