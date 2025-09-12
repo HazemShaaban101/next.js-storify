@@ -12,6 +12,8 @@ import {
 	Store,
 	Sun,
 	Moon,
+	Spotlight,
+	ScanBarcode,
 } from "lucide-react";
 
 import {
@@ -54,7 +56,12 @@ const menuItems = [
 	{
 		title: "Products",
 		url: "/products",
-		icon: Apple,
+		icon: ScanBarcode,
+	},
+	{
+		title: "Brands",
+		url: "/brands",
+		icon: Spotlight,
 	},
 ];
 const footerItems = [

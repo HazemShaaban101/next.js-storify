@@ -58,7 +58,9 @@ export default function Brands() {
 						<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
 							{brandList?.map((brand: brandType) => {
 								return (
-									<Link href={``} key={brand._id}>
+									<Link
+										href={`/brands/${brand._id}`}
+										key={brand._id}>
 										<div className="flex flex-col items-center justify-center gap-3 border-2 border-solid rounded-2xl py-5">
 											<Image
 												src={brand.image}
@@ -77,7 +79,9 @@ export default function Brands() {
 						</div>
 					</div>
 
-					<Paginator metaData={metaData} />
+					<div className="my-3">
+						<Paginator metaData={metaData} />
+					</div>
 				</>
 			)}
 		</>
