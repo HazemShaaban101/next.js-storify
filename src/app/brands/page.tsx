@@ -56,10 +56,6 @@ export default function Brands() {
 				<>
 					<div className="min-h-[calc(100vh-2rem-60px-35px)] relative">
 						<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
-							{/* {data.map((product: productType) => (
-					<ProductCard product={product} key={product._id} />
-				))} */}
-
 							{brandList?.map((brand: brandType) => {
 								return (
 									<Link href={``} key={brand._id}>
@@ -79,47 +75,8 @@ export default function Brands() {
 								);
 							})}
 						</div>
-
-						{/* <Pagination>
-						<PaginationContent>
-							<PaginationItem>
-								<PaginationPrevious
-									href="?page=1"
-									className={
-										metaData.currentPage === 1
-											? "hidden"
-											: ""
-									}
-								/>
-							</PaginationItem>
-							<PaginationItem>
-								<PaginationLink
-									href="?page=1"
-									isActive={metaData.currentPage == 1}>
-									1
-								</PaginationLink>
-							</PaginationItem>
-							<PaginationItem>
-								<PaginationLink
-									href="?page=2"
-									isActive={metaData.currentPage == 2}>
-									2
-								</PaginationLink>
-							</PaginationItem>
-							<PaginationItem>
-								<PaginationNext
-									href="?page=2"
-									className={
-										metaData.currentPage ===
-										metaData.numberOfPages
-											? "hidden"
-											: ""
-									}
-								/>
-							</PaginationItem>
-						</PaginationContent>
-					</Pagination> */}
 					</div>
+
 					<Paginator metaData={metaData} />
 				</>
 			)}
