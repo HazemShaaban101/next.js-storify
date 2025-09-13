@@ -14,6 +14,7 @@ import {
 	Moon,
 	Spotlight,
 	ScanBarcode,
+	Tags,
 } from "lucide-react";
 
 import {
@@ -59,6 +60,11 @@ const menuItems = [
 		icon: ScanBarcode,
 	},
 	{
+		title: "Categories",
+		url: "/categories",
+		icon: Tags,
+	},
+	{
 		title: "Brands",
 		url: "/brands",
 		icon: Spotlight,
@@ -95,9 +101,9 @@ export default function NavSideBar() {
 							<p className="flex items-center gap-2">
 								<Store
 									color={"oklch(52% 0.105 223.128)"}
-									size={20}
+									size={30}
 								/>
-								<span className="text-lg font-mono font-extrabold">
+								<span className="text-lg/tight font-mono font-extrabold">
 									Storify
 								</span>
 							</p>
