@@ -26,8 +26,6 @@ export default async function onlinePayment(
 
 		const data = await response.json();
 
-		console.log(data);
-
 		if (data.status == "success") {
 			return data.session.url;
 		}
