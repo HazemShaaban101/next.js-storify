@@ -93,11 +93,13 @@ export default function Cart() {
 								"Clear Cart"
 							)}
 						</Button>
-						<Button
-							className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800 cursor-pointer"
-							disabled={clearingCart}>
-							Check Out
-						</Button>
+						<Link href={`/checkout/${cartItems?.cartId}`}>
+							<Button
+								className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800 cursor-pointer"
+								disabled={clearingCart}>
+								Check Out
+							</Button>
+						</Link>
 					</div>
 					<div className="w-full border rounded-md overflow-hidden">
 						<Table>

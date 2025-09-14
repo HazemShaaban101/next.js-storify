@@ -1,0 +1,39 @@
+"use server";
+
+import React from "react";
+import getUserToken from "./getUserToken";
+import { record } from "zod";
+
+export default async function onlinePayment(
+	id: string,
+	shippingAddress: { city: string; details: string; phone: string }
+) {
+	try {
+		const token = await getUserToken();
+		if (!token) return null;
+
+		const response = await fetch(
+			`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=http://localhost:3000`,
+			{
+				method: "POST",
+				body: JSON.stringify({ shippingAddress }),
+				headers: {
+					token,
+					"Content-Type": "application/json",
+				},
+			}
+		);
+
+		const data = await response.json();
+
+		console.log(data);
+
+		if (data.status == "success") {
+			return data.session.url;
+		}
+	} catch (error) {
+		if (error instanceof Error) {
+			throw new Error(error?.message);
+		}
+	}
+}
