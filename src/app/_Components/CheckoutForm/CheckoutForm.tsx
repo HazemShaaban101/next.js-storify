@@ -20,10 +20,13 @@ import {
 	registerType,
 } from "@/app/_interfaces/register.interface";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import onlinePayment from "@/utilities/onlinePayment.action";
+import cashPayment from "@/utilities/cashPayment.action";
+import { CartCountBadge } from "../CartCountContext/CartCountContext";
+import { clearCartBadge } from "@/utilities/cartBadge.Actions";
 
 export default function CheckoutForm(
 	defaultValues: { details: string; phone: string; city: string } | {} = {
@@ -33,6 +36,7 @@ export default function CheckoutForm(
 	}
 ) {
 	const [loading, setLoading] = useState(false);
+	const { setCartCountState } = useContext(CartCountBadge);
 
 	const { userID } = useParams();
 
@@ -72,7 +76,21 @@ export default function CheckoutForm(
 		setLoading(true);
 
 		if (addressData.paymentMethod === "cash") {
-			console.log("Cash payment");
+			try {
+				console.log("Cash payment");
+				const response = await cashPayment(userID as string, {
+					details: addressData.details,
+					city: addressData.city,
+					phone: addressData.phone,
+				});
+				toast.success("Order created successfully!");
+				setLoading(false);
+				clearCartBadge(setCartCountState);
+				router.push("/allorders");
+			} catch (error) {
+				setLoading(false);
+				throw new Error("Error");
+			}
 		} else if (addressData.paymentMethod === "online") {
 			try {
 				console.log("Online Payment");
