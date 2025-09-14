@@ -1,6 +1,6 @@
 import { GalleryVerticalEnd } from "lucide-react";
 
-import registerimage from "../../../../public/Sign up.gif";
+import checkoutimage from "../../../../public/Self checkout.gif";
 import Image from "next/image";
 import CheckoutForm from "@/app/_Components/CheckoutForm/CheckoutForm";
 
@@ -16,7 +16,7 @@ export default function Register() {
 			</div>
 			<div className="bg-muted relative hidden lg:block rounded-r-2xl shadow">
 				<Image
-					src={registerimage}
+					src={checkoutimage}
 					alt="Image"
 					className="absolute inset-0 h-full w-full object-contain dark:brightness-[0.6]"
 				/>
