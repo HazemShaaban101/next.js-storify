@@ -22,9 +22,14 @@ import Link from "next/link";
 import { CartCountBadge } from "../_Components/CartCountContext/CartCountContext";
 import { clearCartBadge, removeItemBadge } from "@/utilities/cartBadge.Actions";
 import ClearCart from "@/utilities/ClearCart";
+import { productType } from "../_interfaces/product.interface";
 
 export default function Cart() {
-	const [cartItems, setCartItems] = useState<CartItemType>();
+	const [cartItems, setCartItems] = useState<{
+		data: { products: CartProduct[] };
+		numOfCartItems: number;
+		cartId: string;
+	}>();
 
 	const [updateLoading, setUpdataLoading] = useState<boolean>(false);
 	const [removing, setRemoving] = useState<boolean>(false);
@@ -32,6 +37,7 @@ export default function Cart() {
 	const [clearingCart, setClearingCart] = useState<boolean>(false);
 
 	const { cartCountState, setCartCountState } = useContext(CartCountBadge);
+	const [cartTotalPrice, setCartTotalPrice] = useState(0);
 
 	useEffect(() => {
 		const dummyFunction = async () => HandleGetCartItems();
@@ -40,9 +46,23 @@ export default function Cart() {
 		});
 	}, []);
 
+	useEffect(() => {
+		let cartSum = 0;
+		cartItems?.data.products.forEach((product: CartProduct) => {
+			console.log(product);
+			cartSum += product.count * product.price;
+			console.log(cartSum);
+		});
+		setCartTotalPrice(cartSum);
+	}, [cartItems]);
+
 	// get user cart items
 	async function HandleGetCartItems() {
-		const cartData: CartItemType = await getUserCart();
+		const cartData: {
+			data: { products: CartProduct[] };
+			numOfCartItems: number;
+			cartId: string;
+		} = await getUserCart();
 		// console.log("this is initial data", cartData);
 		setCartItems(cartData);
 	}
@@ -76,7 +96,10 @@ export default function Cart() {
 				</div>
 			) : cartItems?.numOfCartItems! > 0 ? (
 				<div className="min-h-[calc(100vh-2rem-60px)]">
-					<div className="flex justify-end gap-3 mb-3">
+					<div className="flex justify-end gap-3 mb-3 items-center">
+						<p className="font-mono text-md">
+							Total: {cartTotalPrice} EGP
+						</p>
 						<Button
 							variant={"destructive"}
 							className="hover:bg-red-700 dark:hover:bg-[#863842] cursor-pointer"
