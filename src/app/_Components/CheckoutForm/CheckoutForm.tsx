@@ -262,7 +262,7 @@ export default function CheckoutForm() {
 													"Choose from saved addresses"}
 											</Button>
 										</DropdownMenuTrigger>
-										<DropdownMenuContent className="dropdown-content-width-full hide-scrollbar h-[400px]">
+										<DropdownMenuContent className="dropdown-content-width-full hide-scrollbar max-h-[400px]">
 											{addressList?.map(
 												(address, index) => {
 													return (
