@@ -7,7 +7,7 @@ import CheckoutForm from "@/app/_Components/CheckoutForm/CheckoutForm";
 export default function Register() {
 	return (
 		<div className=" shadow rounded-2xl min-h-[calc(100vh-2rem-60px)] shadow-slate-700 grid lg:grid-cols-2">
-			<div className="flex flex-col gap-4 p-6 md:p-10">
+			<div className="flex flex-col gap-4 p-6 md:p-2">
 				<div className="flex flex-1 w-full items-center justify-center">
 					<div className="w-full max-w-md">
 						<CheckoutForm />

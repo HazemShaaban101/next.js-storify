@@ -533,3 +533,17 @@ div[data-input-otp-container] {
 	margin-right: auto;
 	margin-left: auto;
 }
+
+@layer utilities {
+	.dropdown-content-width-full {
+		width: var(--radix-dropdown-menu-trigger-width);
+		max-height: var(--radix-dropdown-menu-content-available-height);
+	}
+}
+
+@layer utilities {
+	.hide-scrollbar {
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none; /* IE 10+ */
+	}
+}

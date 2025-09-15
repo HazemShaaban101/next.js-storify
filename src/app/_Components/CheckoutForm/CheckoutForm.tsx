@@ -5,22 +5,17 @@ import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import {
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import axios from "axios";
-import { Form, FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import {
-	RegisterErrorType,
-	registerType,
-} from "@/app/_interfaces/register.interface";
+
 import { useParams, useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import onlinePayment from "@/utilities/onlinePayment.action";
@@ -28,19 +23,55 @@ import cashPayment from "@/utilities/cashPayment.action";
 import { CartCountBadge } from "../CartCountContext/CartCountContext";
 import { clearCartBadge } from "@/utilities/cartBadge.Actions";
 
-export default function CheckoutForm(
-	defaultValues: { details: string; phone: string; city: string } | {} = {
-		details: "",
-		phone: "",
-		city: "",
-	}
-) {
+import { Separator } from "@/components/ui/separator";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import AddNewAddress from "@/utilities/AddNewAddress";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Trash, Trash2, Trash2Icon } from "lucide-react";
+import RemoveAddress from "@/utilities/RemoveAddress";
+
+export default function CheckoutForm() {
 	const [loading, setLoading] = useState(false);
 	const { setCartCountState } = useContext(CartCountBadge);
 
+	interface AddressListType {
+		name: string;
+		details: string;
+		phone: string;
+		city: string;
+		_id: string;
+	}
+	const [addressList, setAddressList] = useState<AddressListType[] | null>(
+		null
+	);
+	const [deletingAddress, setDeletingAddress] = useState(false);
+
 	const { userID } = useParams();
 
+	useEffect(() => {
+		async function dummyFunc() {
+			const response = await fetch(
+				`http://localhost:3000/api/useraddresses`
+			);
+			const data = await response.json();
+			if (data?.length > 0) {
+				setAddressList(data);
+			}
+		}
+		dummyFunc();
+	}, []);
+
 	const formSchema = z.object({
+		name: z
+			.string()
+			.min(2, "name must be 2 characters or longer")
+			.max(20, "name can only be 20 characters max."),
 		details: z.string().max(256, "Details can only be 256 characters max."),
 
 		phone: z
@@ -56,13 +87,16 @@ export default function CheckoutForm(
 		paymentMethod: z
 			.string()
 			.regex(/^(cash|online){1}$/, "Choose a Payment option"),
+		saveAddress: z.boolean(),
 	});
 	const form = useForm({
 		defaultValues: {
+			name: "",
 			details: "",
 			phone: "",
 			city: "",
 			paymentMethod: "",
+			saveAddress: false,
 		},
 		resolver: zodResolver(formSchema),
 	});
@@ -72,12 +106,27 @@ export default function CheckoutForm(
 		details: string;
 		phone: string;
 		paymentMethod: string;
+		name: string;
+		saveAddress: boolean;
 	}) {
 		setLoading(true);
 
+		if (addressData.saveAddress) {
+			try {
+				const { data } = await AddNewAddress({
+					name: addressData.name,
+					details: addressData.details,
+					phone: addressData.phone,
+					city: addressData.city,
+				});
+				// data contains a new array of addresses
+			} catch (error) {
+				throw new Error("Couldn't save new address");
+			}
+		}
+
 		if (addressData.paymentMethod === "cash") {
 			try {
-				console.log("Cash payment");
 				const response = await cashPayment(userID as string, {
 					details: addressData.details,
 					city: addressData.city,
@@ -93,7 +142,6 @@ export default function CheckoutForm(
 			}
 		} else if (addressData.paymentMethod === "online") {
 			try {
-				console.log("Online Payment");
 				const forwardURL = await onlinePayment(userID as string, {
 					details: addressData.details,
 					city: addressData.city,
@@ -106,43 +154,231 @@ export default function CheckoutForm(
 				throw new Error("Error");
 			}
 		}
-
-		setLoading(false);
-		// axios
-		// 	.post(
-		// 		`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${userID}?url=http://localhost:3000`,
-		// 		addressData
-		// 	)
-		// 	.then(() => {
-		// 		toast.success("Account created successfully!");
-		// 		router.push("/login");
-		// 	})
-		// 	.catch((err: RegisterErrorType) => {
-		// 		toast.error(err.response.data.message);
-		// 		setLoading(false);
-		// 	});
 	}
 
+	function handleSelect(id: string) {
+		if (addressList) {
+			const address = addressList?.find(
+				(address: AddressListType) => address._id == id
+			);
+			form.reset({
+				name: address?.name,
+				details: address?.details,
+				phone: address?.phone,
+				city: address?.city,
+			});
+		}
+	}
+
+	async function handleRemoveAddress(id: string) {
+		setDeletingAddress(true);
+		try {
+			const { data } = await RemoveAddress(id);
+			console.log(data);
+			setAddressList(data);
+			setDeletingAddress(false);
+		} catch (error) {
+			setDeletingAddress(false);
+			throw new Error("couldn't delete address");
+		}
+	}
 	const router = useRouter();
 
 	return (
 		<FormProvider {...form}>
 			<form
-				className={cn("flex flex-col gap-6")}
+				className={cn("flex flex-col gap-3")}
 				onSubmit={form.handleSubmit(handleCheckout)}>
 				<div className="flex flex-col items-center gap-2 text-center">
 					<h1 className="text-2xl font-bold">Checkout</h1>
 					<p className="text-muted-foreground text-sm text-balance">
-						Enter your info below to finalize your order!
+						Choose your shipping information to finalize your order
 					</p>
+					{addressList && (
+						// <Select onValueChange={handleSelect}>
+						// 	<SelectTrigger className="w-full">
+						// 		<div className="w-full flex flex-wrap gap-1 text-gray-400 px-5">
+						// 			<h1 className="w-full text-center">
+						// 				Choose your shipping information
+						// 			</h1>
+						// 		</div>
+						// 	</SelectTrigger>
+						// 	<SelectContent className="">
+						// 		<SelectGroup className="w-full">
+						// 			{addressList?.map((address, index) => {
+						// 				return (
+						// 					<div key={address._id}>
+						// 						<SelectItem
+						// 							className={`justify-between items-between w-full ${
+						// 								index ==
+						// 									addressList.length -
+						// 										1 && "mb-0.5"
+						// 							}`}
+						// 							value={address._id}>
+						// 							<div
+						// 								className={`flex flex-col gap-1 text-gray-600 dark:text-gray-200`}>
+						// 								<h1 className="text-center">
+						// 									{address.name}
+						// 								</h1>
+						// 								<h2 className=" text-center ">
+						// 									Details:{" "}
+						// 									{address.details}
+						// 								</h2>
+
+						// 								<p className="text-center">
+						// 									Phone:{" "}
+						// 									{address.phone}
+						// 								</p>
+						// 								<p className="text-center">
+						// 									Address:{" "}
+						// 									{address.city}
+						// 								</p>
+						// 							</div>
+						// 						</SelectItem>
+						// 						{index <
+						// 							addressList.length - 1 && (
+						// 							<Separator className="my-1" />
+						// 						)}
+						// 					</div>
+						// 				);
+						// 			})}
+						// 		</SelectGroup>
+						// 	</SelectContent>
+						// </Select>
+
+						<FormField
+							control={form.control}
+							name="name"
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<DropdownMenu>
+										<DropdownMenuTrigger
+											asChild
+											className="w-full">
+											<Button
+												variant="outline"
+												className="">
+												{field.value ||
+													"Choose from saved addresses"}
+											</Button>
+										</DropdownMenuTrigger>
+										<DropdownMenuContent className="dropdown-content-width-full hide-scrollbar h-[400px]">
+											{addressList?.map(
+												(address, index) => {
+													return (
+														<div key={address._id}>
+															<DropdownMenuItem
+																className={`w-full ${
+																	index ==
+																		addressList.length -
+																			1 &&
+																	"mb-0.5"
+																}`}
+																onSelect={() =>
+																	handleSelect(
+																		address._id
+																	)
+																}>
+																<div
+																	className={`w-full flex flex-col gap-1 text-gray-600 dark:text-gray-200`}>
+																	<h1 className="text-center">
+																		{
+																			address.name
+																		}
+																	</h1>
+																	<h2 className=" text-center ">
+																		Details:{" "}
+																		{
+																			address.details
+																		}
+																	</h2>
+
+																	<p className="text-center">
+																		Phone:{" "}
+																		{
+																			address.phone
+																		}
+																	</p>
+																	<p className="text-center">
+																		Address:{" "}
+																		{
+																			address.city
+																		}
+																	</p>
+																</div>
+																<Button
+																	onClick={(
+																		e
+																	) => {
+																		e.preventDefault();
+																		handleRemoveAddress(
+																			address._id
+																		);
+																	}}
+																	variant="destructive"
+																	className="py-12 !px-5 cursor-pointer hover:bg-red-700 focus:bg-red-800 dark:hover:bg-red-500 dark:focus:bg-red-400">
+																	{deletingAddress ? (
+																		<Spinner />
+																	) : (
+																		<Trash
+																			className="text-white"
+																			style={{
+																				width: "20px",
+																				height: "20px",
+																			}}
+																		/>
+																	)}
+																</Button>
+															</DropdownMenuItem>
+															{index <
+																addressList.length -
+																	1 && (
+																<Separator className="my-1" />
+															)}
+														</div>
+													);
+												}
+											)}
+										</DropdownMenuContent>
+									</DropdownMenu>
+								</FormItem>
+							)}
+						/>
+					)}
 				</div>
+
+				<div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+					<span className="bg-card text-muted-foreground relative z-10 px-2">
+						Or enter new Address
+					</span>
+				</div>
+
 				<div className="grid gap-3">
+					<FormField
+						control={form.control}
+						name="name"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel className="pl-2">Name</FormLabel>
+								<FormControl>
+									<Input
+										{...field}
+										disabled={loading}
+										placeholder="Home"
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 					<FormField
 						control={form.control}
 						name="details"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Enter any details</FormLabel>
+								<FormLabel className="pl-2">
+									Enter any details
+								</FormLabel>
 								<FormControl>
 									<Input
 										{...field}
@@ -159,7 +395,9 @@ export default function CheckoutForm(
 						name="phone"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Enter your phone number</FormLabel>
+								<FormLabel className="pl-2">
+									Enter your phone number
+								</FormLabel>
 								<FormControl>
 									<Input
 										{...field}
@@ -176,7 +414,9 @@ export default function CheckoutForm(
 						name="city"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Enter your Address</FormLabel>
+								<FormLabel className="pl-2">
+									Enter your Address
+								</FormLabel>
 								<FormControl>
 									<Input
 										{...field}
@@ -193,7 +433,7 @@ export default function CheckoutForm(
 						control={form.control}
 						name="paymentMethod"
 						render={({ field }) => (
-							<FormItem className="my-2 flex items-center justify-center content-around flex-wrap ">
+							<FormItem className=" flex items-center justify-center content-around flex-wrap ">
 								<FormLabel className="text-lg font-bold w-full flex justify-center">
 									Payment method
 								</FormLabel>
@@ -227,6 +467,31 @@ export default function CheckoutForm(
 									</RadioGroup>
 								</FormControl>
 								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="saveAddress"
+						render={({ field }) => (
+							<FormItem className=" flex items-center justify-center content-around flex-wrap ">
+								<Label className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-cyan-700 has-[[aria-checked=true]]:bg-cyan-100 dark:has-[[aria-checked=true]]:border-cyan-900 dark:has-[[aria-checked=true]]:bg-cyan-950">
+									<Checkbox
+										id="toggle-2"
+										onCheckedChange={field.onChange}
+										checked={field.value}
+										className="data-[state=checked]:border-cyan-700 data-[state=checked]:bg-cyan-700 data-[state=checked]:text-white dark:data-[state=checked]:border-cyan-800 dark:data-[state=checked]:bg-cyan-800"
+									/>
+									<div className="grid gap-1.5 font-normal">
+										<p className="text-sm leading-none font-medium">
+											Save address information
+										</p>
+										<p className="text-muted-foreground text-sm">
+											You can choose from saved addresses
+											on your next orders.
+										</p>
+									</div>
+								</Label>
 							</FormItem>
 						)}
 					/>
