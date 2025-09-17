@@ -16,6 +16,7 @@ import Link from "next/link";
 
 import { UserOrderType } from "../_interfaces/userOrder.interface";
 import { OrderModal } from "../_Components/OrderModal/OrderModal";
+import * as motion from "motion/react-client";
 
 export default function Orders() {
 	const [userOrders, setUserOrders] = useState<UserOrderType[]>([]);
@@ -51,7 +52,7 @@ export default function Orders() {
 					<span className="loader"></span>
 				</div>
 			) : userOrders.length > 0 ? (
-				<div className="min-h-[calc(100vh-2rem-60px)]">
+				<motion.div className="min-h-[calc(100vh-2rem-60px)]">
 					<div className="w-full border rounded-md overflow-hidden">
 						<Table>
 							<TableHeader>
@@ -114,7 +115,7 @@ export default function Orders() {
 							</TableBody>
 						</Table>
 					</div>
-				</div>
+				</motion.div>
 			) : (
 				<div className="flex justify-center items-center w-full text-cyan-700 font-mono font-bold text-4xl flex-wrap gap-10 h-[calc(100vh-60px-2rem)] content-center">
 					<p className="w-full text-center">

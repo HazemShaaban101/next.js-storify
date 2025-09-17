@@ -46,6 +46,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { useContext } from "react";
 import { CartCountBadge } from "../CartCountContext/CartCountContext";
+import * as motion from "motion/react-client";
+import { AnimatePresence } from "framer-motion";
 
 // Menu items.
 const menuItems = [
@@ -90,8 +92,6 @@ export default function NavSideBar() {
 	const cartCount: { cartCountState: number; setCartCountState: Function } =
 		useContext(CartCountBadge);
 
-	console.log(session);
-
 	return (
 		<Sidebar>
 			<SidebarContent>
@@ -108,8 +108,8 @@ export default function NavSideBar() {
 								</span>
 							</p>
 							<Button
-								className="py-4 bg-white text-dark shadow-lg hover:bg-cyan-100 focus:bg-cyan-100 dark:bg-slate-800 dark:text-white dark:hover:bg-cyan-950 dark:focus:bg-cyan-950 cursor-pointer"
-								variant={"default"}
+								className="p-3 bg-white text-dark shadow-lg hover:bg-cyan-100 focus:bg-cyan-100 dark:bg-slate-800 dark:text-white dark:hover:bg-cyan-950 dark:focus:bg-cyan-950 cursor-pointer"
+								// variant={"default"}
 								onClick={(e) => {
 									theme == "light"
 										? (() => {
@@ -121,13 +121,39 @@ export default function NavSideBar() {
 												e.currentTarget.blur();
 										  })();
 								}}>
-								{theme == "light" ? <Sun /> : <Moon />}
+								<AnimatePresence mode="popLayout">
+									<motion.div
+										className=""
+										key={theme}
+										layout
+										initial={{
+											opacity: 0,
+											rotateZ: 360,
+											scale: 0.5,
+										}}
+										animate={{
+											opacity: 1,
+											rotateZ: 0,
+											scale: 1,
+											transition: { duration: 0.3 },
+										}}
+										exit={{
+											opacity: 0,
+											rotateZ: 360,
+											scale: 0.5,
+											transition: { duration: 0.5 },
+										}}>
+										{theme == "light" ? <Sun /> : <Moon />}
+									</motion.div>
+								</AnimatePresence>
 							</Button>
 						</div>
 					</SidebarGroupLabel>
 					<hr className="my-1 border-2 rounded-full" />
 					<SidebarGroupContent>
-						<SidebarMenu>
+						<SidebarMenu
+							className="overflow-hidden"
+							suppressHydrationWarning>
 							{menuItems.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton asChild>
@@ -139,19 +165,30 @@ export default function NavSideBar() {
 								</SidebarMenuItem>
 							))}
 							{session.status == "authenticated" && (
-								<SidebarMenuItem key={"cart"}>
-									<SidebarMenuButton asChild>
-										<Link href={"/cart"} className="">
-											<ShoppingCart />
-											<span>{"Cart"}</span>
-											<Badge
-												variant="default"
-												className="ml-auto">
-												{cartCount?.cartCountState!}
-											</Badge>
-										</Link>
-									</SidebarMenuButton>
-								</SidebarMenuItem>
+								<motion.div
+									initial={{ x: -400 }}
+									animate={{
+										x: 0,
+										transition: {
+											duration: 0.5,
+											type: "spring",
+											stiffness: 50,
+										},
+									}}>
+									<SidebarMenuItem key={"cart"}>
+										<SidebarMenuButton asChild>
+											<Link href={"/cart"} className="">
+												<ShoppingCart />
+												<span>{"Cart"}</span>
+												<Badge
+													variant="default"
+													className="ml-auto">
+													{cartCount?.cartCountState!}
+												</Badge>
+											</Link>
+										</SidebarMenuButton>
+									</SidebarMenuItem>
+								</motion.div>
 							)}
 						</SidebarMenu>
 					</SidebarGroupContent>
@@ -200,9 +237,19 @@ export default function NavSideBar() {
 					<div className="flex">
 						<SidebarMenuButton asChild>
 							<Link
-								href={"https://github.com"}
+								href={"https://github.com/HazemShaaban101"}
 								className="justify-center">
-								<div className="icon text-center box-border py-5">
+								<motion.div
+									className="icon text-center box-border py-5"
+									initial={{ y: 0 }}
+									whileHover={{
+										y: -3,
+										transition: {
+											duration: 0.3,
+											type: "spring",
+											stiffness: 1000,
+										},
+									}}>
 									<svg
 										role="img"
 										viewBox="0 0 24 24" // Simple Icons are typically 24x24
@@ -218,14 +265,24 @@ export default function NavSideBar() {
 										<title>{siGithub.title}</title>
 										<path d={siGithub.path} />
 									</svg>
-								</div>
+								</motion.div>
 							</Link>
 						</SidebarMenuButton>
 						<SidebarMenuButton asChild>
 							<Link
-								href={"https://facebook.com"}
+								href={"https://www.facebook.com/"}
 								className="justify-center">
-								<div className="icon text-center">
+								<motion.div
+									className="icon text-center"
+									initial={{ y: 0 }}
+									whileHover={{
+										y: -3,
+										transition: {
+											duration: 0.3,
+											type: "spring",
+											stiffness: 1000,
+										},
+									}}>
 									<svg
 										role="img"
 										viewBox="0 0 24 24" // Simple Icons are typically 24x24
@@ -237,14 +294,24 @@ export default function NavSideBar() {
 										<title>{siFacebook.title}</title>
 										<path d={siFacebook.path} />
 									</svg>
-								</div>
+								</motion.div>
 							</Link>
 						</SidebarMenuButton>
 						<SidebarMenuButton asChild>
 							<Link
 								href={"https://instagram.com"}
 								className="justify-center">
-								<div className="icon text-center">
+								<motion.div
+									className="icon text-center"
+									initial={{ y: 0 }}
+									whileHover={{
+										y: -3,
+										transition: {
+											duration: 0.3,
+											type: "spring",
+											stiffness: 1000,
+										},
+									}}>
 									<svg
 										role="img"
 										viewBox="0 0 24 24" // Simple Icons are typically 24x24
@@ -256,33 +323,53 @@ export default function NavSideBar() {
 										<title>{siInstagram.title}</title>
 										<path d={siInstagram.path} />
 									</svg>
-								</div>
+								</motion.div>
 							</Link>
 						</SidebarMenuButton>
 						<SidebarMenuButton asChild>
 							<Link
 								href={"https://whatsapp.com"}
 								className="justify-center">
-								<div className="icon text-center">
+								<motion.div
+									className="icon text-center"
+									initial={{ y: 0 }}
+									whileHover={{
+										y: -3,
+										transition: {
+											duration: 0.3,
+											type: "spring",
+											stiffness: 1000,
+										},
+									}}>
 									<svg
 										role="img"
 										viewBox="0 0 24 24" // Simple Icons are typically 24x24
 										xmlns="http://www.w3.org/2000/svg"
 										width={24}
 										height={24}
-										style={{ fill: "#25D366" }} // Use the icon's hex color
+										style={{ fill: "#25D366" }} // Use 	the icon's hex color
 									>
 										<title>{siWhatsapp.title}</title>
 										<path d={siWhatsapp.path} />
 									</svg>
-								</div>
+								</motion.div>
 							</Link>
 						</SidebarMenuButton>
 						<SidebarMenuButton asChild>
 							<Link
 								href={"https://tiktok.com"}
 								className="justify-center">
-								<div className="icon text-center box-border py-5">
+								<motion.div
+									className="icon text-center box-border py-5"
+									initial={{ y: 0 }}
+									whileHover={{
+										y: -3,
+										transition: {
+											duration: 0.3,
+											type: "spring",
+											stiffness: 1000,
+										},
+									}}>
 									<svg
 										role="img"
 										viewBox="0 0 24 24" // Simple Icons are typically 24x24
@@ -298,7 +385,7 @@ export default function NavSideBar() {
 										<title>{siTiktok.title}</title>
 										<path d={siTiktok.path} />
 									</svg>
-								</div>
+								</motion.div>
 							</Link>
 						</SidebarMenuButton>
 					</div>
