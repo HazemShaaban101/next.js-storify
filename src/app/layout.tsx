@@ -7,6 +7,7 @@ import NavSideBar from "./_Components/NavSideBar/NavSideBar";
 import MySessionProvider from "./_Components/MySessionProvider/MySessionProvider";
 import { Toaster } from "@/components/ui/sonner";
 import CartCountContext from "./_Components/CartCountContext/CartCountContext";
+import * as motion from "motion/react-client";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",

@@ -1,7 +1,5 @@
 "use server";
-import React from "react";
 import getUserToken from "./getUserToken";
-import { toast, Toaster } from "sonner";
 
 export default async function addToCart(productID: string) {
 	console.log("Adding product to cart");

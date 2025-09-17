@@ -23,14 +23,12 @@ export interface RegisterErrorType {
 export interface Config {
 	transitional: Transitional;
 	adapter: string[];
-	transformRequest: any[];
-	transformResponse: any[];
+
 	timeout: number;
 	xsrfCookieName: string;
 	xsrfHeaderName: string;
 	maxContentLength: number;
 	maxBodyLength: number;
-	env: Env;
 	headers: Headers;
 	method: string;
 	url: string;
@@ -43,8 +41,6 @@ export interface Transitional {
 	forcedJSONParsing: boolean;
 	clarifyTimeoutError: boolean;
 }
-
-export interface Env {}
 
 export interface Headers {
 	Accept: string;
@@ -69,8 +65,7 @@ export type RESPONSE = {
 			clarifyTimeoutError: boolean;
 		};
 		adapter: Array<string>;
-		transformRequest: Array<any>;
-		transformResponse: Array<any>;
+
 		timeout: number;
 		xsrfCookieName: string;
 		xsrfHeaderName: string;

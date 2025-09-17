@@ -11,14 +11,14 @@ export default async function AllBrands(
 	metadata: brandMetadataType;
 }> {
 	try {
-		let response = await fetch(
+		const response = await fetch(
 			`https://ecommerce.routemisr.com/api/v1/brands?limit=30&${page}`
 		);
-		let data: { data: brandType[]; metadata: object } =
+		const data: { data: brandType[]; metadata: object } =
 			await response.json();
 
 		return data;
-	} catch (err: unknown) {
+	} catch (err) {
 		throw new Error("server communication error");
 	}
 }

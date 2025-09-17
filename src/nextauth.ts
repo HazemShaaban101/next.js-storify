@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
 				email: { type: "email", placeholder: "enter your email..." },
 				password: { type: "password", placeholder: "H@zemsh2011" },
 			},
-			async authorize(credentials, req) {
+			async authorize(credentials) {
 				// console.log("user credentials:", credentials);
 				const response = await fetch(
 					`${process.env.APIBASE}/auth/signin`,

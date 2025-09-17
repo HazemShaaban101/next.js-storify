@@ -1,7 +1,5 @@
 "use server";
-import React from "react";
 import getUserToken from "./getUserToken";
-import { toast, Toaster } from "sonner";
 
 export default async function AddNewAddress(address: {
 	city: string;
@@ -39,7 +37,7 @@ export default async function AddNewAddress(address: {
 
 		const payload = await response.json();
 		return payload;
-	} catch (error) {
+	} catch (e) {
 		throw new Error("Couldn't add address");
 	}
 }
