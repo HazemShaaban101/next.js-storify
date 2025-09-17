@@ -103,7 +103,9 @@ export function OrderModal({
 									Delivered
 								</span>
 							) : (
-								<span className="text-yellow-500">Pending</span>
+								<span className="text-yellow-500">
+									On route
+								</span>
 							)}
 						</p>
 					</div>

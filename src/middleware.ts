@@ -14,7 +14,12 @@ export default async function middleware(request: NextRequest) {
 	) {
 		return NextResponse.redirect(new URL("/", request.url));
 	}
-	if (!token && pathname === "/cart") {
+	if (
+		!token &&
+		(pathname === "/cart" ||
+			pathname === "/allorders" ||
+			pathname.startsWith("/checkout"))
+	) {
 		return NextResponse.redirect(new URL("/login", request.url));
 	}
 
@@ -22,5 +27,12 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/cart", "/login", "/register", "/resetpassword"],
+	matcher: [
+		"/cart",
+		"/login",
+		"/register",
+		"/resetpassword",
+		"/allorders",
+		"/checkout/:path*",
+	],
 };
