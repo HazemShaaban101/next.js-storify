@@ -191,166 +191,128 @@ export default function CheckoutForm() {
 				onSubmit={form.handleSubmit(handleCheckout)}>
 				<div className="flex flex-col items-center gap-2 text-center">
 					<h1 className="text-2xl font-bold">Checkout</h1>
-					<p className="text-muted-foreground text-sm text-balance">
-						Choose your shipping information to finalize your order
-					</p>
-					{addressList && (
-						// <Select onValueChange={handleSelect}>
-						// 	<SelectTrigger className="w-full">
-						// 		<div className="w-full flex flex-wrap gap-1 text-gray-400 px-5">
-						// 			<h1 className="w-full text-center">
-						// 				Choose your shipping information
-						// 			</h1>
-						// 		</div>
-						// 	</SelectTrigger>
-						// 	<SelectContent className="">
-						// 		<SelectGroup className="w-full">
-						// 			{addressList?.map((address, index) => {
-						// 				return (
-						// 					<div key={address._id}>
-						// 						<SelectItem
-						// 							className={`justify-between items-between w-full ${
-						// 								index ==
-						// 									addressList.length -
-						// 										1 && "mb-0.5"
-						// 							}`}
-						// 							value={address._id}>
-						// 							<div
-						// 								className={`flex flex-col gap-1 text-gray-600 dark:text-gray-200`}>
-						// 								<h1 className="text-center">
-						// 									{address.name}
-						// 								</h1>
-						// 								<h2 className=" text-center ">
-						// 									Details:{" "}
-						// 									{address.details}
-						// 								</h2>
-
-						// 								<p className="text-center">
-						// 									Phone:{" "}
-						// 									{address.phone}
-						// 								</p>
-						// 								<p className="text-center">
-						// 									Address:{" "}
-						// 									{address.city}
-						// 								</p>
-						// 							</div>
-						// 						</SelectItem>
-						// 						{index <
-						// 							addressList.length - 1 && (
-						// 							<Separator className="my-1" />
-						// 						)}
-						// 					</div>
-						// 				);
-						// 			})}
-						// 		</SelectGroup>
-						// 	</SelectContent>
-						// </Select>
-
-						<FormField
-							control={form.control}
-							name="name"
-							render={({ field }) => (
-								<FormItem className="w-full">
-									<DropdownMenu>
-										<DropdownMenuTrigger
-											asChild
-											className="w-full">
-											<Button
-												variant="outline"
-												className="">
-												{field.value ||
-													"Choose from saved addresses"}
-											</Button>
-										</DropdownMenuTrigger>
-										<DropdownMenuContent className="dropdown-content-width-full hide-scrollbar max-h-[400px]">
-											{addressList?.map(
-												(address, index) => {
-													return (
-														<div key={address._id}>
-															<DropdownMenuItem
-																className={`w-full ${
-																	index ==
-																		addressList.length -
-																			1 &&
-																	"mb-0.5"
-																}`}
-																onSelect={() =>
-																	handleSelect(
-																		address._id
-																	)
+					{addressList ? (
+						<>
+							<p className="text-muted-foreground text-sm text-balance">
+								Choose your shipping information to finalize
+								your order
+							</p>
+							<FormField
+								control={form.control}
+								name="name"
+								render={({ field }) => (
+									<FormItem className="w-full">
+										<DropdownMenu>
+											<DropdownMenuTrigger
+												asChild
+												className="w-full">
+												<Button
+													variant="outline"
+													className="">
+													{field.value ||
+														"Choose from saved addresses"}
+												</Button>
+											</DropdownMenuTrigger>
+											<DropdownMenuContent className="dropdown-content-width-full hide-scrollbar max-h-[400px]">
+												{addressList?.map(
+													(address, index) => {
+														return (
+															<div
+																key={
+																	address._id
 																}>
-																<div
-																	className={`w-full flex flex-col gap-1 text-gray-600 dark:text-gray-200`}>
-																	<h1 className="text-center">
-																		{
-																			address.name
-																		}
-																	</h1>
-																	<h2 className=" text-center ">
-																		Details:{" "}
-																		{
-																			address.details
-																		}
-																	</h2>
-
-																	<p className="text-center">
-																		Phone:{" "}
-																		{
-																			address.phone
-																		}
-																	</p>
-																	<p className="text-center">
-																		Address:{" "}
-																		{
-																			address.city
-																		}
-																	</p>
-																</div>
-																<Button
-																	onClick={(
-																		e
-																	) => {
-																		e.preventDefault();
-																		handleRemoveAddress(
+																<DropdownMenuItem
+																	className={`w-full ${
+																		index ==
+																			addressList.length -
+																				1 &&
+																		"mb-0.5"
+																	}`}
+																	onSelect={() =>
+																		handleSelect(
 																			address._id
-																		);
-																	}}
-																	variant="destructive"
-																	className="py-12 !px-5 cursor-pointer hover:bg-red-700 focus:bg-red-800 dark:hover:bg-red-500 dark:focus:bg-red-400">
-																	{deletingAddress ? (
-																		<Spinner />
-																	) : (
-																		<Trash
-																			className="text-white"
-																			style={{
-																				width: "20px",
-																				height: "20px",
-																			}}
-																		/>
-																	)}
-																</Button>
-															</DropdownMenuItem>
-															{index <
-																addressList.length -
-																	1 && (
-																<Separator className="my-1" />
-															)}
-														</div>
-													);
-												}
-											)}
-										</DropdownMenuContent>
-									</DropdownMenu>
-								</FormItem>
-							)}
-						/>
-					)}
-				</div>
+																		)
+																	}>
+																	<div
+																		className={`w-full flex flex-col gap-1 text-gray-600 dark:text-gray-200`}>
+																		<h1 className="text-center">
+																			{
+																				address.name
+																			}
+																		</h1>
+																		<h2 className=" text-center ">
+																			Details:{" "}
+																			{
+																				address.details
+																			}
+																		</h2>
 
-				<div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-					<span className="bg-card text-muted-foreground relative z-10 px-2">
-						Or enter new Address
-					</span>
+																		<p className="text-center">
+																			Phone:{" "}
+																			{
+																				address.phone
+																			}
+																		</p>
+																		<p className="text-center">
+																			Address:{" "}
+																			{
+																				address.city
+																			}
+																		</p>
+																	</div>
+																	<Button
+																		disabled={
+																			deletingAddress
+																		}
+																		onClick={(
+																			e
+																		) => {
+																			e.preventDefault();
+																			handleRemoveAddress(
+																				address._id
+																			);
+																		}}
+																		variant="destructive"
+																		className="py-12 !px-5 cursor-pointer hover:bg-red-700 focus:bg-red-800 dark:hover:bg-red-500 dark:focus:bg-red-400">
+																		{deletingAddress ? (
+																			<Spinner />
+																		) : (
+																			<Trash
+																				className="text-white"
+																				style={{
+																					width: "20px",
+																					height: "20px",
+																				}}
+																			/>
+																		)}
+																	</Button>
+																</DropdownMenuItem>
+																{index <
+																	addressList.length -
+																		1 && (
+																	<Separator className="my-1" />
+																)}
+															</div>
+														);
+													}
+												)}
+											</DropdownMenuContent>
+										</DropdownMenu>
+									</FormItem>
+								)}
+							/>
+							<div className="w-full after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+								<span className="bg-card text-muted-foreground relative z-10 px-2">
+									Or enter new Address
+								</span>
+							</div>
+						</>
+					) : (
+						<p className="text-muted-foreground text-sm text-balance">
+							Enter your shipping information to finalize your
+							order
+						</p>
+					)}
 				</div>
 
 				<div className="grid gap-3">
