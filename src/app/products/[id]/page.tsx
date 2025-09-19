@@ -1,12 +1,11 @@
+import { SingleProductRelatedProducts } from "@/apis/singleProductRelatedProducts";
 import AddToCartButton from "@/app/_Components/AddToCartButton/AddToCartButton";
+import { ProductCard } from "@/app/_Components/ProductCard/ProductCard";
 import ProductImageSwiper from "@/app/_Components/ProductImageSwiper/ProductImageSwiper";
 import { productType } from "@/app/_interfaces/product.interface";
 
 import { ShoppingCart, Star, User } from "lucide-react";
-import Image from "next/image";
 import React from "react";
-import { Virtual } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 export default async function GetSingleProduct({
 	params,
@@ -19,41 +18,45 @@ export default async function GetSingleProduct({
 		`https://ecommerce.routemisr.com/api/v1/products/${id}`
 	);
 
-	const { data }: { data: productType } = await response.json();
-	console.log(data);
+	const { data: productDetails }: { data: productType } =
+		await response.json();
+
+	const relatedProducts: productType[] = await SingleProductRelatedProducts(
+		productDetails.category._id
+	);
 
 	return (
 		<>
 			<div className="flex flex-wrap justify-center container w-[90%] gap-x-10 gap-y-5 mx-auto my-10">
-				<ProductImageSwiper data={data.images} />
+				<ProductImageSwiper data={productDetails.images} />
 				<div className="w-full md:w-3/5 flex flex-wrap items-center content-around gap-2">
 					<div className="w-full flex flex-col">
 						<div className="flex justify-between items-center mb-3">
 							<img
-								src={data?.brand?.image}
-								alt={data?.brand.slug}
+								src={productDetails?.brand?.image}
+								alt={productDetails?.brand.slug}
 								width={36}
 							/>
 							<p className="font-sans text-sm">
-								{data?.category?.name}
+								{productDetails?.category?.name}
 							</p>
 						</div>
 						<p className="text-2xl text-cyan-700 font- font-sans">
-							{data?.title}
+							{productDetails?.title}
 						</p>
 						<p className="text-lg text-gray-400 font-sans">
-							{data?.description}
+							{productDetails?.description}
 						</p>
 					</div>
 					<div className="flex justify-between w-full flex-wrap gap-3 font-semibold font-mono">
-						<p className="text-xl">{data?.price} EGP</p>
+						<p className="text-xl">{productDetails?.price} EGP</p>
 						<div className="flex gap-2 items-center">
 							<span className="flex gap-1 items-center text-xl">
-								{data.ratingsQuantity}
+								{productDetails.ratingsQuantity}
 								<User size={"22px"} />
 							</span>
 							<span className="flex gap-1 items-center text-xl">
-								{data?.ratingsAverage}{" "}
+								{productDetails?.ratingsAverage}{" "}
 								<Star
 									fill="#FFD700"
 									color="#FFD700"
@@ -61,8 +64,22 @@ export default async function GetSingleProduct({
 								/>
 							</span>
 						</div>
-						<AddToCartButton productID={data?.id} />
+						<AddToCartButton productID={productDetails?.id} />
 					</div>
+				</div>
+			</div>
+
+			<div>
+				<h2 className="w-full text-center font-mono font-bold text-2xl mb-5">
+					Related products
+				</h2>
+
+				<div className="w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+					{relatedProducts.map((product) => {
+						return (
+							<ProductCard product={product} key={product._id} />
+						);
+					})}
 				</div>
 			</div>
 		</>
