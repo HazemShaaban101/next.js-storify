@@ -17,7 +17,9 @@ export default async function middleware(request: NextRequest) {
 		!token &&
 		(pathname === "/cart" ||
 			pathname === "/allorders" ||
-			pathname.startsWith("/checkout"))
+			pathname.startsWith("/checkout") ||
+			pathname === "/profile" ||
+			pathname === "/wishlist")
 	) {
 		return NextResponse.redirect(new URL("/login", request.url));
 	}
@@ -33,5 +35,7 @@ export const config = {
 		"/resetpassword",
 		"/allorders",
 		"/checkout/:path*",
+		"/profile",
+		"/wishlist",
 	],
 };

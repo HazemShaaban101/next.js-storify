@@ -7,6 +7,7 @@ import { ProductCard } from "../_Components/ProductCard/ProductCard";
 import { productType } from "../_interfaces/product.interface";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { ChangePasswordModal } from "../_Components/ChangePasswordModal/ChangePasswordModal";
 
 export default function Profile() {
 	const { wishlistState } = useContext(wishlistContext);
@@ -82,7 +83,7 @@ export default function Profile() {
 								stiffness: 100,
 							},
 						}}>
-						<Button>Edit Password</Button>
+						<ChangePasswordModal />
 					</motion.div>
 				</motion.div>
 				<div className="content">

@@ -11,20 +11,13 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import axios from "axios";
 import { Form, FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import {
-	RegisterErrorType,
-	registerType,
-} from "@/app/_interfaces/register.interface";
 import { useRouter } from "next/navigation";
-
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
-import { truncate } from "fs";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 
 export default function LoginForm({
