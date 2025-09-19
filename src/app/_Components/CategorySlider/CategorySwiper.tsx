@@ -1,12 +1,9 @@
 "use client";
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Autoplay, EffectCoverflow, EffectFade } from "swiper/modules";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { CategoryType } from "@/app/_interfaces/categories.interface";
 import { motion } from "framer-motion/";
-import { reverse } from "dns";
 
 export default function CategorySwiper({ data }: { data: CategoryType[] }) {
 	return (

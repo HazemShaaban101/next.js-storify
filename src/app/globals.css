@@ -549,3 +549,25 @@ div[data-input-otp-container] {
 		-ms-overflow-style: none; /* IE 10+ */
 	}
 }
+
+.swiper-pagination {
+	position: relative !important;
+	bottom: 100% !important;
+	width: 100% !important;
+	display: flex;
+	gap: 0;
+}
+
+.swiper-pagination-bullet {
+	/* each bullet */
+	background-color: gray !important;
+	height: 3px !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	transition: all 0.6s ease;
+	flex: 1;
+}
+
+.swiper-pagination-bullet-active {
+	background: linear-gradient(to bottom right, #44a7e8, #084c86) !important;
+}

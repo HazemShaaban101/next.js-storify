@@ -1,9 +1,12 @@
 import AddToCartButton from "@/app/_Components/AddToCartButton/AddToCartButton";
+import ProductImageSwiper from "@/app/_Components/ProductImageSwiper/ProductImageSwiper";
 import { productType } from "@/app/_interfaces/product.interface";
-import { Button } from "@/components/ui/button";
-import { log } from "console";
+
 import { ShoppingCart, Star, User } from "lucide-react";
+import Image from "next/image";
 import React from "react";
+import { Virtual } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default async function GetSingleProduct({
 	params,
@@ -22,13 +25,7 @@ export default async function GetSingleProduct({
 	return (
 		<>
 			<div className="flex flex-wrap justify-center container w-[90%] gap-x-10 gap-y-5 mx-auto my-10">
-				<div className="w-full flex justify-center items-center md:w-1/5">
-					<img
-						src={data?.imageCover}
-						alt={data?.description}
-						className="w-1/2 md:w-full"
-					/>
-				</div>
+				<ProductImageSwiper data={data.images} />
 				<div className="w-full md:w-3/5 flex flex-wrap items-center content-around gap-2">
 					<div className="w-full flex flex-col">
 						<div className="flex justify-between items-center mb-3">
