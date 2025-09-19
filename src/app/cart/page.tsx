@@ -70,7 +70,7 @@ export default function Cart() {
 	// remove cart item
 	async function handleRemoveFromCart(id: string, itemCount: number) {
 		setRemoving(true);
-		const removeProduct = await removeProductFromCart(id);
+		await removeProductFromCart(id);
 		await HandleGetCartItems();
 		setRemoving(false);
 		removeItemBadge(itemCount, cartCountState, setCartCountState);

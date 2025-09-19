@@ -18,6 +18,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
+import WishlistButton from "../WishlistButton/WishlistButton";
 
 export function ProductCard({ product }: { product: productType }) {
 	// console.log(product);
@@ -78,8 +79,9 @@ export function ProductCard({ product }: { product: productType }) {
 					</div>
 				</CardContent>
 			</Link>
-			<CardFooter className="">
+			<CardFooter className="flex flex-col gap-3">
 				<AddToCartButton productID={product._id} />
+				<WishlistButton productID={product._id} />
 			</CardFooter>
 		</Card>
 	);

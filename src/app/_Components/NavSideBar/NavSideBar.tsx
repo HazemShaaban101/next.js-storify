@@ -15,6 +15,7 @@ import {
 	Spotlight,
 	ScanBarcode,
 	Tags,
+	Heart,
 } from "lucide-react";
 
 import {
@@ -165,30 +166,58 @@ export default function NavSideBar() {
 								</SidebarMenuItem>
 							))}
 							{session.status == "authenticated" && (
-								<motion.div
-									initial={{ x: -400 }}
-									animate={{
-										x: 0,
-										transition: {
-											duration: 0.5,
-											type: "spring",
-											stiffness: 50,
-										},
-									}}>
-									<SidebarMenuItem key={"cart"}>
-										<SidebarMenuButton asChild>
-											<Link href={"/cart"} className="">
-												<ShoppingCart />
-												<span>{"Cart"}</span>
-												<Badge
-													variant="default"
-													className="ml-auto">
-													{cartCount?.cartCountState!}
-												</Badge>
-											</Link>
-										</SidebarMenuButton>
-									</SidebarMenuItem>
-								</motion.div>
+								<>
+									<motion.div
+										initial={{ x: -400 }}
+										animate={{
+											x: 0,
+											transition: {
+												duration: 0.5,
+												type: "spring",
+												stiffness: 50,
+											},
+										}}>
+										<SidebarMenuItem key={"cart"}>
+											<SidebarMenuButton asChild>
+												<Link
+													href={"/cart"}
+													className="">
+													<ShoppingCart />
+													<span>{"Cart"}</span>
+													<Badge
+														variant="default"
+														className="ml-auto">
+														{
+															cartCount?.cartCountState!
+														}
+													</Badge>
+												</Link>
+											</SidebarMenuButton>
+										</SidebarMenuItem>
+									</motion.div>
+									<motion.div
+										initial={{ x: -400 }}
+										animate={{
+											x: 0,
+											transition: {
+												duration: 0.5,
+												delay: 0.5,
+												type: "spring",
+												stiffness: 50,
+											},
+										}}>
+										<SidebarMenuItem key={"wishlist"}>
+											<SidebarMenuButton asChild>
+												<Link
+													href={"/wishlist"}
+													className="">
+													<Heart />
+													<span>{"Wishlist"}</span>
+												</Link>
+											</SidebarMenuButton>
+										</SidebarMenuItem>
+									</motion.div>
+								</>
 							)}
 						</SidebarMenu>
 					</SidebarGroupContent>

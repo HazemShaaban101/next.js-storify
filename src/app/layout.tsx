@@ -8,6 +8,7 @@ import MySessionProvider from "./_Components/MySessionProvider/MySessionProvider
 import { Toaster } from "@/components/ui/sonner";
 import CartCountContext from "./_Components/CartCountContext/CartCountContext";
 import * as motion from "motion/react-client";
+import WishlistContext from "./_Components/WishlistContext/WishlistContext";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -40,23 +41,25 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange>
 					<CartCountContext>
-						<SidebarProvider defaultOpen={false}>
-							<MySessionProvider>
-								<NavSideBar />
-								<main className="w-full relative">
-									<div className="w-full flex">
-										<div className="w-full p-2 m-2 rounded-sm bg-gray-100 dark:bg-slate-900">
-											<SidebarTrigger className=" p-5 mb-5 bg-white hover:bg-cyan-100 shadow dark:bg-slate-800 dark:hover:bg-cyan-950 cursor-pointer" />
-											<Toaster
-												closeButton
-												position="top-center"
-											/>
-											{children}
+						<WishlistContext>
+							<SidebarProvider defaultOpen={false}>
+								<MySessionProvider>
+									<NavSideBar />
+									<main className="w-full relative">
+										<div className="w-full flex">
+											<div className="w-full p-2 m-2 rounded-sm bg-gray-100 dark:bg-slate-900">
+												<SidebarTrigger className=" p-5 mb-5 bg-white hover:bg-cyan-100 shadow dark:bg-slate-800 dark:hover:bg-cyan-950 cursor-pointer" />
+												<Toaster
+													closeButton
+													position="top-center"
+												/>
+												{children}
+											</div>
 										</div>
-									</div>
-								</main>
-							</MySessionProvider>
-						</SidebarProvider>
+									</main>
+								</MySessionProvider>
+							</SidebarProvider>
+						</WishlistContext>
 					</CartCountContext>
 				</ThemeProvider>
 			</body>
