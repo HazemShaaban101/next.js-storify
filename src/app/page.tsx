@@ -14,6 +14,9 @@ export default async function Home() {
 			<div className="flex justify-center mx-auto gap-5 mb-10 overflow-hidden">
 				<CategorySlider />
 			</div>
+			<h2 className="text-center font-mono font-bold text-2xl mb-5">
+				Frequently bought products!
+			</h2>
 			<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
 				{data?.data.map((product: productType) => (
 					<ProductCard product={product} key={product._id} />

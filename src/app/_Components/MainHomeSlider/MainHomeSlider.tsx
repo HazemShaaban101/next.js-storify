@@ -14,7 +14,7 @@ export default function MainHomeSlider() {
 	return (
 		<>
 			<div className="mainHomeSlider flex justify-center mx-auto">
-				<div className="flex w-3/4">
+				<div className="flex w-full lg:w-3/4">
 					<Swiper
 						spaceBetween={0}
 						slidesPerView={1}
@@ -46,16 +46,16 @@ export default function MainHomeSlider() {
 						</SwiperSlide>
 					</Swiper>
 				</div>
-				<div className=" flex flex-col object-cover">
+				<div className="hidden lg:flex flex-col object-cover">
 					<Image
 						src={image2}
 						alt="choco"
-						className="w-full h-[150px]"
+						className=" w-full h-[150px]"
 					/>
 					<Image
 						src={image3}
 						alt="food"
-						className="w-full h-[150px]"
+						className=" w-full h-[150px]"
 					/>
 				</div>
 			</div>
