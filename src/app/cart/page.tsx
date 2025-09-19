@@ -23,6 +23,7 @@ import { CartCountBadge } from "../_Components/CartCountContext/CartCountContext
 import { clearCartBadge, removeItemBadge } from "@/utilities/cartBadge.Actions";
 import ClearCart from "@/utilities/ClearCart";
 import { productType } from "../_interfaces/product.interface";
+import * as motion from "motion/react-client";
 
 export default function Cart() {
 	const [cartItems, setCartItems] = useState<{
@@ -95,7 +96,18 @@ export default function Cart() {
 					<span className="loader"></span>
 				</div>
 			) : cartItems?.numOfCartItems! > 0 ? (
-				<div className="min-h-[calc(100vh-2rem-60px)]">
+				<motion.div
+					className="min-h-[calc(100vh-2rem-60px)]"
+					initial={{ scale: 0.5, opacity: 0 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						transition: {
+							duration: 0.5,
+							type: "spring",
+							stiffness: 100,
+						},
+					}}>
 					<div className="flex justify-end gap-3 mb-3 items-center">
 						<p className="font-mono text-md">
 							Total: {cartTotalPrice} EGP
@@ -211,7 +223,7 @@ export default function Cart() {
 							</TableBody>
 						</Table>
 					</div>
-				</div>
+				</motion.div>
 			) : (
 				<div className="flex justify-center items-center w-full text-cyan-700 font-mono font-bold text-4xl flex-wrap gap-10 h-[calc(100vh-60px-2rem)] content-center">
 					<p className="w-full text-center">No items in your cart!</p>

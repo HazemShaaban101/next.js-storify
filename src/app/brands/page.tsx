@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Paginator from "../_Components/Paginator/Paginator";
 import Link from "next/link";
 import Image from "next/image";
+import * as motion from "motion/react-client";
 
 export default function Brands() {
 	// const searchParams = Object.fromEntries(useSearchParams().entries());
@@ -45,7 +46,18 @@ export default function Brands() {
 				</div>
 			) : (
 				<>
-					<div className="min-h-[calc(100vh-2rem-60px-35px)] relative">
+					<motion.div
+						className="min-h-[calc(100vh-2rem-60px-35px)] relative"
+						initial={{ scale: 0.5, opacity: 0 }}
+						animate={{
+							opacity: 1,
+							scale: 1,
+							transition: {
+								duration: 0.5,
+								type: "spring",
+								stiffness: 100,
+							},
+						}}>
 						<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
 							{brandList?.map((brand: brandType) => {
 								return (
@@ -68,7 +80,7 @@ export default function Brands() {
 								);
 							})}
 						</div>
-					</div>
+					</motion.div>
 
 					<div className="my-3">
 						<Paginator metaData={metaData} />

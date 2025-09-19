@@ -22,21 +22,15 @@ import {
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog";
+
 import ResetPasswordOTP from "../_Components/ResetPasswordOTP/ResetPasswordOTP";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
-import { redirect, useRouter } from "next/navigation";
-import { resolve } from "path";
-import Router from "next/router";
+import { useRouter } from "next/navigation";
+
+import * as motion from "motion/react-client";
+
 export default function ResetPassword() {
 	const [step, setStep] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
@@ -216,7 +210,18 @@ export default function ResetPassword() {
 
 	return (
 		<>
-			<div className="space-y-4 h-[calc(100vh-2rem-60px)] flex justify-center items-center flex-col gap-5">
+			<motion.div
+				className="space-y-4 h-[calc(100vh-2rem-60px)] flex justify-center items-center flex-col gap-5"
+				initial={{ scale: 0.5, opacity: 0 }}
+				animate={{
+					opacity: 1,
+					scale: 1,
+					transition: {
+						duration: 0.5,
+						type: "spring",
+						stiffness: 100,
+					},
+				}}>
 				<div className="flex items-center justify-center">
 					{Array.from({ length: totalSteps }).map((_, index) => (
 						<div key={index} className="flex items-center">
@@ -448,7 +453,7 @@ export default function ResetPassword() {
 						</>
 					)}
 				</Card>
-			</div>
+			</motion.div>
 		</>
 	);
 }

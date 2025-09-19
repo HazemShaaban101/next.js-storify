@@ -3,17 +3,41 @@ import CategorySlider from "./_Components/CategorySlider/CategorySlider";
 import { productType } from "./_interfaces/product.interface";
 import AllProducts from "../apis/AllProducts.api";
 import { ProductCard } from "./_Components/ProductCard/ProductCard";
+import * as motion from "motion/react-client";
 
 export default async function Home() {
 	const data: { data: productType[] } = await AllProducts();
 	return (
 		<>
-			<div className="flex flex-col w-[80%] mx-auto gap-5 mb-10 overflow-hidden">
+			<motion.div
+				className="flex flex-col w-[80%] mx-auto gap-5 mb-10 overflow-hidden"
+				initial={{ scale: 0.5, opacity: 0 }}
+				animate={{
+					opacity: 1,
+					scale: 1,
+					transition: {
+						duration: 0.5,
+						type: "spring",
+						stiffness: 100,
+					},
+				}}>
 				<MainHomeSlider />
-			</div>
-			<div className="flex justify-center mx-auto gap-5 mb-10 overflow-hidden">
+			</motion.div>
+			<motion.div
+				className="flex justify-center mx-auto gap-5 mb-10 overflow-hidden"
+				initial={{ scale: 0.5, opacity: 0 }}
+				animate={{
+					opacity: 1,
+					scale: 1,
+					transition: {
+						duration: 0.5,
+						delay: 0.5,
+						type: "spring",
+						stiffness: 100,
+					},
+				}}>
 				<CategorySlider />
-			</div>
+			</motion.div>
 			<h2 className="text-center font-mono font-bold text-2xl mb-5">
 				Frequently bought products!
 			</h2>

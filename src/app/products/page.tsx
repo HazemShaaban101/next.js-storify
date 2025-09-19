@@ -6,6 +6,7 @@ import AllProducts from "../../apis/AllProducts.api";
 import { brandMetadataType, brandType } from "../_interfaces/brand.interface";
 import Paginator from "../_Components/Paginator/Paginator";
 import { useSearchParams } from "next/navigation";
+import * as motion from "motion/react-client";
 
 export default function Products() {
 	const searchParams = useSearchParams();
@@ -36,14 +37,30 @@ export default function Products() {
 				</div>
 			) : (
 				<>
-					<h1 className="text-3xl font-bold font-mono text-center mb-3">
-						Products, products, products!
-					</h1>
-					<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
-						{productList.map((product: productType) => (
-							<ProductCard product={product} key={product._id} />
-						))}
-					</div>
+					<motion.div
+						initial={{ scale: 0.5, opacity: 0 }}
+						animate={{
+							opacity: 1,
+							scale: 1,
+							transition: {
+								duration: 0.5,
+								type: "spring",
+								stiffness: 100,
+							},
+						}}>
+						<h1 className="text-3xl font-bold font-mono text-center mb-3">
+							Products, products, products!
+						</h1>
+						<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+							{productList.map((product: productType) => (
+								<ProductCard
+									product={product}
+									key={product._id}
+								/>
+							))}
+						</div>
+					</motion.div>
+
 					<Paginator metaData={metaData} />
 				</>
 			)}

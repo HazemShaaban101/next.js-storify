@@ -20,6 +20,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import * as motion from "motion/react-client";
 
 export default function SingleSubCategory() {
 	const { subid } = useParams();
@@ -66,7 +67,18 @@ export default function SingleSubCategory() {
 					<span className="loader"></span>
 				</div>
 			) : (
-				<div className="min-h-[calc(100vh-2rem-60px)] relative">
+				<motion.div
+					className="min-h-[calc(100vh-2rem-60px)] relative"
+					initial={{ scale: 0.5, opacity: 0 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						transition: {
+							duration: 0.5,
+							type: "spring",
+							stiffness: 100,
+						},
+					}}>
 					<div className="header flex flex-col items-center justify-center gap-3 py-4">
 						<h2 className="text-center font-bold font-mono text-2xl">
 							{subCategoryDetails?.name} products
@@ -93,7 +105,7 @@ export default function SingleSubCategory() {
 							""
 						)}
 					</div>
-				</div>
+				</motion.div>
 			)}
 		</>
 	);

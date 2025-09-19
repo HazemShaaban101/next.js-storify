@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ProductCard } from "../_Components/ProductCard/ProductCard";
 import { productType } from "../_interfaces/product.interface";
 import { wishlistContext } from "../_Components/WishlistContext/WishlistContext";
+import * as motion from "motion/react-client";
 
 export default function WishList() {
 	// const [wishlistItems, setWishlistItems] = useState<productType[]>();
@@ -25,7 +26,18 @@ export default function WishList() {
 				</div>
 			) : wishlistState?.length! > 0 ? (
 				<>
-					<div className="min-h-[calc(100vh-2rem-60px)]">
+					<motion.div
+						className="min-h-[calc(100vh-2rem-60px)]"
+						initial={{ scale: 0.5, opacity: 0 }}
+						animate={{
+							opacity: 1,
+							scale: 1,
+							transition: {
+								duration: 0.5,
+								type: "spring",
+								stiffness: 100,
+							},
+						}}>
 						<h1 className="font-mono font-bold text-center text-2xl mb-5">
 							Wishlist
 						</h1>
@@ -37,10 +49,21 @@ export default function WishList() {
 								/>
 							))}
 						</div>
-					</div>
+					</motion.div>
 				</>
 			) : (
-				<div className="flex justify-center items-center w-full text-cyan-700 font-mono font-bold text-4xl flex-wrap gap-10 h-[calc(100vh-60px-2rem)] content-center">
+				<motion.div
+					className="flex justify-center items-center w-full text-cyan-700 font-mono font-bold text-4xl flex-wrap gap-10 h-[calc(100vh-60px-2rem)] content-center"
+					initial={{ scale: 0.5, opacity: 0 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						transition: {
+							duration: 0.5,
+							type: "spring",
+							stiffness: 100,
+						},
+					}}>
 					<p className="w-full text-center">
 						No items in your Wishlist!
 					</p>
@@ -49,7 +72,7 @@ export default function WishList() {
 							HomePage
 						</Button>
 					</Link>
-				</div>
+				</motion.div>
 			)}
 		</>
 	);

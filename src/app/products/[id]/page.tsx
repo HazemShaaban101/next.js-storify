@@ -5,7 +5,7 @@ import ProductImageSwiper from "@/app/_Components/ProductImageSwiper/ProductImag
 import { productType } from "@/app/_interfaces/product.interface";
 
 import { ShoppingCart, Star, User } from "lucide-react";
-import React from "react";
+import * as motion from "motion/react-client";
 
 export default async function GetSingleProduct({
 	params,
@@ -27,7 +27,18 @@ export default async function GetSingleProduct({
 
 	return (
 		<>
-			<div className="flex flex-wrap justify-center container w-[90%] gap-x-10 gap-y-5 mx-auto my-10">
+			<motion.div
+				className="flex flex-wrap justify-center container w-[90%] gap-x-10 gap-y-5 mx-auto my-10"
+				initial={{ scale: 0.5, opacity: 0 }}
+				animate={{
+					opacity: 1,
+					scale: 1,
+					transition: {
+						duration: 0.5,
+						type: "spring",
+						stiffness: 100,
+					},
+				}}>
 				<ProductImageSwiper data={productDetails.images} />
 				<div className="w-full md:w-3/5 flex flex-wrap items-center content-around gap-2">
 					<div className="w-full flex flex-col">
@@ -67,9 +78,20 @@ export default async function GetSingleProduct({
 						<AddToCartButton productID={productDetails?.id} />
 					</div>
 				</div>
-			</div>
+			</motion.div>
 
-			<div>
+			<motion.div
+				initial={{ scale: 0.5, opacity: 0 }}
+				animate={{
+					opacity: 1,
+					scale: 1,
+					transition: {
+						duration: 0.5,
+						delay: 0.5,
+						type: "spring",
+						stiffness: 100,
+					},
+				}}>
 				<h2 className="w-full text-center font-mono font-bold text-2xl mb-5">
 					Related products
 				</h2>
@@ -81,7 +103,7 @@ export default async function GetSingleProduct({
 						);
 					})}
 				</div>
-			</div>
+			</motion.div>
 		</>
 	);
 }

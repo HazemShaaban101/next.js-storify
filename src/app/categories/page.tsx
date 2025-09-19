@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CategoryType } from "../_interfaces/categories.interface";
 import AllCategories from "@/apis/AllCategories.api";
+import * as motion from "motion/react-client";
 
 export default async function Categories() {
 	// const searchParams = Object.fromEntries(useSearchParams().entries());
@@ -18,7 +19,18 @@ export default async function Categories() {
 	return (
 		<>
 			<>
-				<div className="min-h-[calc(100vh-2rem-60px)] relative flex items-center">
+				<motion.div
+					className="min-h-[calc(100vh-2rem-60px)] relative flex items-center"
+					initial={{ scale: 0.5, opacity: 0 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						transition: {
+							duration: 0.5,
+							type: "spring",
+							stiffness: 100,
+						},
+					}}>
 					<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
 						{categories?.map((category: CategoryType) => {
 							return (
@@ -41,7 +53,7 @@ export default async function Categories() {
 							);
 						})}
 					</div>
-				</div>
+				</motion.div>
 			</>
 		</>
 	);
