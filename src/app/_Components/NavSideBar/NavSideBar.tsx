@@ -16,6 +16,7 @@ import {
 	ScanBarcode,
 	Tags,
 	Heart,
+	UserPen,
 } from "lucide-react";
 
 import {
@@ -230,6 +231,16 @@ export default function NavSideBar() {
 							<p className="font-mono font-bold text-center">
 								Hello {session.data.user.name}!
 							</p>
+							<SidebarMenuItem key={"profile"} className="my-0.5">
+								<SidebarMenuButton asChild className="">
+									<Link
+										href={"/profile"}
+										className="flex justify-center">
+										<UserPen />
+										<span className="">{"Profile"}</span>
+									</Link>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
 							<SidebarMenuItem key={"logOut"}>
 								<SidebarMenuButton asChild>
 									<Button

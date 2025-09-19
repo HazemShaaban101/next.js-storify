@@ -9,7 +9,7 @@ import { incBadge } from "@/utilities/cartBadge.Actions";
 import { useRouter } from "next/navigation";
 
 export default function AddToCartButton({ productID }: { productID: string }) {
-	const { cartCountState, setCartCountState } = useContext(CartCountBadge);
+	const { setCartCountState } = useContext(CartCountBadge);
 	const router = useRouter();
 	return (
 		<Button
