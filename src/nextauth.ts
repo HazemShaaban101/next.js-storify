@@ -31,7 +31,6 @@ export const authOptions: NextAuthOptions = {
 
 				const payload = await response.json();
 
-				console.log(payload);
 				if (payload.message === "success") {
 					// console.log("payload at nextAuth:", payload);
 					return {
@@ -49,19 +48,16 @@ export const authOptions: NextAuthOptions = {
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) {
-				console.log("------user insdie token:", user);
 				// First run: user just signed in
 				token.user = user.user;
 				token.token = user.token;
 			}
-			// console.log("------token:", token);
 			// token is the encrypted object on the server. this cannot be accessed by the client
 			return token;
 		},
 
 		async session({ session, token }) {
 			session.user = token.user;
-			// console.log("session:", session);
 			return session;
 		},
 	},

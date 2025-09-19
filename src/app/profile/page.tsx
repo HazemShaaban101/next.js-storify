@@ -6,10 +6,12 @@ import { wishlistContext } from "../_Components/WishlistContext/WishlistContext"
 import { ProductCard } from "../_Components/ProductCard/ProductCard";
 import { productType } from "../_interfaces/product.interface";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function Profile() {
 	const { wishlistState } = useContext(wishlistContext);
 	const [initialLoading, setInitialLoading] = useState<boolean>(true);
+	const { data } = useSession();
 
 	useEffect(() => {
 		if (wishlistState) {
@@ -21,7 +23,7 @@ export default function Profile() {
 		<>
 			<div className="min-h-[calc(100vh-2rem-60px)]">
 				<motion.div
-					className="min-h-[calc(40vh-2rem-60px)] flex justify-center items-center flex-wrap content-center gap-10 bg-[linear-gradient(0deg,#0f172b,#104e64,#0b4f4a)] from-slate-900 via-cyan-900 to-teal-900 rounded-2xl easteregg-bg"
+					className="min-h-[calc(40vh-2rem-60px)] flex justify-center items-center flex-wrap content-center gap-3 bg-[linear-gradient(0deg,#0f172b,#104e64,#0b4f4a)] from-slate-900 via-cyan-900 to-teal-900 rounded-2xl easteregg-bg"
 					initial={{ scale: 0.5, opacity: 0 }}
 					animate={{
 						opacity: 1,
@@ -47,6 +49,13 @@ export default function Profile() {
 						}}>
 						Edit your profile
 					</motion.h1>
+					<motion.p className="w-full text-center">
+						Name: {data?.user.name}
+					</motion.p>
+					<motion.p className="w-full text-center">
+						Email: {data?.user.email}
+					</motion.p>
+
 					<motion.div
 						initial={{ scale: 0, opacity: 0 }}
 						animate={{

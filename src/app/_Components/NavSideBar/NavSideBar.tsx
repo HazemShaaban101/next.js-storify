@@ -257,6 +257,7 @@ export default function NavSideBar() {
 						<>
 							<Skeleton className="h-[30px] w-full rounded-full" />
 							<Skeleton className="h-[30px] w-full rounded-full" />
+							<Skeleton className="h-[30px] w-full rounded-full" />
 						</>
 					) : (
 						footerItems.map((item) => (
