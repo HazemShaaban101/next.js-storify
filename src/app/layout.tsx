@@ -40,7 +40,7 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange>
 					<CartCountContext>
-						<SidebarProvider>
+						<SidebarProvider defaultOpen={false}>
 							<MySessionProvider>
 								<NavSideBar />
 								<main className="w-full relative">
