@@ -12,7 +12,7 @@ export default function MainHomeSlider() {
 	return (
 		<>
 			<div className="mainHomeSlider flex justify-center mx-auto">
-				<div className="flex w-full lg:w-3/4 rounded-l-2xl overflow-hidden">
+				<div className="flex w-full lg:w-3/4 rounded-2xl lg:rounded-r-none overflow-hidden ">
 					<Swiper
 						spaceBetween={0}
 						slidesPerView={1}

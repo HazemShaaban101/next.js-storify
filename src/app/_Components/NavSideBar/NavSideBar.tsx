@@ -44,7 +44,6 @@ import { Badge } from "@/components/ui/badge";
 import { useContext } from "react";
 import { CartCountBadge } from "../CartCountContext/CartCountContext";
 import * as motion from "motion/react-client";
-import { AnimatePresence } from "framer-motion";
 
 // Menu items.
 const menuItems = [

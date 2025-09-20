@@ -68,7 +68,7 @@ export default async function Home() {
 				</motion.p>
 			</motion.div>
 			<motion.div
-				className="flex justify-center mx-auto gap-5 mb-10 overflow-hidden"
+				className="justify-center mx-auto gap-5 mb-10 overflow-hidden hidden md:flex"
 				initial={{ scale: 0.5, opacity: 0 }}
 				animate={{
 					opacity: 1,
@@ -82,7 +82,7 @@ export default async function Home() {
 				}}>
 				<CategorySlider />
 			</motion.div>
-			<h2 className="text-center font-mono font-bold text-2xl mb-5">
+			<h2 className="text-center font-mono font-bold text-2xl mb-5 mt-10 md:mt-0">
 				Frequently bought products!
 			</h2>
 			<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
