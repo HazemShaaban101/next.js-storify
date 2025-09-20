@@ -57,7 +57,7 @@ export default function CheckoutForm() {
 	useEffect(() => {
 		async function dummyFunc() {
 			const response = await fetch(
-				`http://localhost:3000/api/useraddresses`
+				`${process.env.NEXT_PUBLIC_NEXT_BASE}/api/useraddresses`
 			);
 			const data = await response.json();
 			if (data?.length > 0) {

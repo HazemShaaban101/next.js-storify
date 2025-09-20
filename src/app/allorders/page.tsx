@@ -33,7 +33,11 @@ export default function Orders() {
 
 	// get user cart items
 	async function handleGetUserOrders() {
-		const response = await fetch(`http://localhost:3000/api/userorders`);
+		console.log(process.env.NEXT_PUBLIC_NEXT_BASE);
+
+		const response = await fetch(
+			`${process.env.NEXT_PUBLIC_NEXT_BASE}/api/userorders`
+		);
 
 		const userOrders = await response.json();
 		console.log("this is userOrders:", userOrders);

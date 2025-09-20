@@ -60,7 +60,9 @@ function AddToWishlistButton({
 				onClick={async () => {
 					setisLoading(true);
 					await addToWishlist(productID).then(async () => {
-						return fetch(`http://localhost:3000/api/getwishlist`)
+						return fetch(
+							`${process.env.NEXT_PUBLIC_NEXT_BASE}/api/getwishlist`
+						)
 							.then(async (response) => {
 								toast.success("Product added to wishlist");
 								setWishlistState(await response.json());
@@ -107,7 +109,9 @@ function RemoveFromWishlistButton({
 				onClick={async () => {
 					setisLoading(true);
 					await removeFromWishlist(productID).then(async () => {
-						return fetch(`http://localhost:3000/api/getwishlist`)
+						return fetch(
+							`${process.env.NEXT_PUBLIC_NEXT_BASE}/api/getwishlist`
+						)
 							.then(async (response) => {
 								toast.success("Product removed from wishlist");
 								setWishlistState(await response.json());
