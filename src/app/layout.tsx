@@ -8,6 +8,7 @@ import MySessionProvider from "./_Components/MySessionProvider/MySessionProvider
 import { Toaster } from "@/components/ui/sonner";
 import CartCountContext from "./_Components/CartCountContext/CartCountContext";
 import WishlistContext from "./_Components/WishlistContext/WishlistContext";
+import Footer from "./_Components/Footer/Footer";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -54,6 +55,9 @@ export default function RootLayout({
 												/>
 												{children}
 											</div>
+										</div>
+										<div className="mx-2 mb-2">
+											<Footer />
 										</div>
 									</main>
 								</MySessionProvider>
