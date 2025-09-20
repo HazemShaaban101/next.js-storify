@@ -17,6 +17,7 @@ import {
 	Tags,
 	Heart,
 	UserPen,
+	ShoppingBasket,
 } from "lucide-react";
 
 import {
@@ -101,7 +102,7 @@ export default function NavSideBar() {
 					<SidebarGroupLabel className="my-3">
 						<div className="flex justify-between items-center w-full">
 							<p className="flex items-center gap-2">
-								<Store
+								<ShoppingBasket
 									color={"oklch(52% 0.105 223.128)"}
 									size={30}
 								/>
@@ -137,7 +138,11 @@ export default function NavSideBar() {
 											opacity: 1,
 											rotateZ: 0,
 											scale: 1,
-											transition: { duration: 0.3 },
+											transition: {
+												duration: 0.3,
+												type: "spring",
+												stiffness: 100,
+											},
 										}}
 										exit={{
 											opacity: 0,
