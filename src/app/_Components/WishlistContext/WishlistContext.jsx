@@ -12,8 +12,10 @@ export default function WishlistContext({ children }) {
 				const response = await fetch(
 					"http://localhost:3000/api/getwishlist"
 				);
-				const data = await response.json();
-				setWishlistState(data);
+				if (response.ok) {
+					const data = await response.json();
+					setWishlistState(data);
+				}
 			} catch (error) {
 				throw new Error("Internet problem!");
 			}
