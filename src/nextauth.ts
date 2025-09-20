@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
 			async authorize(credentials) {
 				// console.log("user credentials:", credentials);
 				const response = await fetch(
-					`${process.env.APIBASE}/auth/signin`,
+					`${process.env.NEXT_PUBLIC_APIBASE}/auth/signin`,
 					{
 						method: "POST",
 
