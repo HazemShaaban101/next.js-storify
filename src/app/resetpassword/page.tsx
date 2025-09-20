@@ -30,6 +30,7 @@ import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { useRouter } from "next/navigation";
 
 import * as motion from "motion/react-client";
+import { AnimatePresence } from "framer-motion";
 
 export default function ResetPassword() {
 	const [step, setStep] = useState(0);
@@ -248,210 +249,262 @@ export default function ResetPassword() {
 					))}
 				</div>
 				<Card className="shadow-sm w-full sm:w-[90%] md:w-[80%] lg:w-[70%] mb-20">
-					{step === 0 && (
-						<>
-							<CardHeader>
-								<CardTitle className="text-xl font-bold font-mono text-center">
-									Step UNO! enter your Email.
-								</CardTitle>
-								<CardDescription className="text-center">
-									Verification code will be sent to your
-									provided Email.
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<Form {...form}>
-									<form
-										onSubmit={handleSubmit(onSubmit)}
-										className="grid gap-y-4">
-										<FormField
-											key="email"
-											control={control}
-											name="email"
-											render={({ field }) => (
-												<FormItem>
-													<FormLabel>Email</FormLabel>
-													<FormControl>
-														<Input
-															{...field}
-															placeholder="email@provider.com"
-															autoComplete="email"
-															disabled={isLoading}
-														/>
-													</FormControl>
-													<FormDescription></FormDescription>
-													<FormMessage />
-												</FormItem>
-											)}
-										/>
+					<AnimatePresence mode="wait">
+						{step === 0 && (
+							<motion.div
+								layout
+								key={0}
+								initial={{ scale: 0.6, opacity: 0 }}
+								animate={{
+									scale: 1,
+									opacity: 1,
 
-										<div className="flex justify-between">
-											<Button
-												type="submit"
-												size="sm"
-												className="font-medium w-full py-5"
-												disabled={isLoading}>
-												{isLoading ? (
-													<Spinner />
-												) : (
-													"Next"
+									transition: { duration: 0.5 },
+								}}
+								exit={{
+									scale: 0.6,
+									opacity: 0,
+									transition: { duration: 0.5 },
+								}}>
+								<CardHeader>
+									<CardTitle className="text-xl font-bold font-mono text-center">
+										Step UNO! enter your Email.
+									</CardTitle>
+									<CardDescription className="text-center mb-5">
+										Verification code will be sent to your
+										provided Email.
+									</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<Form {...form}>
+										<form
+											onSubmit={handleSubmit(onSubmit)}
+											className="grid gap-y-4">
+											<FormField
+												key="email"
+												control={control}
+												name="email"
+												render={({ field }) => (
+													<FormItem>
+														<FormLabel>
+															Email
+														</FormLabel>
+														<FormControl>
+															<Input
+																{...field}
+																placeholder="email@provider.com"
+																autoComplete="email"
+																disabled={
+																	isLoading
+																}
+															/>
+														</FormControl>
+														<FormDescription></FormDescription>
+														<FormMessage />
+													</FormItem>
 												)}
-											</Button>
-										</div>
-									</form>
-								</Form>
-							</CardContent>
-						</>
-					)}
+											/>
 
-					{step === 1 && (
-						<>
-							<CardHeader>
-								<CardTitle className="text-xl font-bold font-mono text-center">
-									Step DOS! Enter verification code sent to
-									your Email.
-								</CardTitle>
-								<CardDescription className="text-center">
-									If you didn't recieve a code, verify your
-									Email is correct.
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<Form {...form}>
-									<form
-										onSubmit={handleSubmit(onSubmit)}
-										className="grid gap-y-4">
-										<FormField
-											key="resetCode"
-											control={control}
-											name="resetCode"
-											render={({ field }) => (
-												<FormItem className="">
-													<FormControl>
-														<ResetPasswordOTP
-															field={field}
-															isLoading={
-																isLoading
-															}
-														/>
-													</FormControl>
-													<FormDescription></FormDescription>
-													<FormMessage className="text-center" />
-												</FormItem>
-											)}
-										/>
+											<div className="flex justify-between">
+												<Button
+													type="submit"
+													size="sm"
+													className="font-medium w-full py-5"
+													disabled={isLoading}>
+													{isLoading ? (
+														<Spinner />
+													) : (
+														"Next"
+													)}
+												</Button>
+											</div>
+										</form>
+									</Form>
+								</CardContent>
+							</motion.div>
+						)}
 
-										<div className="flex justify-between w-full">
-											<Button
-												type="button"
-												className="font-medium px-10 py-5 min-w-[15%]"
-												size="sm"
-												onClick={handleBack}
-												disabled={isLoading}>
-												Back
-											</Button>
-											<Button
-												type="submit"
-												size="sm"
-												className="font-medium px-10 py-5 min-w-[15%]"
-												disabled={isLoading}>
-												{isLoading ? (
-													<Spinner />
-												) : (
-													"Next"
+						{step === 1 && (
+							<motion.div
+								layout
+								key={1}
+								initial={{ scale: 0.6, opacity: 0 }}
+								animate={{
+									scale: 1,
+									opacity: 1,
+
+									transition: { duration: 0.5 },
+								}}
+								exit={{
+									scale: 0.6,
+									opacity: 0,
+									transition: { duration: 0.5 },
+								}}>
+								<CardHeader>
+									<CardTitle className="text-xl font-bold font-mono text-center">
+										Step DOS! Enter verification code sent
+										to your Email.
+									</CardTitle>
+									<CardDescription className="text-center mb-5">
+										If you didn't recieve a code, verify
+										your Email is correct.
+									</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<Form {...form}>
+										<form
+											onSubmit={handleSubmit(onSubmit)}
+											className="grid gap-y-4">
+											<FormField
+												key="resetCode"
+												control={control}
+												name="resetCode"
+												render={({ field }) => (
+													<FormItem className="">
+														<FormControl>
+															<ResetPasswordOTP
+																field={field}
+																isLoading={
+																	isLoading
+																}
+															/>
+														</FormControl>
+														<FormDescription></FormDescription>
+														<FormMessage className="text-center" />
+													</FormItem>
 												)}
-											</Button>
-										</div>
-									</form>
-								</Form>
-							</CardContent>
-						</>
-					)}
+											/>
 
-					{step === 2 && (
-						<>
-							<CardHeader>
-								<CardTitle className="text-xl font-bold font-mono text-center">
-									Lasto Stepo! just enter your new password!
-								</CardTitle>
-								<CardDescription className="text-center">
-									Make sure to remember your password this
-									time, We don't wanna go over these steps
-									every time eh?
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<Form {...form}>
-									<form
-										onSubmit={handleSubmit(onSubmit)}
-										className="grid gap-y-4">
-										<FormField
-											key="password"
-											control={control}
-											name="newPassword"
-											render={({ field }) => (
-												<FormItem>
-													<FormLabel>
-														New password
-													</FormLabel>
-													<FormControl>
-														<Input
-															disabled={isLoading}
-															{...field}
-															type="password"
-															placeholder="••••••••"
-															autoComplete="off"
-														/>
-													</FormControl>
-													<FormDescription></FormDescription>
-													<FormMessage />
-												</FormItem>
-											)}
-										/>
+											<div className="flex justify-between w-full">
+												<Button
+													type="button"
+													className="font-medium px-10 py-5 min-w-[15%]"
+													size="sm"
+													onClick={handleBack}
+													disabled={isLoading}>
+													Back
+												</Button>
+												<Button
+													type="submit"
+													size="sm"
+													className="font-medium px-10 py-5 min-w-[15%]"
+													disabled={isLoading}>
+													{isLoading ? (
+														<Spinner />
+													) : (
+														"Next"
+													)}
+												</Button>
+											</div>
+										</form>
+									</Form>
+								</CardContent>
+							</motion.div>
+						)}
 
-										<FormField
-											key="rePassword"
-											control={control}
-											name="rePassword"
-											render={({ field }) => (
-												<FormItem>
-													<FormLabel>
-														Re-enter your new
-														password
-													</FormLabel>
-													<FormControl>
-														<Input
-															disabled={isLoading}
-															{...field}
-															type="password"
-															placeholder="••••••••"
-															autoComplete="off"
-														/>
-													</FormControl>
-													<FormDescription></FormDescription>
-													<FormMessage />
-												</FormItem>
-											)}
-										/>
-
-										<div className="flex justify-between">
-											<Button
-												type="submit"
-												size="sm"
-												className="font-medium w-full py-5"
-												disabled={isLoading}>
-												{isLoading ? (
-													<Spinner />
-												) : (
-													"Submit"
+						{step === 2 && (
+							<motion.div
+								layout
+								key={2}
+								initial={{ scale: 0.6, opacity: 0 }}
+								animate={{
+									scale: 1,
+									opacity: 1,
+									transition: { duration: 0.5 },
+								}}
+								exit={{
+									scale: 0.6,
+									opacity: 0,
+									transition: { duration: 0.5 },
+								}}>
+								<CardHeader>
+									<CardTitle className="text-xl font-bold font-mono text-center">
+										Lasto Stepo! just enter your new
+										password!
+									</CardTitle>
+									<CardDescription className="text-center mb-5">
+										Make sure to remember your password this
+										time, We don't wanna go over these steps
+										every time eh?
+									</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<Form {...form}>
+										<form
+											onSubmit={handleSubmit(onSubmit)}
+											className="grid gap-y-4">
+											<FormField
+												key="password"
+												control={control}
+												name="newPassword"
+												render={({ field }) => (
+													<FormItem>
+														<FormLabel>
+															New password
+														</FormLabel>
+														<FormControl>
+															<Input
+																disabled={
+																	isLoading
+																}
+																{...field}
+																type="password"
+																placeholder="••••••••"
+																autoComplete="off"
+															/>
+														</FormControl>
+														<FormDescription></FormDescription>
+														<FormMessage />
+													</FormItem>
 												)}
-											</Button>
-										</div>
-									</form>
-								</Form>
-							</CardContent>
-						</>
-					)}
+											/>
+
+											<FormField
+												key="rePassword"
+												control={control}
+												name="rePassword"
+												render={({ field }) => (
+													<FormItem>
+														<FormLabel>
+															Re-enter your new
+															password
+														</FormLabel>
+														<FormControl>
+															<Input
+																disabled={
+																	isLoading
+																}
+																{...field}
+																type="password"
+																placeholder="••••••••"
+																autoComplete="off"
+															/>
+														</FormControl>
+														<FormDescription></FormDescription>
+														<FormMessage />
+													</FormItem>
+												)}
+											/>
+
+											<div className="flex justify-between">
+												<Button
+													type="submit"
+													size="sm"
+													className="font-medium w-full py-5"
+													disabled={isLoading}>
+													{isLoading ? (
+														<Spinner />
+													) : (
+														"Submit"
+													)}
+												</Button>
+											</div>
+										</form>
+									</Form>
+								</CardContent>
+							</motion.div>
+						)}
+					</AnimatePresence>
 				</Card>
 			</motion.div>
 		</>
