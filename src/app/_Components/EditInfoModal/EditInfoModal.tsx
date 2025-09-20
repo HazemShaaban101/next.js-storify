@@ -81,11 +81,10 @@ export function EditInfoModal() {
 						onSubmit={form.handleSubmit(handleEditInfo)}>
 						<DialogHeader>
 							<DialogTitle className="text-center">
-								Reset your password
+								Edit your information
 							</DialogTitle>
 							<DialogDescription className="text-center">
-								Change to your password here. Click save when
-								you&apos;re done.
+								This will send you back to login page.
 							</DialogDescription>
 						</DialogHeader>
 						<div className="grid">

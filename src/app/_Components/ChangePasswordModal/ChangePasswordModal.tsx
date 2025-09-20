@@ -95,8 +95,7 @@ export function ChangePasswordModal() {
 								Reset your password
 							</DialogTitle>
 							<DialogDescription className="text-center">
-								Change to your password here. Click save when
-								you&apos;re done.
+								This will send you back to login page.
 							</DialogDescription>
 						</DialogHeader>
 						<div className="grid">

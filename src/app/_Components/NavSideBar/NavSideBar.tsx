@@ -18,6 +18,7 @@ import {
 	Heart,
 	UserPen,
 	ShoppingBasket,
+	Truck,
 } from "lucide-react";
 
 import {
@@ -219,6 +220,28 @@ export default function NavSideBar() {
 													className="">
 													<Heart />
 													<span>{"Wishlist"}</span>
+												</Link>
+											</SidebarMenuButton>
+										</SidebarMenuItem>
+									</motion.div>
+									<motion.div
+										initial={{ x: -400 }}
+										animate={{
+											x: 0,
+											transition: {
+												duration: 0.5,
+												delay: 1,
+												type: "spring",
+												stiffness: 50,
+											},
+										}}>
+										<SidebarMenuItem key={"Orders"}>
+											<SidebarMenuButton asChild>
+												<Link
+													href={"/allorders"}
+													className="">
+													<Truck />
+													<span>{"Orders"}</span>
 												</Link>
 											</SidebarMenuButton>
 										</SidebarMenuItem>
