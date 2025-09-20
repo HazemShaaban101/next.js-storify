@@ -580,7 +580,7 @@ div[data-sidebar="footer"] {
 
 @layer base {
 	:root {
-		--footer-background: url("/patternLight.png");
+		--footer-background: url("/patternlight.png");
 	}
 
 	.dark {

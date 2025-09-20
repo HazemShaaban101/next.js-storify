@@ -116,49 +116,49 @@ export default function NavSideBar() {
 										e.currentTarget.blur();
 									}
 								}}>
-								<div>
-									{theme == "light" ? (
-										<motion.div
-											className=""
-											initial={{
-												opacity: 0,
-												rotateZ: 360,
-												scale: 0.5,
-											}}
-											animate={{
-												opacity: 1,
-												rotateZ: 0,
-												scale: 1,
-												transition: {
-													duration: 0.3,
-													type: "spring",
-													stiffness: 100,
-												},
-											}}>
-											<Sun />
-										</motion.div>
-									) : (
-										<motion.div
-											className=""
-											initial={{
-												opacity: 0,
-												rotateZ: 360,
-												scale: 0.5,
-											}}
-											animate={{
-												opacity: 1,
-												rotateZ: 0,
-												scale: 1,
-												transition: {
-													duration: 0.3,
-													type: "spring",
-													stiffness: 100,
-												},
-											}}>
-											<Moon />
-										</motion.div>
-									)}
-								</div>
+								{theme == "light" ? (
+									<motion.div
+										key={theme}
+										className=""
+										initial={{
+											opacity: 0,
+											rotateZ: 360,
+											scale: 0.5,
+										}}
+										animate={{
+											opacity: 1,
+											rotateZ: 0,
+											scale: 1,
+											transition: {
+												duration: 0.3,
+												type: "spring",
+												stiffness: 100,
+											},
+										}}>
+										<Sun />
+									</motion.div>
+								) : (
+									<motion.div
+										key={theme}
+										className=""
+										initial={{
+											opacity: 0,
+											rotateZ: 360,
+											scale: 0.5,
+										}}
+										animate={{
+											opacity: 1,
+											rotateZ: 0,
+											scale: 1,
+											transition: {
+												duration: 0.3,
+												type: "spring",
+												stiffness: 100,
+											},
+										}}>
+										<Moon />
+									</motion.div>
+								)}
 							</Button>
 						</div>
 					</SidebarGroupLabel>
@@ -298,7 +298,7 @@ export default function NavSideBar() {
 					) : (
 						footerItems.map((item) => (
 							<SidebarMenuItem key={item.title}>
-								<SidebarMenuButton asChild>
+								<SidebarMenuButton asChild variant={"outline"}>
 									<Link href={item.url}>
 										<item.icon />
 										<span>{item.title}</span>

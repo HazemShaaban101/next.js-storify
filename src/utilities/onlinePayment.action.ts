@@ -11,7 +11,7 @@ export default async function onlinePayment(
 		if (!token) return null;
 
 		const response = await fetch(
-			`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=http://localhost:3000`,
+			`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=${process.env.NEXT_PUBLIC_API_URL}`,
 			{
 				method: "POST",
 				body: JSON.stringify({ shippingAddress }),

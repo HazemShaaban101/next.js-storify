@@ -24,13 +24,14 @@ export default async function Home() {
 				<MainHomeSlider />
 			</motion.div>
 			<motion.div
-				className=" py-10 flex justify-center items-center flex-wrap content-center gap-2 bg-[linear-gradient(0deg,#0f172b,#104e64,#0b4f4a)] from-slate-900 via-cyan-900 to-teal-900 rounded-2xl easteregg-bg"
+				className=" py-10 mt-5 flex justify-center items-center flex-wrap content-center gap-2 bg-[linear-gradient(0deg,#0f172b,#104e64,#0b4f4a)] from-slate-900 via-cyan-900 to-teal-900 rounded-2xl easteregg-bg"
 				initial={{ scale: 0.5, opacity: 0 }}
 				animate={{
 					opacity: 1,
 					scale: 1,
 					transition: {
 						duration: 0.5,
+						delay: 0.3,
 						type: "spring",
 						stiffness: 100,
 					},
@@ -43,7 +44,7 @@ export default async function Home() {
 						scale: 1,
 						transition: {
 							duration: 0.5,
-							delay: 0.5,
+							delay: 0.6,
 							type: "spring",
 							stiffness: 100,
 						},
