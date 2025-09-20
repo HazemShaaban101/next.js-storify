@@ -45,26 +45,26 @@ export function OrderModal({
 							User information
 						</span>
 					</div>
-					<div className="grid grid-cols-1 lg:grid-cols-2">
-						<p className="text-gray-700 dark:text-gray-400">
+					<div className="grid grid-cols-1 sm:grid-cols-2">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							Name:{" "}
 							<span className="text-dark dark:text-white">
 								{order?.user.name}
 							</span>
 						</p>
-						<p className="text-gray-700 dark:text-gray-400">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							Phone:{" "}
 							<span className="text-dark dark:text-white">
 								{order?.shippingAddress.phone}
 							</span>
 						</p>
-						<p className="text-gray-700 dark:text-gray-400">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							Details:{" "}
 							<span className="text-dark dark:text-white">
 								{order?.shippingAddress.details}
 							</span>
 						</p>
-						<p className="text-gray-700 dark:text-gray-400">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							City:{" "}
 							<span className="text-dark dark:text-white">
 								{order?.shippingAddress.city}
@@ -77,26 +77,26 @@ export function OrderModal({
 							Order details
 						</span>
 					</div>
-					<div className="grid grid-cols-1 lg:grid-cols-2">
-						<p className="text-gray-700 dark:text-gray-400">
+					<div className="grid grid-cols-1 sm:grid-cols-2">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							Created at: {created}
 						</p>
-						<p className="text-gray-700 dark:text-gray-400">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							Last updated at: {updated}
 						</p>
-						<p className="text-gray-700 dark:text-gray-400">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							Order price:{" "}
 							<span className="text-dark dark:text-white">
 								{order?.totalOrderPrice} EGP
 							</span>
 						</p>
-						<p className="text-gray-700 dark:text-gray-400">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							Payment method:{" "}
 							<span className="text-dark dark:text-white">
 								{order?.paymentMethodType}
 							</span>
 						</p>
-						<p className="text-gray-700 dark:text-gray-400">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							Payment status:{" "}
 							{order?.isPaid == true ? (
 								<span className="text-green-500">Paid</span>
@@ -104,7 +104,7 @@ export function OrderModal({
 								<span className="text-yellow-500">Pending</span>
 							)}
 						</p>
-						<p className="text-gray-700 dark:text-gray-400">
+						<p className="text-gray-700 dark:text-gray-400 mx-auto sm:mx-0">
 							Delivery status:{" "}
 							{order?.isDelivered == true ? (
 								<span className="text-green-500">

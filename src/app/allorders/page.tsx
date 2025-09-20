@@ -52,7 +52,18 @@ export default function Orders() {
 					<span className="loader"></span>
 				</div>
 			) : userOrders.length > 0 ? (
-				<motion.div className="min-h-[calc(100vh-2rem-60px)]">
+				<motion.div
+					className="min-h-[calc(100vh-2rem-60px)]"
+					initial={{ scale: 0.5, opacity: 0 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						transition: {
+							duration: 0.5,
+							type: "spring",
+							stiffness: 100,
+						},
+					}}>
 					<div className="w-full border rounded-md overflow-hidden">
 						<Table>
 							<TableHeader>
@@ -117,7 +128,18 @@ export default function Orders() {
 					</div>
 				</motion.div>
 			) : (
-				<div className="flex justify-center items-center w-full text-cyan-700 font-mono font-bold text-4xl flex-wrap gap-10 h-[calc(100vh-60px-2rem)] content-center">
+				<motion.div
+					className="flex justify-center items-center w-full text-cyan-700 font-mono font-bold text-4xl flex-wrap gap-10 h-[calc(100vh-60px-2rem)] content-center"
+					initial={{ scale: 0.5, opacity: 0 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						transition: {
+							duration: 0.5,
+							type: "spring",
+							stiffness: 100,
+						},
+					}}>
 					<p className="w-full text-center">
 						You have no orders yet!
 					</p>
@@ -126,7 +148,7 @@ export default function Orders() {
 							HomePage
 						</Button>
 					</Link>
-				</div>
+				</motion.div>
 			)}
 		</>
 	);

@@ -50,7 +50,7 @@ export default function CategorySwiper({ data }: { data: CategoryType[] }) {
 			</div> */}
 
 			<div className="container p-5 w-full overflow-hidden relative">
-				<div className="flex mx-auto relative overflow-hidden before:absolute rounded-lg before:left-0 before:top-0 before:z-10 before:h-full before:w-10 before:bg-gradient-to-r before:from-zinc-950 before:to-transparent before:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-10 after:bg-gradient-to-l after:from-zinc-950 after:to-transparent after:content-['']">
+				<div className="flex mx-auto relative overflow-hidden before:absolute rounded-lg before:left-0 before:top-0 before:z-2 before:h-full before:w-10 before:bg-gradient-to-r before:from-zinc-950 before:to-transparent before:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-10 after:bg-gradient-to-l after:from-zinc-950 after:to-transparent after:content-['']">
 					<motion.div
 						transition={{
 							duration: 10,
