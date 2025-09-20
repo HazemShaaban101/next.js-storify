@@ -116,35 +116,49 @@ export default function NavSideBar() {
 										e.currentTarget.blur();
 									}
 								}}>
-								<AnimatePresence mode="popLayout">
-									<motion.div
-										className=""
-										key={theme}
-										layout
-										initial={{
-											opacity: 0,
-											rotateZ: 360,
-											scale: 0.5,
-										}}
-										animate={{
-											opacity: 1,
-											rotateZ: 0,
-											scale: 1,
-											transition: {
-												duration: 0.3,
-												type: "spring",
-												stiffness: 100,
-											},
-										}}
-										exit={{
-											opacity: 0,
-											rotateZ: 360,
-											scale: 0.5,
-											transition: { duration: 0.5 },
-										}}>
-										{theme == "light" ? <Sun /> : <Moon />}
-									</motion.div>
-								</AnimatePresence>
+								<div>
+									{theme == "light" ? (
+										<motion.div
+											className=""
+											initial={{
+												opacity: 0,
+												rotateZ: 360,
+												scale: 0.5,
+											}}
+											animate={{
+												opacity: 1,
+												rotateZ: 0,
+												scale: 1,
+												transition: {
+													duration: 0.3,
+													type: "spring",
+													stiffness: 100,
+												},
+											}}>
+											<Sun />
+										</motion.div>
+									) : (
+										<motion.div
+											className=""
+											initial={{
+												opacity: 0,
+												rotateZ: 360,
+												scale: 0.5,
+											}}
+											animate={{
+												opacity: 1,
+												rotateZ: 0,
+												scale: 1,
+												transition: {
+													duration: 0.3,
+													type: "spring",
+													stiffness: 100,
+												},
+											}}>
+											<Moon />
+										</motion.div>
+									)}
+								</div>
 							</Button>
 						</div>
 					</SidebarGroupLabel>

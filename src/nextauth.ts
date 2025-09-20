@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
 				password: { type: "password", placeholder: "H@zemsh2011" },
 			},
 			async authorize(credentials) {
-				// console.log("user credentials:", credentials);
+				// // console.log("user credentials:", credentials);
 				const response = await fetch(
 					`${process.env.NEXT_PUBLIC_APIBASE}/auth/signin`,
 					{
@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
 				const payload = await response.json();
 
 				if (payload.message === "success") {
-					// console.log("payload at nextAuth:", payload);
+					// // console.log("payload at nextAuth:", payload);
 					return {
 						user: payload.user,
 						token: payload.token,

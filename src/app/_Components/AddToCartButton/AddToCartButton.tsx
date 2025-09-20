@@ -18,7 +18,7 @@ export default function AddToCartButton({ productID }: { productID: string }) {
 			onClick={async () => {
 				try {
 					const payload = await addToCart(productID);
-					console.log(payload);
+					// console.log(payload);
 					if (payload.status === "success") {
 						toast.success(payload.message);
 					} else if (

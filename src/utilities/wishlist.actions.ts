@@ -2,7 +2,7 @@
 import getUserToken from "./getUserToken";
 
 export default async function addToWishlist(productID: string) {
-	console.log("Adding product to wishlist");
+	// console.log("Adding product to wishlist");
 
 	const token = await getUserToken();
 
@@ -21,7 +21,7 @@ export default async function addToWishlist(productID: string) {
 	return payload;
 }
 export async function removeFromWishlist(productID: string) {
-	console.log("Removing product from wishlist");
+	// console.log("Removing product from wishlist");
 
 	const token = await getUserToken();
 

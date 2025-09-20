@@ -61,7 +61,7 @@ function AddToWishlistButton({
 					setisLoading(true);
 					await addToWishlist(productID).then(async () => {
 						return fetch(
-							`https://next-js-storify.vercel.app/api/getwishlist`
+							`${process.env.NEXT_PUBLIC_API_URL}/api/getwishlist`
 						)
 							.then(async (response) => {
 								toast.success("Product added to wishlist");
@@ -110,7 +110,7 @@ function RemoveFromWishlistButton({
 					setisLoading(true);
 					await removeFromWishlist(productID).then(async () => {
 						return fetch(
-							`https://next-js-storify.vercel.app/api/getwishlist`
+							`${process.env.NEXT_PUBLIC_API_URL}/api/getwishlist`
 						)
 							.then(async (response) => {
 								toast.success("Product removed from wishlist");

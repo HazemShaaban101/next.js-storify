@@ -33,14 +33,14 @@ export default function Orders() {
 
 	// get user cart items
 	async function handleGetUserOrders() {
-		console.log(process.env.NEXT_PUBLIC_NEXT_BASE);
+		// console.log(process.env.NEXT_PUBLIC_NEXT_BASE);
 
 		const response = await fetch(
-			`https://next-js-storify.vercel.app/api/userorders`
+			`${process.env.NEXT_PUBLIC_API_URL}/api/userorders`
 		);
 
 		const userOrders = await response.json();
-		console.log("this is userOrders:", userOrders);
+		// console.log("this is userOrders:", userOrders);
 		setUserOrders(userOrders);
 	}
 

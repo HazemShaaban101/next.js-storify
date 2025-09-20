@@ -66,7 +66,7 @@ export function ChangePasswordModal() {
 	}) {
 		setLoading(true);
 		const response = await ChangePassword(userData);
-		console.log(response);
+		// console.log(response);
 		if (response.message === "success") {
 			toast.success("Password changed successfully!");
 			setLoading(false);

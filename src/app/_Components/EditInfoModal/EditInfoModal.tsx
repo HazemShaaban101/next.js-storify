@@ -54,7 +54,7 @@ export function EditInfoModal() {
 	}) {
 		setLoading(true);
 		const response = await EditInfo(userData);
-		console.log(response);
+		// console.log(response);
 		if (response.message === "success") {
 			toast.success("Info edited successfully!");
 			setLoading(false);

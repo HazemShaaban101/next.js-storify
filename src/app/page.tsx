@@ -10,7 +10,7 @@ export default async function Home() {
 	return (
 		<>
 			<motion.div
-				className="flex flex-col w-[80%] mx-auto gap-5 mb-10 overflow-hidden"
+				className="flex flex-col w-[80%] mx-auto gap-5 mb-3 overflow-hidden"
 				initial={{ scale: 0.5, opacity: 0 }}
 				animate={{
 					opacity: 1,
@@ -22,6 +22,49 @@ export default async function Home() {
 					},
 				}}>
 				<MainHomeSlider />
+			</motion.div>
+			<motion.div
+				className=" py-10 flex justify-center items-center flex-wrap content-center gap-2 bg-[linear-gradient(0deg,#0f172b,#104e64,#0b4f4a)] from-slate-900 via-cyan-900 to-teal-900 rounded-2xl easteregg-bg"
+				initial={{ scale: 0.5, opacity: 0 }}
+				animate={{
+					opacity: 1,
+					scale: 1,
+					transition: {
+						duration: 0.5,
+						type: "spring",
+						stiffness: 100,
+					},
+				}}>
+				<motion.h1
+					className="text-center font-mono font-bold text-3xl w-full text-white"
+					initial={{ scale: 0, opacity: 0 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						transition: {
+							duration: 0.5,
+							delay: 0.5,
+							type: "spring",
+							stiffness: 100,
+						},
+					}}>
+					Welcome to Storify
+				</motion.h1>
+				<motion.p
+					className="text-center font-mono font-bold text-xl w-full text-white"
+					initial={{ scale: 0, opacity: 0 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						transition: {
+							duration: 0.5,
+							delay: 0.5,
+							type: "spring",
+							stiffness: 100,
+						},
+					}}>
+					Where all products are imaginary!
+				</motion.p>
 			</motion.div>
 			<motion.div
 				className="flex justify-center mx-auto gap-5 mb-10 overflow-hidden"

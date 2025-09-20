@@ -47,9 +47,9 @@ export default function Cart() {
 	useEffect(() => {
 		let cartSum = 0;
 		cartItems?.data.products.forEach((product: CartProduct) => {
-			console.log(product);
+			// console.log(product);
 			cartSum += product.count * product.price;
-			console.log(cartSum);
+			// console.log(cartSum);
 		});
 		setCartTotalPrice(cartSum);
 	}, [cartItems]);
@@ -61,7 +61,7 @@ export default function Cart() {
 			numOfCartItems: number;
 			cartId: string;
 		} = await getUserCart();
-		// console.log("this is initial data", cartData);
+		// // console.log("this is initial data", cartData);
 		setCartItems(cartData);
 	}
 

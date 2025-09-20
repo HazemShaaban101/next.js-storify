@@ -57,7 +57,7 @@ export default function CheckoutForm() {
 	useEffect(() => {
 		async function dummyFunc() {
 			const response = await fetch(
-				`https://next-js-storify.vercel.app/api/useraddresses`
+				`${process.env.NEXT_PUBLIC_API_URL}/api/useraddresses`
 			);
 			const data = await response.json();
 			if (data?.length > 0) {
@@ -174,7 +174,7 @@ export default function CheckoutForm() {
 		setDeletingAddress(true);
 		try {
 			const { data } = await RemoveAddress(id);
-			console.log(data);
+			// console.log(data);
 			setAddressList(data);
 			setDeletingAddress(false);
 		} catch {

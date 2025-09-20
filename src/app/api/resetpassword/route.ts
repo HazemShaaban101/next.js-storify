@@ -25,13 +25,13 @@ export async function PUT(request: NextRequest) {
 				},
 			}
 		);
-		console.log("response from route.....", response);
+		// console.log("response from route.....", response);
 		if (response.ok) {
-			console.log("changed password okay");
+			// console.log("changed password okay");
 			const payload = await response.json();
 			return NextResponse.json(payload);
 		} else {
-			console.log(response);
+			// console.log(response);
 
 			const errorMessage = await response.text();
 			return new NextResponse(errorMessage, { status: response.status });

@@ -15,7 +15,7 @@ export default function CartCountContext({ children }) {
 				sum += product.count;
 			});
 			setCartCountState(sum);
-			console.log(sum);
+			// console.log(sum);
 		});
 	}, []);
 

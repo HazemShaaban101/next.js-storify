@@ -7,16 +7,16 @@ export default async function getUserToken() {
 		(await cookies()).get("next-auth.session-token")?.value ||
 		(await cookies()).get("__Secure-next-auth.session-token")?.value;
 
-	console.log("EncryptedToken---->", encryptedToken);
+	// console.log("EncryptedToken---->", encryptedToken);
 
 	const decodedToken = await decode({
 		token: encryptedToken,
 		secret: process.env.NEXTAUTH_SECRET!,
 	});
 
-	console.log("DecodedToken", decodedToken?.token);
+	// console.log("DecodedToken", decodedToken?.token);
 
-	console.log("All cookies------->", (await cookies()).getAll());
+	// console.log("All cookies------->", (await cookies()).getAll());
 
 	return decodedToken?.token as string;
 }

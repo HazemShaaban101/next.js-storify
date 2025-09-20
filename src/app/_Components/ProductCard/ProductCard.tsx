@@ -15,7 +15,7 @@ import AddToCartButton from "../AddToCartButton/AddToCartButton";
 import WishlistButton from "../WishlistButton/WishlistButton";
 
 export function ProductCard({ product }: { product: productType }) {
-	// console.log(product);
+	// // console.log(product);
 	return (
 		<Card className="w-full max-w-sm mx-auto col-span-1 content-center justify-center">
 			<Link href={`/products/${product.id}`}>

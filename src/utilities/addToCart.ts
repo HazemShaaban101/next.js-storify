@@ -2,7 +2,7 @@
 import getUserToken from "./getUserToken";
 
 export default async function addToCart(productID: string) {
-	console.log("Adding product to cart");
+	// console.log("Adding product to cart");
 
 	const userToken = await getUserToken();
 

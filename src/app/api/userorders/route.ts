@@ -19,16 +19,16 @@ export async function GET() {
 			exp: number;
 		} = jwtDecode(token);
 
-		console.log("userID: ", id);
+		// console.log("userID: ", id);
 
 		const response = await fetch(
 			`https://ecommerce.routemisr.com/api/v1/orders/user/${id}`
 		);
 
-		console.log(response);
+		// console.log(response);
 		if (response.ok) {
 			const data: { data: UserOrderType[] } = await response.json();
-			console.log("DATA:-------------->", data);
+			// console.log("DATA:-------------->", data);
 			return NextResponse.json(data);
 		} else {
 			const errorMessage = await response.text();

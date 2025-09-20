@@ -105,7 +105,7 @@ export default function ResetPassword() {
 	async function handleResetPassword(formData: unknown) {
 		try {
 			const response = await fetch(
-				`https://next-js-storify.vercel.app/api/forgotpassword`,
+				`${process.env.NEXT_PUBLIC_API_URL}/api/forgotpassword`,
 				{
 					method: "POST",
 					body: JSON.stringify(formData),
@@ -132,7 +132,7 @@ export default function ResetPassword() {
 	async function handleVerifyCode(formData: unknown) {
 		try {
 			const response = await fetch(
-				`https://next-js-storify.vercel.app/api/verifycode`,
+				`${process.env.NEXT_PUBLIC_API_URL}/api/verifycode`,
 				{
 					method: "POST",
 					body: JSON.stringify(formData),
@@ -157,7 +157,7 @@ export default function ResetPassword() {
 	async function handleSetNewPassword(formData: unknown) {
 		try {
 			const response = await fetch(
-				`https://next-js-storify.vercel.app/api/resetpassword`,
+				`${process.env.NEXT_PUBLIC_API_URL}/api/resetpassword`,
 				{
 					method: "PUT",
 					body: JSON.stringify(formData),
@@ -184,7 +184,7 @@ export default function ResetPassword() {
 	const { handleSubmit, control } = form;
 
 	const onSubmit = async (formData: unknown) => {
-		console.log(`step ${step + 1}`, formData);
+		// console.log(`step ${step + 1}`, formData);
 		if (step === 0) {
 			setIsLoading(true);
 			await handleResetPassword(formData);

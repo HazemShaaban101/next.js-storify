@@ -30,7 +30,7 @@ export default function CartCounter({
 		try {
 			const payload = await updateProductCartCount(id, newCount);
 
-			console.log(payload);
+			// console.log(payload);
 			setCartItems(payload);
 			setDisabled(false);
 			setUpdateLoading(false);
