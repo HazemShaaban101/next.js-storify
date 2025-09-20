@@ -98,8 +98,6 @@ export default function Profile() {
 								transition: {
 									duration: 0.5,
 									delay: 2,
-									type: "spring",
-									stiffness: 100,
 								},
 							}}>
 							<span className="loader"></span>
@@ -114,8 +112,6 @@ export default function Profile() {
 									scale: 1,
 									transition: {
 										duration: 0.5,
-										type: "spring",
-										stiffness: 100,
 									},
 								}}>
 								<h1 className="font-mono font-bold text-center text-2xl my-5">
