@@ -10,6 +10,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export function OrderModal({
@@ -123,6 +124,9 @@ export function OrderModal({
 							<TableHeader>
 								<TableRow>
 									<TableHead className="text-center">
+										Item image
+									</TableHead>
+									<TableHead className="text-center">
 										Item name
 									</TableHead>
 									<TableHead className="text-center">
@@ -169,7 +173,19 @@ export function OrderModal({
 										<TableRow
 											key={item._id}
 											className="odd:bg-muted/50">
-											<TableCell className="font-medium flex justify-center">
+											<TableCell className="font-medium justify-center">
+												<Image
+													src={
+														item.product.imageCover
+													}
+													alt={item.product.title}
+													width={30}
+													height={30}
+													objectFit="cover"
+													className="w-[35%] mx-auto"
+												/>
+											</TableCell>
+											<TableCell className="font-medium text-center">
 												{item.product.title}
 											</TableCell>
 											<TableCell className="font-medium text-center">
