@@ -41,7 +41,7 @@ export function ProductCard({ product }: { product: productType }) {
 								{product.category?.name}
 							</p>
 						</div>
-						<p className="truncate text-md mt-2 p-0">
+						<p className="truncate text-md mt-2 py-1 ">
 							{product?.title}
 						</p>
 					</CardTitle>

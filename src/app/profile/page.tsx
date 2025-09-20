@@ -51,10 +51,34 @@ export default function Profile() {
 						}}>
 						Edit your profile
 					</motion.h1>
-					<motion.p className="w-full text-center text-white">
+					<motion.p
+						className="w-full text-center text-white font-mono"
+						initial={{ scale: 0, opacity: 0 }}
+						animate={{
+							opacity: 1,
+							scale: 1,
+							transition: {
+								duration: 0.5,
+								delay: 0.7,
+								type: "spring",
+								stiffness: 100,
+							},
+						}}>
 						Name: {data?.user.name}
 					</motion.p>
-					<motion.p className="w-full text-center text-white mb-2">
+					<motion.p
+						className="w-full text-center text-white mb-2 font-mono"
+						initial={{ scale: 0, opacity: 0 }}
+						animate={{
+							opacity: 1,
+							scale: 1,
+							transition: {
+								duration: 0.5,
+								delay: 0.9,
+								type: "spring",
+								stiffness: 100,
+							},
+						}}>
 						Email: {data?.user.email}
 					</motion.p>
 
@@ -65,7 +89,7 @@ export default function Profile() {
 							scale: 1,
 							transition: {
 								duration: 0.5,
-								delay: 1,
+								delay: 1.1,
 								type: "spring",
 								stiffness: 100,
 							},
@@ -79,7 +103,7 @@ export default function Profile() {
 							scale: 1,
 							transition: {
 								duration: 0.5,
-								delay: 1.5,
+								delay: 1.3,
 								type: "spring",
 								stiffness: 100,
 							},
@@ -97,7 +121,7 @@ export default function Profile() {
 								scale: 1,
 								transition: {
 									duration: 0.5,
-									delay: 2,
+									delay: 1.5,
 								},
 							}}>
 							<span className="loader"></span>

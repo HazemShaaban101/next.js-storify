@@ -243,15 +243,18 @@ export default function NavSideBar() {
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
-			<SidebarFooter>
+			<SidebarFooter className="pt-5 rounded-t-3xl overflow-hidden">
 				<SidebarMenu>
 					{session.status == "authenticated" ? (
 						<>
-							<p className="font-mono font-bold text-center">
+							<p className="font-mono font-bold text-center backdrop-blur-[5px] backdrop-contrast-75 py-1 rounded-md overflow-hidden">
 								Hello {session.data.user.name}!
 							</p>
 							<SidebarMenuItem key={"profile"} className="my-0.5">
-								<SidebarMenuButton asChild className="">
+								<SidebarMenuButton
+									asChild
+									variant={"outline"}
+									className="">
 									<Link
 										href={"/profile"}
 										className="flex justify-center">
@@ -294,7 +297,7 @@ export default function NavSideBar() {
 					<hr className="my-2 border-2 rounded-full" />
 
 					{/* social media links */}
-					<div className="flex">
+					<div className="flex backdrop-blur-[5px]  backdrop-contrast-75 p-2 rounded-md">
 						<SidebarMenuButton asChild>
 							<Link
 								href={"https://github.com/HazemShaaban101"}

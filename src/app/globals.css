@@ -571,3 +571,19 @@ div[data-input-otp-container] {
 .swiper-pagination-bullet-active {
 	background: linear-gradient(to bottom right, #44a7e8, #084c86) !important;
 }
+
+div[data-sidebar="footer"] {
+	background-image: var(--footer-background);
+	background-position: center;
+	background-size: cover;
+}
+
+@layer base {
+	:root {
+		--footer-background: url("/patternLight.png");
+	}
+
+	.dark {
+		--footer-background: url("/patternDark.png");
+	}
+}
