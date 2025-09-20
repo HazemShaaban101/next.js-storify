@@ -90,14 +90,15 @@ export function ChangePasswordModal() {
 					<form
 						className={"flex flex-col gap-6"}
 						onSubmit={form.handleSubmit(handleChangePassword)}>
-						<div className=" items-center gap-2 text-center">
-							<h1 className="text-2xl font-bold">
+						<DialogHeader>
+							<DialogTitle className="text-center">
 								Reset your password
-							</h1>
-							<p className="text-muted-foreground text-sm text-balance">
-								Enter your info below to create a new password
-							</p>
-						</div>
+							</DialogTitle>
+							<DialogDescription className="text-center">
+								Change to your password here. Click save when
+								you&apos;re done.
+							</DialogDescription>
+						</DialogHeader>
 						<div className="grid">
 							<FormField
 								control={form.control}
