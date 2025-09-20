@@ -1,4 +1,4 @@
-"use server";
+"use client";
 import { decode } from "next-auth/jwt";
 import { cookies } from "next/headers";
 
@@ -15,6 +15,8 @@ export default async function getUserToken() {
 	});
 
 	console.log("DecodedToken", decodedToken?.token);
+
+	console.log("All cookies------->", (await cookies()).getAll());
 
 	return decodedToken?.token as string;
 }
