@@ -57,7 +57,7 @@ export default function CheckoutForm() {
 	useEffect(() => {
 		async function dummyFunc() {
 			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_NEXT_BASE}/api/useraddresses`
+				`https://next-js-storify.vercel.app/api/useraddresses`
 			);
 			const data = await response.json();
 			if (data?.length > 0) {

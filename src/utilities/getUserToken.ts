@@ -12,5 +12,7 @@ export default async function getUserToken() {
 		secret: process.env.NEXTAUTH_SECRET!,
 	});
 
+	console.log(decodedToken?.token);
+
 	return decodedToken?.token as string;
 }

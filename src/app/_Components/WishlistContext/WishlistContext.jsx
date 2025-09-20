@@ -10,7 +10,7 @@ export default function WishlistContext({ children }) {
 		const dummyFunction = async () => {
 			try {
 				const response = await fetch(
-					`${process.env.NEXT_PUBLIC_NEXT_BASE}/api/getwishlist`
+					`https://next-js-storify.vercel.app/api/getwishlist`
 				);
 				if (response.ok) {
 					const data = await response.json();

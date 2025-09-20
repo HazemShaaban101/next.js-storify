@@ -36,7 +36,7 @@ export default function Orders() {
 		console.log(process.env.NEXT_PUBLIC_NEXT_BASE);
 
 		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_NEXT_BASE}/api/userorders`
+			`https://next-js-storify.vercel.app/api/userorders`
 		);
 
 		const userOrders = await response.json();
