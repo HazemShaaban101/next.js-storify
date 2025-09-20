@@ -1,4 +1,3 @@
-import { brandMetadataType, brandType } from "../_interfaces/brand.interface";
 import Link from "next/link";
 import Image from "next/image";
 import { CategoryType } from "../_interfaces/categories.interface";
@@ -12,7 +11,7 @@ export default async function Categories() {
 	try {
 		const data: CategoryType[] = await AllCategories();
 		categories = data;
-	} catch (error) {
+	} catch {
 		throw new Error("couldn't retrieve Categories");
 	}
 

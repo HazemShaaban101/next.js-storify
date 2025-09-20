@@ -31,7 +31,7 @@ export default async function RemoveAddress(id: string): Promise<{
 
 		const payload = await response.json();
 		return payload;
-	} catch (error) {
+	} catch {
 		throw new Error("Couldn't delete address");
 	}
 }

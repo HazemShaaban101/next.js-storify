@@ -4,7 +4,7 @@ import getUserToken from "./getUserToken";
 
 export default async function ClearCart() {
 	const token = await getUserToken();
-	const response = fetch(`https://ecommerce.routemisr.com/api/v1/cart`, {
+	fetch(`https://ecommerce.routemisr.com/api/v1/cart`, {
 		method: "DELETE",
 		headers: {
 			token,

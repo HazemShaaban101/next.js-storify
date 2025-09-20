@@ -8,7 +8,7 @@ export default async function AllCategories(): Promise<CategoryType[]> {
 		const { data }: { data: CategoryType[] } = await response.json();
 
 		return data;
-	} catch (err) {
+	} catch {
 		throw new Error("server communication error");
 	}
 }

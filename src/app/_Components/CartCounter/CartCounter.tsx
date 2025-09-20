@@ -1,10 +1,8 @@
 "use client";
-import { CartProduct } from "@/app/_interfaces/cartProduct.interface";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import updateProductCartCount from "@/utilities/updateProductCartCount";
 import { Plus, Minus } from "lucide-react";
-import { TelemetryPlugin } from "next/dist/build/webpack/plugins/telemetry-plugin/telemetry-plugin";
 import React, { useContext, useState } from "react";
 import { CartCountBadge } from "../CartCountContext/CartCountContext";
 import { decBadge, incBadge } from "@/utilities/cartBadge.Actions";
@@ -14,19 +12,17 @@ export default function CartCounter({
 	count,
 	removing,
 	setUpdateLoading,
-	updateLoading,
 	setCartItems,
 }: {
 	id: string;
 	count: number;
 	removing: boolean;
 	setUpdateLoading: Function;
-	updateLoading: boolean;
 	setCartItems: Function;
 }) {
 	const [disabled, setDisabled] = useState(false);
 
-	const { cartCountState, setCartCountState } = useContext(CartCountBadge);
+	const { setCartCountState } = useContext(CartCountBadge);
 
 	async function handleUpdateCartCount(newCount: number, sign: string) {
 		setDisabled(true);
@@ -38,9 +34,11 @@ export default function CartCounter({
 			setCartItems(payload);
 			setDisabled(false);
 			setUpdateLoading(false);
-			sign === "+"
-				? incBadge(setCartCountState)
-				: decBadge(setCartCountState);
+			if (sign === "+") {
+				incBadge(setCartCountState);
+			} else {
+				decBadge(setCartCountState);
+			}
 		} catch (error) {
 			setDisabled(false);
 			setUpdateLoading(false);

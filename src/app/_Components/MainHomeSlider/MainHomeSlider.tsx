@@ -1,14 +1,12 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect } from "react";
 import image1 from "../../../../public/banner-4.jpeg";
 import image2 from "../../../../public/slider-image-2.jpeg";
 import image3 from "../../../../public/slider-image-3.jpeg";
 import image4 from "../../../../public/grocery-banner.png";
-import image5 from "../../../../public/grocery-banner-2.jpeg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Autoplay, Virtual } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 
 export default function MainHomeSlider() {
 	return (

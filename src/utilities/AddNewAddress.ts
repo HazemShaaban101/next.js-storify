@@ -37,7 +37,7 @@ export default async function AddNewAddress(address: {
 
 		const payload = await response.json();
 		return payload;
-	} catch (e) {
+	} catch {
 		throw new Error("Couldn't add address");
 	}
 }

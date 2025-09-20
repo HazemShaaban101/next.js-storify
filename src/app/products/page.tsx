@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ProductCard } from "../_Components/ProductCard/ProductCard";
 import { productType } from "../_interfaces/product.interface";
 import AllProducts from "../../apis/AllProducts.api";
-import { brandMetadataType, brandType } from "../_interfaces/brand.interface";
+import { brandMetadataType } from "../_interfaces/brand.interface";
 import Paginator from "../_Components/Paginator/Paginator";
 import { useSearchParams } from "next/navigation";
 import * as motion from "motion/react-client";

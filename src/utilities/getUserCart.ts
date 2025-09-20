@@ -2,8 +2,6 @@
 
 import { CartProduct } from "@/app/_interfaces/cartProduct.interface";
 import getUserToken from "./getUserToken";
-import { string } from "zod";
-import { CartItemType } from "@/app/_interfaces/cartItems.interface";
 
 export default async function getUserCart(): Promise<{
 	data: { products: CartProduct[] };
@@ -28,7 +26,7 @@ export default async function getUserCart(): Promise<{
 		).json();
 
 		return cartItems;
-	} catch (error) {
+	} catch {
 		throw new Error("no internet connection...");
 	}
 }

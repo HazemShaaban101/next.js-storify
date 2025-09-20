@@ -5,20 +5,16 @@ import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import {
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
 import axios from "axios";
-import { Form, FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import {
-	RegisterErrorType,
-	registerType,
-} from "@/app/_interfaces/register.interface";
+import { RegisterErrorType } from "@/app/_interfaces/register.interface";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";

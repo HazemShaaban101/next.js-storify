@@ -15,7 +15,7 @@ export default async function SingleBrandAPI(id: ParamValue): Promise<{
 		const data: { data: brandType } = await response.json();
 
 		return data;
-	} catch (err) {
+	} catch {
 		throw new Error("server communication error");
 	}
 }
@@ -36,7 +36,7 @@ export async function SingleBrandProducts(
 		} = await response.json();
 
 		return data;
-	} catch (err) {
+	} catch {
 		throw new Error("server communication error");
 	}
 }

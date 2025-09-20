@@ -4,6 +4,7 @@ import "swiper/css";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { CategoryType } from "@/app/_interfaces/categories.interface";
 import { motion } from "framer-motion/";
+import Image from "next/image";
 
 export default function CategorySwiper({ data }: { data: CategoryType[] }) {
 	return (
@@ -67,9 +68,11 @@ export default function CategorySwiper({ data }: { data: CategoryType[] }) {
 									key={category._id}>
 									<Card className="w-full max-w-sm h-full">
 										<CardContent className="">
-											<img
+											<Image
 												src={category?.image}
 												alt={category?.slug}
+												width={100}
+												height={100}
 												className="object-cover w-[100px] h-[100px]"
 											/>
 										</CardContent>

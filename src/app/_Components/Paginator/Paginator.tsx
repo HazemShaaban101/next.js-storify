@@ -1,5 +1,4 @@
 import { brandMetadataType } from "@/app/_interfaces/brand.interface";
-import { metadata } from "@/app/layout";
 import {
 	Pagination,
 	PaginationContent,

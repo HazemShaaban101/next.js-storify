@@ -1,5 +1,4 @@
 "use client";
-import { cn } from "@/lib/utils";
 import {
 	FormControl,
 	FormDescription,
@@ -11,10 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
-	DialogClose,
 	DialogContent,
 	DialogDescription,
-	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,

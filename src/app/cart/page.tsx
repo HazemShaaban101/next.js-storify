@@ -8,7 +8,6 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import getUserCart from "@/utilities/getUserCart";
-import getUserToken from "@/utilities/getUserToken";
 
 import React, { useContext, useEffect, useState } from "react";
 import { CartProduct } from "../_interfaces/cartProduct.interface";
@@ -17,12 +16,10 @@ import { Button } from "@/components/ui/button";
 import removeProductFromCart from "@/utilities/removeFromCart";
 import CartCounter from "../_Components/CartCounter/CartCounter";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
-import { CartItemType } from "../_interfaces/cartItems.interface";
 import Link from "next/link";
 import { CartCountBadge } from "../_Components/CartCountContext/CartCountContext";
 import { clearCartBadge, removeItemBadge } from "@/utilities/cartBadge.Actions";
 import ClearCart from "@/utilities/ClearCart";
-import { productType } from "../_interfaces/product.interface";
 import * as motion from "motion/react-client";
 
 export default function Cart() {
@@ -95,7 +92,7 @@ export default function Cart() {
 				<div className="min-h-[calc(100vh-2rem-60px)] justify-center items-center flex">
 					<span className="loader"></span>
 				</div>
-			) : cartItems?.numOfCartItems! > 0 ? (
+			) : cartItems?.numOfCartItems && cartItems?.numOfCartItems > 0 ? (
 				<motion.div
 					className="min-h-[calc(100vh-2rem-60px)]"
 					initial={{ scale: 0.5, opacity: 0 }}
@@ -182,9 +179,6 @@ export default function Cart() {
 													removing={removing}
 													setUpdateLoading={
 														setUpdataLoading
-													}
-													updateLoading={
-														updateLoading
 													}
 													setCartItems={setCartItems}
 												/>

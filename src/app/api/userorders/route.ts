@@ -1,10 +1,10 @@
 "use server";
 import getUserToken from "@/utilities/getUserToken";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { jwtDecode } from "jwt-decode";
 import { UserOrderType } from "@/app/_interfaces/userOrder.interface";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
 	try {
 		const token = await getUserToken();
 		if (!token) throw new Error("Invalid token, please Log in");
@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
 			const errorMessage = await response.text();
 			return new NextResponse(errorMessage, { status: response.status });
 		}
-	} catch (error) {
+	} catch {
 		return new NextResponse("...Internal Server Error...", { status: 500 });
 	}
 }

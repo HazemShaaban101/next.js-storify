@@ -1,8 +1,6 @@
 "use server";
 
-import React from "react";
 import getUserToken from "./getUserToken";
-import { record } from "zod";
 
 export default async function cashPayment(
 	id: string,

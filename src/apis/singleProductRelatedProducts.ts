@@ -5,17 +5,17 @@ export async function SingleProductRelatedProducts(
 	id: ParamValue
 ): Promise<productType[]> {
 	try {
-		let response = await fetch(
+		const response = await fetch(
 			`https://ecommerce.routemisr.com/api/v1/products?limit=6&category=${id}`
 		);
-		let {
+		const {
 			data,
 		}: {
 			data: productType[];
 		} = await response.json();
 
 		return data;
-	} catch (err: unknown) {
+	} catch {
 		throw new Error("server communication error");
 	}
 }

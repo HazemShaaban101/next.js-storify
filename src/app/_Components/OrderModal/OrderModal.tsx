@@ -1,7 +1,5 @@
 "use client";
 
-import { CartItemType } from "@/app/_interfaces/cartItems.interface";
-import { CartProduct } from "@/app/_interfaces/cartProduct.interface";
 import { UserOrderType } from "@/app/_interfaces/userOrder.interface";
 import {
 	Table,
@@ -11,13 +9,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import {
-	Button,
-	Modal,
-	ModalBody,
-	ModalFooter,
-	ModalHeader,
-} from "flowbite-react";
+import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { useEffect, useState } from "react";
 
 export function OrderModal({

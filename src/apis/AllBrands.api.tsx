@@ -18,7 +18,7 @@ export default async function AllBrands(
 			await response.json();
 
 		return data;
-	} catch (err) {
+	} catch {
 		throw new Error("server communication error");
 	}
 }

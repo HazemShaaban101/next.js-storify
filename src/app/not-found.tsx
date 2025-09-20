@@ -1,16 +1,16 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import * as motion from "motion/react-client";
 
-export default function handleIntrusiveUser() {
+export default function HandleIntrusiveUser() {
 	const router = useRouter();
 
 	useEffect(() => {
 		setTimeout(() => {
 			router.push("/");
 		}, 5000);
-	}, []);
+	}, [router]);
 	return (
 		<>
 			<motion.div
@@ -38,7 +38,7 @@ export default function handleIntrusiveUser() {
 							stiffness: 100,
 						},
 					}}>
-					Don't be a naughty fella...stick to your routes!
+					Don&apos;t be a naughty fella...stick to your routes!
 				</motion.h1>
 				<motion.h2
 					className="funt-mono text-xl w-full text-center animate-EasterEgg"

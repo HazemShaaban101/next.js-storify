@@ -7,7 +7,6 @@ import {
 	brandType,
 } from "@/app/_interfaces/brand.interface";
 import { productType } from "@/app/_interfaces/product.interface";
-import { Divide } from "lucide-react";
 import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -16,38 +15,37 @@ import * as motion from "motion/react-client";
 export default function SingleBrand() {
 	const searchParams = useSearchParams();
 	const searchParamsOBJ = Object.fromEntries(searchParams.entries());
-
 	const { id } = useParams();
 	const [brandDetails, setBrandDetails] = useState<brandType | null>(null);
 	const [productList, setProductList] = useState<productType[]>([]);
 	const [metaData, setMetaData] = useState<brandMetadataType>({});
 	const [isLoading, setIsLoading] = useState(true);
 
-	async function getSingleBrand() {
-		try {
-			const data: {
-				data: brandType;
-			} = await SingleBrandAPI(id);
-			setBrandDetails(data.data);
-		} catch (error) {
-			throw new Error("couldn't retrieve brands");
-		}
-	}
-
-	async function getSingleBrandProducts() {
-		try {
-			const data: {
-				data: productType[];
-				metadata: brandMetadataType;
-			} = await SingleBrandProducts(id, searchParamsOBJ.page);
-			setProductList(data.data);
-			setMetaData(data.metadata);
-		} catch (error) {
-			throw new Error("couldn't retrieve brands");
-		}
-	}
-
 	useEffect(() => {
+		async function getSingleBrand() {
+			try {
+				const data: {
+					data: brandType;
+				} = await SingleBrandAPI(id);
+				setBrandDetails(data.data);
+			} catch {
+				throw new Error("couldn't retrieve brands");
+			}
+		}
+
+		async function getSingleBrandProducts() {
+			try {
+				const data: {
+					data: productType[];
+					metadata: brandMetadataType;
+				} = await SingleBrandProducts(id, searchParamsOBJ.page);
+				setProductList(data.data);
+				setMetaData(data.metadata);
+			} catch {
+				throw new Error("couldn't retrieve brands");
+			}
+		}
+
 		async function workaround() {
 			setIsLoading(true);
 			await getSingleBrand();
@@ -55,7 +53,7 @@ export default function SingleBrand() {
 			setIsLoading(false);
 		}
 		workaround();
-	}, [searchParams]);
+	}, [searchParams, searchParamsOBJ, id]);
 	return (
 		<>
 			{isLoading ? (

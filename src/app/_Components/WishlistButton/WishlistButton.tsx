@@ -2,14 +2,12 @@ import { Button } from "@/components/ui/button";
 import addToWishlist, {
 	removeFromWishlist,
 } from "@/utilities/wishlist.actions";
-import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import { toast } from "sonner";
 import { wishlistContext } from "../WishlistContext/WishlistContext";
 import { productType } from "@/app/_interfaces/product.interface";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { Heart } from "lucide-react";
-import { p } from "framer-motion/client";
 
 export default function WishlistButton({ productID }: { productID: string }) {
 	const { wishlistState, setWishlistState } = useContext(wishlistContext);
@@ -53,8 +51,6 @@ function AddToWishlistButton({
 	isLoading: boolean;
 	setisLoading: Function;
 }) {
-	const router = useRouter();
-
 	return (
 		<>
 			<Button
@@ -63,25 +59,21 @@ function AddToWishlistButton({
 				disabled={isLoading}
 				onClick={async () => {
 					setisLoading(true);
-					const payload = await addToWishlist(productID).then(
-						async () => {
-							return fetch(
-								`http://localhost:3000/api/getwishlist`
-							)
-								.then(async (response) => {
-									toast.success("Product added to wishlist");
-									setWishlistState(await response.json());
-									setisLoading(false);
-								})
-								.catch((error) => {
-									toast.error(
-										error.message ||
-											"Cannot add product to wishlist"
-									);
-									setisLoading(false);
-								});
-						}
-					);
+					await addToWishlist(productID).then(async () => {
+						return fetch(`http://localhost:3000/api/getwishlist`)
+							.then(async (response) => {
+								toast.success("Product added to wishlist");
+								setWishlistState(await response.json());
+								setisLoading(false);
+							})
+							.catch((error) => {
+								toast.error(
+									error.message ||
+										"Cannot add product to wishlist"
+								);
+								setisLoading(false);
+							});
+					});
 				}}>
 				{isLoading ? (
 					<Spinner />
@@ -106,7 +98,6 @@ function RemoveFromWishlistButton({
 	isLoading: boolean;
 	setisLoading: Function;
 }) {
-	const router = useRouter();
 	return (
 		<>
 			<Button
@@ -115,27 +106,21 @@ function RemoveFromWishlistButton({
 				disabled={isLoading}
 				onClick={async () => {
 					setisLoading(true);
-					const payload = await removeFromWishlist(productID).then(
-						async () => {
-							return fetch(
-								`http://localhost:3000/api/getwishlist`
-							)
-								.then(async (response) => {
-									toast.success(
-										"Product removed from wishlist"
-									);
-									setWishlistState(await response.json());
-									setisLoading(false);
-								})
-								.catch((error) => {
-									toast.error(
-										error.message ||
-											"Cannot remove product from wishlist"
-									);
-									setisLoading(false);
-								});
-						}
-					);
+					await removeFromWishlist(productID).then(async () => {
+						return fetch(`http://localhost:3000/api/getwishlist`)
+							.then(async (response) => {
+								toast.success("Product removed from wishlist");
+								setWishlistState(await response.json());
+								setisLoading(false);
+							})
+							.catch((error) => {
+								toast.error(
+									error.message ||
+										"Cannot remove product from wishlist"
+								);
+								setisLoading(false);
+							});
+					});
 				}}>
 				{isLoading ? (
 					<Spinner />

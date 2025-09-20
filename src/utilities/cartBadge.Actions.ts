@@ -1,6 +1,3 @@
-import { CartCountBadge } from "@/app/_Components/CartCountContext/CartCountContext";
-import { useContext } from "react";
-
 export function incBadge(setCartCountState: Function) {
 	setCartCountState((prevCount: number) => prevCount + 1);
 }

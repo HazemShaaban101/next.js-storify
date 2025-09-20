@@ -1,8 +1,6 @@
 "use server";
-import getUserToken from "@/utilities/getUserToken";
-import { log } from "console";
+
 import { NextRequest, NextResponse } from "next/server";
-import { ControllerRenderProps } from "react-hook-form";
 
 export async function POST(request: NextRequest) {
 	try {
@@ -30,7 +28,7 @@ export async function POST(request: NextRequest) {
 			const errorMessage = await response.text();
 			return new NextResponse(errorMessage, { status: response.status });
 		}
-	} catch (error) {
+	} catch {
 		return new NextResponse("...Internal Server Error...", { status: 500 });
 	}
 }

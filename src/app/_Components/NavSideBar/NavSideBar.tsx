@@ -1,15 +1,9 @@
 "use client";
 import {
-	Calendar,
 	Home,
-	Inbox,
-	Search,
-	Settings,
 	LogIn,
 	UserPlus,
 	ShoppingCart,
-	Apple,
-	Store,
 	Sun,
 	Moon,
 	Spotlight,
@@ -43,9 +37,8 @@ import {
 	siTiktok,
 	siWhatsapp,
 } from "simple-icons";
-import Image from "next/image";
+
 import { signOut, useSession } from "next-auth/react";
-import { authOptions } from "@/nextauth";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { useContext } from "react";
@@ -115,15 +108,13 @@ export default function NavSideBar() {
 								className="p-3 bg-white text-dark shadow-lg hover:bg-cyan-100 focus:bg-cyan-100 dark:bg-slate-800 dark:text-white dark:hover:bg-cyan-950 dark:focus:bg-cyan-950 cursor-pointer"
 								// variant={"default"}
 								onClick={(e) => {
-									theme == "light"
-										? (() => {
-												setTheme("dark");
-												e.currentTarget.blur();
-										  })()
-										: (() => {
-												setTheme("light");
-												e.currentTarget.blur();
-										  })();
+									if (theme === "light") {
+										setTheme("dark");
+										e.currentTarget.blur();
+									} else {
+										setTheme("light");
+										e.currentTarget.blur();
+									}
 								}}>
 								<AnimatePresence mode="popLayout">
 									<motion.div
@@ -195,7 +186,7 @@ export default function NavSideBar() {
 														variant="default"
 														className="ml-auto">
 														{
-															cartCount?.cartCountState!
+															cartCount.cartCountState!
 														}
 													</Badge>
 												</Link>

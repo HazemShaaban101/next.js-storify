@@ -1,5 +1,3 @@
-import { GalleryVerticalEnd } from "lucide-react";
-
 import checkoutimage from "../../../../public/Self checkout.gif";
 import Image from "next/image";
 import CheckoutForm from "@/app/_Components/CheckoutForm/CheckoutForm";

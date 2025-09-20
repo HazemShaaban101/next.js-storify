@@ -1,13 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import {
-	EffectCreative,
-	Navigation,
-	Pagination,
-	Virtual,
-	Zoom,
-} from "swiper/modules";
+import { Pagination, Zoom } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";

@@ -4,8 +4,9 @@ import { ProductCard } from "@/app/_Components/ProductCard/ProductCard";
 import ProductImageSwiper from "@/app/_Components/ProductImageSwiper/ProductImageSwiper";
 import { productType } from "@/app/_interfaces/product.interface";
 
-import { ShoppingCart, Star, User } from "lucide-react";
+import { Star, User } from "lucide-react";
 import * as motion from "motion/react-client";
+import Image from "next/image";
 
 export default async function GetSingleProduct({
 	params,
@@ -43,10 +44,11 @@ export default async function GetSingleProduct({
 				<div className="w-full md:w-3/5 flex flex-wrap items-center content-around gap-2">
 					<div className="w-full flex flex-col">
 						<div className="flex justify-between items-center mb-3">
-							<img
+							<Image
 								src={productDetails?.brand?.image}
 								alt={productDetails?.brand.slug}
 								width={36}
+								height={25}
 							/>
 							<p className="font-sans text-sm">
 								{productDetails?.category?.name}

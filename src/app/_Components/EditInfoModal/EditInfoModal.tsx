@@ -1,5 +1,4 @@
 "use client";
-import { cn } from "@/lib/utils";
 import {
 	FormControl,
 	FormDescription,
@@ -11,10 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
-	DialogClose,
 	DialogContent,
 	DialogDescription,
-	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -26,7 +23,6 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
-import ChangePassword from "@/utilities/ChangePassword";
 import { signOut } from "next-auth/react";
 import EditInfo from "@/utilities/EditInfo";
 

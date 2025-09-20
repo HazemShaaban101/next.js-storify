@@ -1,21 +1,15 @@
 "use client";
-import SingleBrandAPI, { SingleBrandProducts } from "@/apis/SingleBrand.api";
 import SingleCategoryAPI, {
 	SingleCategoryProducts,
 	SingleCategorySubCategories,
 } from "@/apis/singleCategory";
-import Paginator from "@/app/_Components/Paginator/Paginator";
 import { ProductCard } from "@/app/_Components/ProductCard/ProductCard";
-import {
-	brandMetadataType,
-	brandType,
-} from "@/app/_interfaces/brand.interface";
+
 import { CategoryType } from "@/app/_interfaces/categories.interface";
 import { productType } from "@/app/_interfaces/product.interface";
-import { Divide } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import * as motion from "motion/react-client";
 
@@ -28,40 +22,40 @@ export default function SingleCategory() {
 	const [subCategoryList, setSubCategoryList] = useState<CategoryType[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 
-	async function getSingleCategory() {
-		try {
-			const data: {
-				data: CategoryType;
-			} = await SingleCategoryAPI(id);
-			setCategoryDetails(data.data);
-		} catch (error) {
-			throw new Error("couldn't retrieve Categories");
-		}
-	}
-
-	async function getSingleCategoryProducts() {
-		try {
-			const data: {
-				data: productType[];
-			} = await SingleCategoryProducts(id);
-			setProductList(data.data);
-		} catch (error) {
-			throw new Error("couldn't retrieve Products");
-		}
-	}
-
-	async function getSingleCategorySubCategories() {
-		try {
-			const data: {
-				data: CategoryType[];
-			} = await SingleCategorySubCategories(id);
-			setSubCategoryList(data.data);
-		} catch (error) {
-			throw new Error("couldn't retrieve SubCategories");
-		}
-	}
-
 	useEffect(() => {
+		async function getSingleCategory() {
+			try {
+				const data: {
+					data: CategoryType;
+				} = await SingleCategoryAPI(id);
+				setCategoryDetails(data.data);
+			} catch {
+				throw new Error("couldn't retrieve Categories");
+			}
+		}
+
+		async function getSingleCategoryProducts() {
+			try {
+				const data: {
+					data: productType[];
+				} = await SingleCategoryProducts(id);
+				setProductList(data.data);
+			} catch {
+				throw new Error("couldn't retrieve Products");
+			}
+		}
+
+		async function getSingleCategorySubCategories() {
+			try {
+				const data: {
+					data: CategoryType[];
+				} = await SingleCategorySubCategories(id);
+				setSubCategoryList(data.data);
+			} catch {
+				throw new Error("couldn't retrieve SubCategories");
+			}
+		}
+
 		async function workaround() {
 			setIsLoading(true);
 			await getSingleCategory();
@@ -70,7 +64,7 @@ export default function SingleCategory() {
 			setIsLoading(false);
 		}
 		workaround();
-	}, []);
+	}, [id]);
 	return (
 		<>
 			{isLoading ? (

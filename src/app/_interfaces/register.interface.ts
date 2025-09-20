@@ -71,7 +71,7 @@ export type RESPONSE = {
 		xsrfHeaderName: string;
 		maxContentLength: number;
 		maxBodyLength: number;
-		env: {};
+		env: object;
 		headers: {
 			Accept: string;
 			"Content-Type": string;
@@ -81,5 +81,5 @@ export type RESPONSE = {
 		data: string;
 		allowAbsoluteUrls: boolean;
 	};
-	request: {};
+	request: object;
 };

@@ -16,20 +16,19 @@ export default function Brands() {
 	const [metaData, setMetaData] = useState<brandMetadataType>({});
 	const [isLoading, setisLoading] = useState(true);
 
-	async function getBrands() {
-		try {
-			const data: {
-				data: brandType[];
-				metadata: brandMetadataType;
-			} = await AllBrands(searchParams);
-			setBrandList(data.data);
-			setMetaData(data.metadata);
-		} catch (error) {
-			throw new Error("couldn't retrieve brands");
-		}
-	}
-
 	useEffect(() => {
+		async function getBrands() {
+			try {
+				const data: {
+					data: brandType[];
+					metadata: brandMetadataType;
+				} = await AllBrands(searchParams);
+				setBrandList(data.data);
+				setMetaData(data.metadata);
+			} catch {
+				throw new Error("couldn't retrieve brands");
+			}
+		}
 		async function workaround() {
 			setisLoading(true);
 			await getBrands();

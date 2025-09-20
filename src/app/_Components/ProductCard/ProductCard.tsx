@@ -1,22 +1,16 @@
 "use client";
 import { productType } from "@/app/_interfaces/product.interface";
-import { Button } from "@/components/ui/button";
 import {
 	Card,
-	CardAction,
 	CardContent,
-	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import addToCart from "@/utilities/addToCart";
 
-import { ShoppingCart, Star, User } from "lucide-react";
+import { Star, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "sonner";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 import WishlistButton from "../WishlistButton/WishlistButton";
 

@@ -124,7 +124,7 @@ export default function ResetPassword() {
 					{ className: "text-center flex flex-col" }
 				);
 			}
-		} catch (error) {
+		} catch {
 			setIsLoading(false);
 			throw new Error("...Internal route error...");
 		}
@@ -142,14 +142,13 @@ export default function ResetPassword() {
 				}
 			);
 			if (response.ok) {
-				const payload = await response.json();
 				setStep(2);
 			} else if (response.status === 400) {
 				toast.error("Wrong code. check your email for correct code", {
 					className: "text-center flex flex-col",
 				});
 			}
-		} catch (error) {
+		} catch {
 			setIsLoading(false);
 			throw new Error("...Internal route error...");
 		}
@@ -169,8 +168,6 @@ export default function ResetPassword() {
 			);
 
 			if (response.ok) {
-				const payload = await response.json();
-				console.log(payload);
 				toast.success("Password successfully reset.");
 				router.push("/login");
 			} else {
@@ -178,13 +175,13 @@ export default function ResetPassword() {
 					className: "text-center flex flex-col",
 				});
 			}
-		} catch (error) {
+		} catch {
 			setIsLoading(false);
 			throw new Error("...Internal route error...");
 		}
 	}
 
-	const { handleSubmit, control, reset } = form;
+	const { handleSubmit, control } = form;
 
 	const onSubmit = async (formData: unknown) => {
 		console.log(`step ${step + 1}`, formData);
@@ -346,8 +343,8 @@ export default function ResetPassword() {
 										to your Email.
 									</CardTitle>
 									<CardDescription className="text-center mb-5">
-										If you didn't recieve a code, verify
-										your Email is correct.
+										If you didn&apos;t recieve a code,
+										verify your Email is correct.
 									</CardDescription>
 								</CardHeader>
 								<CardContent>
@@ -424,8 +421,8 @@ export default function ResetPassword() {
 									</CardTitle>
 									<CardDescription className="text-center mb-5">
 										Make sure to remember your password this
-										time, We don't wanna go over these steps
-										every time eh?
+										time, We don&apos;t wanna go over these
+										steps every time eh?
 									</CardDescription>
 								</CardHeader>
 								<CardContent>

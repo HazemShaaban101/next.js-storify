@@ -31,7 +31,7 @@ export default function AddToCartButton({ productID }: { productID: string }) {
 					}
 
 					incBadge(setCartCountState);
-				} catch (err) {
+				} catch {
 					toast.error("Cannot add product to cart");
 				}
 			}}>

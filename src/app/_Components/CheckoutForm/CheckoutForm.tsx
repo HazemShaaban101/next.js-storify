@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
 import { useParams, useRouter } from "next/navigation";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import onlinePayment from "@/utilities/onlinePayment.action";
@@ -33,7 +33,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Trash, Trash2, Trash2Icon } from "lucide-react";
+import { Trash } from "lucide-react";
 import RemoveAddress from "@/utilities/RemoveAddress";
 
 export default function CheckoutForm() {
@@ -113,21 +113,21 @@ export default function CheckoutForm() {
 
 		if (addressData.saveAddress) {
 			try {
-				const { data } = await AddNewAddress({
+				await AddNewAddress({
 					name: addressData.name,
 					details: addressData.details,
 					phone: addressData.phone,
 					city: addressData.city,
 				});
 				// data contains a new array of addresses
-			} catch (error) {
+			} catch {
 				throw new Error("Couldn't save new address");
 			}
 		}
 
 		if (addressData.paymentMethod === "cash") {
 			try {
-				const response = await cashPayment(userID as string, {
+				await cashPayment(userID as string, {
 					details: addressData.details,
 					city: addressData.city,
 					phone: addressData.phone,
@@ -136,7 +136,7 @@ export default function CheckoutForm() {
 				setLoading(false);
 				clearCartBadge(setCartCountState);
 				router.push("/allorders");
-			} catch (error) {
+			} catch {
 				setLoading(false);
 				throw new Error("Error");
 			}
@@ -149,7 +149,7 @@ export default function CheckoutForm() {
 				});
 				setLoading(false);
 				router.push(forwardURL);
-			} catch (error) {
+			} catch {
 				setLoading(false);
 				throw new Error("Error");
 			}
@@ -177,7 +177,7 @@ export default function CheckoutForm() {
 			console.log(data);
 			setAddressList(data);
 			setDeletingAddress(false);
-		} catch (error) {
+		} catch {
 			setDeletingAddress(false);
 			throw new Error("couldn't delete address");
 		}

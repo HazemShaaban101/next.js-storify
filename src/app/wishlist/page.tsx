@@ -24,7 +24,7 @@ export default function WishList() {
 				<div className="min-h-[calc(100vh-2rem-60px)] justify-center items-center flex">
 					<span className="loader"></span>
 				</div>
-			) : wishlistState?.length! > 0 ? (
+			) : wishlistState?.length && wishlistState?.length > 0 ? (
 				<>
 					<motion.div
 						className="min-h-[calc(100vh-2rem-60px)]"
