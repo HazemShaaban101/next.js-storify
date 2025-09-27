@@ -45,7 +45,7 @@ export default function Products() {
 							transition: {
 								duration: 0.5,
 								type: "spring",
-								stiffness: 100,
+								stiffness: 40,
 							},
 						}}>
 						<h1 className="text-3xl font-bold font-mono text-center mb-3">

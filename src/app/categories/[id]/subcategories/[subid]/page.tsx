@@ -66,7 +66,7 @@ export default function SingleSubCategory() {
 						transition: {
 							duration: 0.5,
 							type: "spring",
-							stiffness: 100,
+							stiffness: 50,
 						},
 					}}>
 					<div className="header flex flex-col items-center justify-center gap-3 py-4">

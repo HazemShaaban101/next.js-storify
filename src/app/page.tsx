@@ -82,14 +82,38 @@ export default async function Home() {
 				}}>
 				<CategorySlider />
 			</motion.div>
-			<h2 className="text-center font-mono font-bold text-2xl mb-5 mt-10 md:mt-0">
+			<motion.h2
+				className="text-center font-mono font-bold text-2xl mb-5 mt-10 md:mt-0"
+				initial={{ scale: 0.5, opacity: 0 }}
+				animate={{
+					opacity: 1,
+					scale: 1,
+					transition: {
+						duration: 0.5,
+						delay: 1,
+						type: "spring",
+						stiffness: 40,
+					},
+				}}>
 				Frequently bought products!
-			</h2>
-			<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+			</motion.h2>
+			<motion.div
+				className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3"
+				initial={{ scale: 0.5, opacity: 0 }}
+				animate={{
+					opacity: 1,
+					scale: 1,
+					transition: {
+						duration: 0.5,
+						delay: 1,
+						type: "spring",
+						stiffness: 40,
+					},
+				}}>
 				{data?.data.map((product: productType) => (
 					<ProductCard product={product} key={product._id} />
 				))}
-			</div>
+			</motion.div>
 		</>
 	);
 }

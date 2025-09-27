@@ -576,14 +576,17 @@ div[data-sidebar="footer"] {
 	background-image: var(--footer-background);
 	background-position: center;
 	background-size: cover;
+	background-color: var(--footer-bg);
 }
 
 @layer base {
 	:root {
 		--footer-background: url("/patternlight.png");
+		--footer-bg: rgba(0, 0, 0, 0.2);
 	}
 
 	.dark {
 		--footer-background: url("/patternDark.png");
+		--footer-bg: rgba(255, 255, 255, 0.2);
 	}
 }

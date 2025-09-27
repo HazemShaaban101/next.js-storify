@@ -256,11 +256,11 @@ export default function NavSideBar() {
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
-			<SidebarFooter className="pt-5 rounded-t-3xl overflow-hidden">
+			<SidebarFooter className="pt-5 m-1 rounded-md overflow-hidden">
 				<SidebarMenu>
 					{session.status == "authenticated" ? (
 						<>
-							<p className="font-mono font-bold text-center backdrop-blur-[5px] backdrop-contrast-75 py-1 rounded-md overflow-hidden">
+							<p className=" font-mono font-bold text-center backdrop-blur-[5px] backdrop-contrast-75 py-1 rounded-md overflow-hidden">
 								Hello {session.data.user.name}!
 							</p>
 							<SidebarMenuItem key={"profile"} className="my-0.5">

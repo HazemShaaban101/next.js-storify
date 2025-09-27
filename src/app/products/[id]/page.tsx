@@ -2,6 +2,7 @@ import { SingleProductRelatedProducts } from "@/apis/singleProductRelatedProduct
 import AddToCartButton from "@/app/_Components/AddToCartButton/AddToCartButton";
 import { ProductCard } from "@/app/_Components/ProductCard/ProductCard";
 import ProductImageSwiper from "@/app/_Components/ProductImageSwiper/ProductImageSwiper";
+import WishlistButton from "@/app/_Components/WishlistButton/WishlistButton";
 import { productType } from "@/app/_interfaces/product.interface";
 
 import { Star, User } from "lucide-react";
@@ -37,7 +38,7 @@ export default async function GetSingleProduct({
 					transition: {
 						duration: 0.5,
 						type: "spring",
-						stiffness: 100,
+						stiffness: 50,
 					},
 				}}>
 				<ProductImageSwiper data={productDetails.images} />
@@ -78,6 +79,7 @@ export default async function GetSingleProduct({
 							</span>
 						</div>
 						<AddToCartButton productID={productDetails?.id} />
+						<WishlistButton productID={productDetails?.id} />
 					</div>
 				</div>
 			</motion.div>
@@ -91,7 +93,7 @@ export default async function GetSingleProduct({
 						duration: 0.5,
 						delay: 0.5,
 						type: "spring",
-						stiffness: 100,
+						stiffness: 50,
 					},
 				}}>
 				<h2 className="w-full text-center font-mono font-bold text-2xl mb-5">

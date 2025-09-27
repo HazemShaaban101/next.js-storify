@@ -27,7 +27,7 @@ export default async function Categories() {
 						transition: {
 							duration: 0.5,
 							type: "spring",
-							stiffness: 100,
+							stiffness: 50,
 						},
 					}}>
 					<div className=" w-full products grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
