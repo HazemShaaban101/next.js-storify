@@ -14,7 +14,7 @@ import * as motion from "motion/react-client";
 
 export default function SingleBrand() {
 	const searchParams = useSearchParams();
-	const searchParamsOBJ = Object.fromEntries(searchParams.entries());
+	let searchParamsOBJ: { [k: string]: string };
 	const { id } = useParams();
 	const [brandDetails, setBrandDetails] = useState<brandType | null>(null);
 	const [productList, setProductList] = useState<productType[]>([]);
@@ -22,6 +22,7 @@ export default function SingleBrand() {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
+		searchParamsOBJ = Object.fromEntries(searchParams.entries());
 		async function getSingleBrand() {
 			try {
 				const data: {
@@ -53,7 +54,7 @@ export default function SingleBrand() {
 			setIsLoading(false);
 		}
 		workaround();
-	}, [searchParams, searchParamsOBJ, id]);
+	}, [searchParams, id]);
 	return (
 		<>
 			{isLoading ? (
